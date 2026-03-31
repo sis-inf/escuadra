@@ -2,6 +2,8 @@
 
 Este documento centraliza los recursos tecnicos, normas de ingenieria y bibliografia que respaldan el desarrollo de las herramientas de la suite Escuadra.
 
+> Ultima verificacion de enlaces: 31 de marzo de 2026 — Todos los enlaces funcionan.
+
 ---
 
 ## 1. Calculadora de Vigas
