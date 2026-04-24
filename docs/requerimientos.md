@@ -8,8 +8,6 @@
 
 ## Requerimientos No Funcionales
 
-## Requerimientos No Funcionales
-
 | ID | Descripción | Categoría | Estado |
 |---|---|---|---|
 | RNF-001 | El sistema debe ser compatible con Windows 10, Linux (Ubuntu 20.04+) y macOS 11+. | Compatibilidad | Pendiente |
