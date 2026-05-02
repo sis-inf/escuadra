@@ -1,0 +1,48 @@
+# Build system
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Metadatos del paquete
+[project]
+name = "escuadra"
+version = "0.1.0"
+description = "Herramientas de cálculo de ingeniería civil y eléctrica"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "SIS-INF"}]
+
+# Dependencias de runtime
+dependencies = [
+    "PySide6>=6.6",
+]
+
+# Dependencias de desarrollo
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-qt",
+    "ruff>=0.4",
+    "pyinstaller>=6",
+]
+
+# Punto de entrada
+[project.scripts]
+escuadra = "escuadra.app:main"
+
+# Configuración de setuptools
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Configuración de ruff
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+# Configuración de pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
