@@ -1,18 +1,27 @@
 import math
-from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QLabel, QPushButton,
-    QGridLayout, QComboBox
-)
-from PyQt6.QtCore import Qt
 
-from escuadra.core.herramienta import Herramienta
+from PyQt6.QtWidgets import (
+    QComboBox,
+    QGridLayout,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QWidget,
+    QVBoxLayout,
+)
+
 from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 
 
 class HerramientaCalculadoraCientifica(Herramienta):
     nombre = "Calculadora científica"
     carrera = Carrera.MATEMATICAS
-    descripcion = "Calculadora con operaciones aritméticas, trigonométricas, logarítmicas y constantes."
+    descripcion = (
+        "Calculadora con operaciones aritméticas, trigonométricas, "
+        "logarítmicas y constantes."
+    )
 
     def crear_widget(self):
         widget = QWidget()
@@ -52,10 +61,16 @@ class HerramientaCalculadoraCientifica(Herramienta):
 
                 if texto == "=":
                     boton.clicked.connect(self.calcular)
-                    boton.setStyleSheet("padding: 10px; font-size: 12px; background-color: green; color: white;")
+                    boton.setStyleSheet(
+                        "padding: 10px; font-size: 12px; "
+                        "background-color: green; color: white;"
+                    )
                 elif texto == "C":
                     boton.clicked.connect(self.limpiar)
-                    boton.setStyleSheet("padding: 10px; font-size: 12px; background-color: red; color: white;")
+                    boton.setStyleSheet(
+                        "padding: 10px; font-size: 12px; "
+                        "background-color: red; color: white;"
+                    )
                 elif texto == "←":
                     boton.clicked.connect(self.borrar_ultimo)
                 elif texto == "Del":
@@ -139,7 +154,9 @@ class HerramientaCalculadoraCientifica(Herramienta):
             "__builtins__": {}
         }
 
-        caracteres_permitidos = set("0123456789+-*/(). ^πesincogtanlognqrt")
+        caracteres_permitidos = set(
+            "0123456789+-*/(). ^πesincostanlognqrt"
+        )
         if not all(c in caracteres_permitidos for c in expresion.lower()):
             raise ValueError("Expresión contiene caracteres no permitidos.")
 
