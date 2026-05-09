@@ -12,7 +12,6 @@ from PyQt6.QtWidgets import (
 from escuadra.core.carrera import Carrera
 from escuadra.core.herramienta import Herramienta
 
-
 class HerramientaComplementoA2(Herramienta):
     nombre = "Complemento a 2"
     carrera = Carrera.SISTEMAS
