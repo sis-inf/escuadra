@@ -49,7 +49,7 @@ class HerramientaCalculadoraCientifica(Herramienta):
             for col_idx, texto in enumerate(fila):
                 boton = QPushButton(texto)
                 boton.setStyleSheet("padding: 10px; font-size: 12px;")
-                
+
                 if texto == "=":
                     boton.clicked.connect(self.calcular)
                     boton.setStyleSheet("padding: 10px; font-size: 12px; background-color: green; color: white;")
@@ -62,7 +62,7 @@ class HerramientaCalculadoraCientifica(Herramienta):
                     boton.clicked.connect(self.limpiar)
                 else:
                     boton.clicked.connect(lambda checked, t=texto: self.agregar_texto(t))
-                
+
                 grid.addWidget(boton, fila_idx, col_idx)
 
         layout.addLayout(grid)
@@ -76,7 +76,7 @@ class HerramientaCalculadoraCientifica(Herramienta):
 
     def agregar_texto(self, texto):
         self.error_label.setText("")
-        
+
         if texto == "π":
             self.display.setText(self.display.text() + "π")
         elif texto == "√":
