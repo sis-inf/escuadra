@@ -29,14 +29,22 @@ def main():
 
     # Subcomando: viga
     viga_parser = subparsers.add_parser("viga", help="Cálculo de reacciones en vigas")
-    viga_parser.add_argument("--longitud", type=float, required=True, help="Longitud de la viga en metros")
+    viga_parser.add_argument(
+        "--longitud", type=float, required=True, help="Longitud de la viga en metros"
+    )
     viga_parser.add_argument("--carga", type=float, required=True, help="Carga puntual en kN")
 
     # Subcomando: tension
     tension_parser = subparsers.add_parser("tension", help="Cálculo de caída de tensión")
-    tension_parser.add_argument("--longitud", type=float, required=True, help="Longitud del conductor en metros")
-    tension_parser.add_argument("--corriente", type=float, required=True, help="Corriente en amperios")
-    tension_parser.add_argument("--seccion", type=float, required=True, help="Sección del conductor en mm²")
+    tension_parser.add_argument(
+        "--longitud", type=float, required=True, help="Longitud del conductor en metros"
+    )
+    tension_parser.add_argument(
+        "--corriente", type=float, required=True, help="Corriente en amperios"
+    )
+    tension_parser.add_argument(
+        "--seccion", type=float, required=True, help="Sección del conductor en mm²"
+    )
 
     args = parser.parse_args()
 
