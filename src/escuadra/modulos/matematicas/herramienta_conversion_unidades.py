@@ -1,3 +1,5 @@
+from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 from PyQt6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -6,9 +8,6 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
 
 
 class HerramientaConversionUnidades(Herramienta):

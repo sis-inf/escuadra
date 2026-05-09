@@ -1,6 +1,8 @@
 import itertools
 import re
 
+from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtWidgets import (
@@ -13,9 +15,6 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
 
 
 class HerramientaTablasVerdad(Herramienta):

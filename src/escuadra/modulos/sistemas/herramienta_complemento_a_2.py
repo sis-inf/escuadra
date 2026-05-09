@@ -1,3 +1,5 @@
+from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 from PyQt6.QtWidgets import (
     QComboBox,
     QFormLayout,
@@ -9,8 +11,6 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from escuadra.core.carrera import Carrera
-from escuadra.core.herramienta import Herramienta
 
 class HerramientaComplementoA2(Herramienta):
     nombre = "Complemento a 2"
@@ -21,7 +21,7 @@ class HerramientaComplementoA2(Herramienta):
         widget = QWidget()
         layout = QVBoxLayout()
 
-        
+        # Selector de bits
         bits_layout = QHBoxLayout()
         bits_label = QLabel("Ancho de bits:")
         self.bits_combo = QComboBox()
@@ -36,11 +36,11 @@ class HerramientaComplementoA2(Herramienta):
         bits_layout.addStretch()
         layout.addLayout(bits_layout)
 
-        
+        # Etiqueta de rango
         self.rango_label = QLabel("")
         layout.addWidget(self.rango_label)
 
-        
+        # Grupo: Decimal a Complemento a 2
         grupo_dec_bin = QGroupBox("Decimal a Complemento a 2")
         layout_dec_bin = QFormLayout()
 
@@ -60,7 +60,7 @@ class HerramientaComplementoA2(Herramienta):
         grupo_dec_bin.setLayout(layout_dec_bin)
         layout.addWidget(grupo_dec_bin)
 
-        
+        # Grupo: Complemento a 2 a Decimal
         grupo_bin_dec = QGroupBox("Complemento a 2 a Decimal")
         layout_bin_dec = QFormLayout()
 
