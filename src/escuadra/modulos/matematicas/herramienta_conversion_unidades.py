@@ -1,11 +1,14 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QLineEdit,
-    QLabel, QMessageBox
+    QComboBox,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt6.QtCore import Qt
 
-from escuadra.core.herramienta import Herramienta
 from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 
 
 class HerramientaConversionUnidades(Herramienta):
