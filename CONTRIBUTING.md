@@ -33,6 +33,27 @@ git checkout dev
 git pull upstream dev
 ```
 
+### 4.1 Configura el entorno de desarrollo
+
+```bash
+pip install -e ".[dev]"
+```
+
+Esto instala el paquete en modo editable junto con las dependencias de desarrollo.
+También puedes instalar sólamente el paquete sin las dependencias de desarrollo:
+
+```bash
+pip install -e .
+```
+
+Para verificar que la instalación funciona:
+
+```bash
+escuadra --version
+# o alternativamente:
+python3 -m escuadra --version
+```
+
 ### 5. Crea tu rama de trabajo
 
 ```bash
