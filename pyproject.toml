@@ -25,7 +25,7 @@ dev = [
 ]
 
 [project.scripts]
-escuadra = "escuadra.app:main"
+escuadra = "escuadra.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
