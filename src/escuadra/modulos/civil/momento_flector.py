@@ -1,6 +1,11 @@
 from typing import Dict
 
-def calculator_momento_mx(longitud: float, carga: float, tipo_carga: str = 'puntual_central') -> Dict[str, float]:
+
+def calculator_momento_mx(
+    longitud: float,
+    carga: float,
+    tipo_carga: str = 'puntual_central',
+) -> Dict[str, float]:
     """
     Calcula el momento de flexión en un elemento civil.
 
@@ -26,7 +31,10 @@ def calculator_momento_mx(longitud: float, carga: float, tipo_carga: str = 'punt
         raise ValueError(f"La carga no puede ser negativa o cero. Valor recibido: {carga}")
 
     if tipo_carga not in ['puntual_central', 'distribuida']:
-        raise ValueError(f"Tipo de carga no soportado: '{tipo_carga}'. Tipos aceptados: puntual_central, distribuida")
+        raise ValueError(
+            f"Tipo de carga no soportado: '{tipo_carga}'. "
+            f"Tipos aceptados: puntual_central, distribuida"
+        )
 
     if tipo_carga == 'puntual_central':
         momento = carga * longitud / 4
