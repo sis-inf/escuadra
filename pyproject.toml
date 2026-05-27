@@ -13,12 +13,12 @@ license = {text = "MIT"}
 authors = [{name = "SIS-INF"}]
 
 dependencies = [
-    "PySide6>=6.6",
+    "PySide6>=6.6,<7.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=8",
+    "pytest>=8,<10",
     "pytest-qt",
     "ruff>=0.4",
     "pyinstaller>=6",
