@@ -53,4 +53,11 @@ def dispatch(subcommand: str) -> int:
         )
         return 1
 
-    return handler()
+    try:
+        return handler()
+    except (ImportError, ModuleNotFoundError):
+        print(
+            "Error: El módulo solicitado no está disponible o no existe.",
+            file=sys.stderr,
+        )
+        return 1
