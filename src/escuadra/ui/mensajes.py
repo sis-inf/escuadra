@@ -25,7 +25,7 @@ def confirmar(parent, titulo, mensaje):
 
     # Agregar botones personalizados en español
     boton_si = caja.addButton("Sí", QMessageBox.ButtonRole.YesRole)
-    boton_no = caja.addButton("No", QMessageBox.ButtonRole.NoRole)
+    caja.addButton("No", QMessageBox.ButtonRole.NoRole)
 
     caja.exec()
 

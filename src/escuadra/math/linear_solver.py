@@ -12,23 +12,23 @@ def solve_linear_2x2(
 ) -> Optional[Tuple[float, float]]:
     """
     Resuelve un sistema de ecuaciones lineales 2x2 usando la regla de Cramer.
-    
+
     Sistema representado como:
     a11*x + a12*y = b1
     a21*x + a22*y = b2
-    
+
     Args:
         a11, a12: Coeficientes de la primera ecuación
         a21, a22: Coeficientes de la segunda ecuación
         b1, b2: Términos independientes
-    
+
     Returns:
         Tupla (x, y) solución del sistema, o None si el determinante es cero
-    
+
     Examples:
         >>> solve_linear_2x2(2, 3, 1, 4, 5, 6)
         (0.4, 1.4)
-        
+
         >>> solve_linear_2x2(1, 1, 1, 1, 2, 3)
         None
     """
