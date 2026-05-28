@@ -4,6 +4,7 @@ Módulo para solucionar sistemas de ecuaciones lineales 2x2
 
 from typing import Optional, Tuple
 
+
 def solve_linear_2x2(
     a11: float, a12: float,
     a21: float, a22: float,
@@ -33,17 +34,17 @@ def solve_linear_2x2(
     """
     # Calcular el determinante principal
     det = a11 * a22 - a12 * a21
-    
+
     # Si el determinante es cero, no hay solución única
     if abs(det) < 1e-10:
         return None
-    
+
     # Calcular determinantes para x e y
     det_x = b1 * a22 - a12 * b2
     det_y = a11 * b2 - b1 * a21
-    
+
     # Calcular x e y
     x = det_x / det
     y = det_y / det
-    
+
     return (x, y)

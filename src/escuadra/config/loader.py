@@ -2,8 +2,9 @@
 Módulo para cargar configuración desde archivos YAML.
 """
 
-import yaml
 from pathlib import Path
+
+import yaml
 
 
 def load(path: str) -> dict:

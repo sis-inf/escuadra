@@ -1,11 +1,5 @@
-from PyQt5.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
-    QLabel,
-    QFrame
-)
-
 from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
 
 
 class WidgetHerramienta(QWidget):
