@@ -1,5 +1,6 @@
 import csv
 
+
 def parse_csv(file_path, has_header=True, delimiter=',', encoding='utf-8'):
     """
     Lee un archivo CSV y devuelve:

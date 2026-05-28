@@ -1,4 +1,3 @@
-import pytest
 
 def test_mock_config_returns_dict(mock_config):
     """Verifica que la fixture retorna un diccionario"""
