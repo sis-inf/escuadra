@@ -67,4 +67,3 @@ class Herramienta(ABC):
             "carrera": cls.carrera,
             "descripcion": cls.descripcion,
         }
-```
