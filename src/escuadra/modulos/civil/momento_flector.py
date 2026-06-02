@@ -33,10 +33,22 @@ def calculator_momento_mx(longitud: float, carga: float, tipo_carga: str = 'punt
                    o si longitud <= 0 o carga <= 0.
     """
     if tipo_carga not in ['puntual_central', 'distribuida']:
-        raise ValueError("El tipo de carga debe ser 'puntual_central' o 'distribuida'")
+        raise ValueError(
+            f"Tipo de carga '{tipo_carga}' no soportado. "
+            "Los tipos aceptados son: 'puntual_central' y 'distribuida'."
+        )
     
-    if longitud <= 0 or carga <= 0:
-        raise ValueError("La longitud y la carga deben ser mayores que cero")
+    if longitud <= 0:
+        raise ValueError(
+            f"El parámetro 'longitud' debe ser mayor que cero. "
+            f"Se recibió: {longitud}."
+        )
+    
+    if carga <= 0:
+        raise ValueError(
+            f"El parámetro 'carga' debe ser mayor que cero. "
+            f"Se recibió: {carga}."
+        )
     
     if tipo_carga == 'puntual_central':
         momento = carga * longitud / 4
