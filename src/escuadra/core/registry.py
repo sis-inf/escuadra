@@ -1,10 +1,12 @@
 from collections.abc import Callable
+from pathlib import Path
 from typing import Any
 
 ToolFunction = Callable[..., Any]
 
 _TOOLS: dict[str, ToolFunction] = {}
 
+MODULOS_DIR = Path(__file__).parent.parent / "modulos"
 
 def register_tool(name: str) -> Callable[[ToolFunction], ToolFunction]:
     """Registra una herramienta usando un nombre."""

@@ -86,3 +86,5 @@ id_rsa.pub
 *.tmp
 *.temp
 *.bak
+# PyInstaller
+*.spec

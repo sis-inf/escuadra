@@ -1,0 +1,172 @@
+from PySide6.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QComboBox,
+)
+
+from escuadra.core.herramienta import Herramienta
+from escuadra.core.carrera import Carrera
+
+def decimal_a_complemento(numero: int, bits: int) -> str:
+    minimo = -(2 ** (bits - 1))
+    maximo = (2 ** (bits - 1)) - 1
+
+    if numero < minimo or numero > maximo:
+        raise ValueError(
+            f"El número debe estar entre {minimo} y {maximo}."
+        )
+
+    if numero >= 0:
+        return f"{numero:0{bits}b}"
+
+    return f"{(2 ** bits + numero):0{bits}b}"
+
+
+def complemento_a_decimal(binario: str, bits: int) -> int:
+    if len(binario) != bits:
+        raise ValueError(
+            f"Debe ingresar exactamente {bits} bits."
+        )
+
+    if any(c not in "01" for c in binario):
+        raise ValueError(
+            "Solo se permiten 0 y 1."
+        )
+
+    valor = int(binario, 2)
+
+    if binario[0] == "1":
+        return valor - (2 ** bits)
+
+    return valor
+
+class HerramientaComplementoA2(Herramienta):
+    nombre = "Complemento a 2"
+    carrera = Carrera.SISTEMAS
+    descripcion = (
+        "Convierte entre decimal con signo y representación en complemento a 2."
+    )
+
+    def crear_widget(self):
+      widget = QWidget()
+      layout = QVBoxLayout()
+
+      # Selector de bits
+      bits_layout = QHBoxLayout()
+      bits_layout.addWidget(QLabel("Bits:"))
+
+      self.bits_combo = QComboBox()
+      self.bits_combo.addItems(["4", "8", "16", "32"])
+
+      bits_layout.addWidget(self.bits_combo)
+      layout.addLayout(bits_layout)
+
+      # Rango representable
+      self.rango_label = QLabel("")
+      layout.addWidget(self.rango_label)
+
+      # Decimal -> Complemento a 2
+      layout.addWidget(QLabel("Número decimal:"))
+
+      self.decimal_input = QLineEdit()
+      self.decimal_input.setPlaceholderText("Ejemplo: -5")
+      layout.addWidget(self.decimal_input)
+
+      self.btn_decimal = QPushButton(
+        "Decimal → Complemento a 2"
+    )
+      self.btn_decimal.clicked.connect(
+        self._convertir_decimal
+    )
+      layout.addWidget(self.btn_decimal)
+
+      self.binario_output = QLineEdit()
+      self.binario_output.setReadOnly(True)
+      layout.addWidget(self.binario_output)
+  
+    # Complemento a 2 -> Decimal
+      layout.addWidget(QLabel("Número binario:"))
+
+      self.binario_input = QLineEdit()
+      self.binario_input.setPlaceholderText(
+        "Ejemplo: 11111011"
+    )
+      layout.addWidget(self.binario_input)
+
+      self.btn_binario = QPushButton(
+        "Complemento a 2 → Decimal"
+    )
+      self.btn_binario.clicked.connect(
+         self._convertir_binario
+    )
+      layout.addWidget(self.btn_binario)
+
+      self.decimal_output = QLineEdit()
+      self.decimal_output.setReadOnly(True)
+      layout.addWidget(self.decimal_output)
+
+    # Errores
+      self.error_label = QLabel("")
+      self.error_label.setStyleSheet(
+        "color: red;"
+    )
+      layout.addWidget(self.error_label)
+
+      self.bits_combo.currentTextChanged.connect(
+        self._actualizar_rango
+    )
+
+      self._actualizar_rango()
+
+      widget.setLayout(layout)
+      return widget
+  
+    def _actualizar_rango(self):
+        bits = int(self.bits_combo.currentText())
+
+        minimo = -(2 ** (bits - 1))
+        maximo = (2 ** (bits - 1)) - 1
+
+        self.rango_label.setText(
+            f"Rango con {bits} bits: {minimo} a {maximo}"
+        )
+
+    def _convertir_decimal(self):
+        self.error_label.setText("")
+
+        try:
+            numero = int(self.decimal_input.text())
+            bits = int(self.bits_combo.currentText())
+
+            resultado = decimal_a_complemento(
+                numero,
+                bits
+            )
+
+            self.binario_output.setText(resultado)
+
+        except ValueError as e:
+            self.error_label.setText(str(e))
+
+    def _convertir_binario(self):
+        self.error_label.setText("")
+
+        try:
+            binario = self.binario_input.text().strip()
+            bits = int(self.bits_combo.currentText())
+
+            resultado = complemento_a_decimal(
+                binario,
+                bits
+            )
+
+            self.decimal_output.setText(
+                str(resultado)
+            )
+
+        except ValueError as e:
+            self.error_label.setText(str(e))

@@ -1,99 +1,223 @@
 # Cómo contribuir a este proyecto
 
-Gracias por tu interés en contribuir. Este proyecto usa
-el **Forking Workflow**. Lee este documento antes de empezar.
+¡Gracias por querer contribuir a **Escuadra**!
+
+Este proyecto utiliza el **Forking Workflow**, por lo que cada contribuidor trabaja desde su propio fork antes de enviar cambios al repositorio principal.
+
+Lee este documento antes de empezar.
 
 ---
 
-## Flujo de trabajo
+# Requisitos previos
 
-### 1. Haz fork del repositorio
+| Herramienta | Versión mínima | Verificar con |
+|---|---|---|
+| Python | 3.10+ | `python --version` |
+| Git | 2.30+ | `git --version` |
+| pip | incluido con Python | `pip --version` |
 
-Botón **Fork** en la esquina superior derecha de GitHub.
+---
 
-### 2. Clona tu fork
+# Configuración del entorno
+
+Configura el entorno de desarrollo la primera vez que clones el proyecto.
+
+## 1. Crear el entorno virtual
+
+### Windows / Linux / macOS:
 
 ```bash
-git clone https://github.com/TU-USUARIO/PROYECTO.git
-
-cd PROYECTO
+python -m venv .venv
 ```
 
-### 3. Agrega el repo original como upstream
+## 2. Activar el entorno virtual
+
+### Linux / macOS
 
 ```bash
-git remote add upstream https://github.com/sis-inf/PROYECTO.git
+source .venv/bin/activate
 ```
 
-### 4. Sincroniza antes de trabajar
+### Windows (CMD)
+
+```cmd
+.venv\Scripts\activate
+```
+
+### Windows (PowerShell)
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+> El prefijo `(.venv)` en la terminal confirma que el entorno está activo.
+
+## 3. Instalar dependencias de desarrollo
+
+### Windows / Linux / macOS:
+
+```bash
+pip install -e ".[dev]"
+```
+
+Esto instalará el proyecto en modo editable junto con las dependencias necesarias para desarrollo, testing y herramientas de calidad de código.
+
+---
+
+# Flujo de trabajo
+
+Este proyecto usa el **Forking Workflow**.
+
+```text
+fork → clone → branch → commit → push → Pull Request
+```
+
+Nunca trabajes directamente sobre el repositorio principal.
+
+## 1. Haz fork del repositorio
+
+Presiona el botón **Fork** en la esquina superior derecha del repositorio en GitHub.
+
+Tu fork quedará en:
+
+```text
+https://github.com/TU-USUARIO/escuadra
+```
+
+## 2. Clona tu fork
+
+```bash
+git clone https://github.com/TU-USUARIO/escuadra.git
+cd escuadra
+```
+
+## 3. Agrega el repositorio original como upstream
+
+```bash
+git remote add upstream https://github.com/sis-inf/escuadra.git
+```
+
+Verifica que quedó correctamente configurado:
+
+```bash
+git remote -v
+```
+
+Salida esperada:
+
+```text
+origin    https://github.com/TU-USUARIO/escuadra.git (fetch)
+origin    https://github.com/TU-USUARIO/escuadra.git (push)
+upstream  https://github.com/sis-inf/escuadra.git (fetch)
+upstream  https://github.com/sis-inf/escuadra.git (push)
+```
+
+## 4. Sincroniza antes de trabajar
+
+Haz esto siempre antes de crear una nueva rama:
 
 ```bash
 git checkout dev
-
 git pull upstream dev
 ```
 
-### 5. Crea tu rama de trabajo
+## 5. Crea tu rama de trabajo
 
 ```bash
-git checkout -b tipo/[`descripcion-corta`]
+git checkout -b tipo/descripcion-corta
 ```
-#### Convencion de nombres de ramas
 
-tipo/[`descripcion corta`]
+Ejemplos:
 
-**Tipos de ramas:**
+```bash
+git checkout -b feat/calculadora-matrices
+git checkout -b fix/error-conversion-binaria
+git checkout -b docs/guia-instalacion
+```
 
-- `feat/` → nueva funcionalidad
-- `fix/` → corrección de errores
-- `docs/` → documentación
-- `test/` → pruebas
-- `chore/` → tareas generales o configuración
-- `refactor/` → mejoras internas
-- `security/` → mejoras de seguridad
-- `data/` → análisis de datos
-
-**Ejemplos de ramas:**
-
-- feat/endpoint-metricas-cpu
-- docs/readme-instalacion
-- fix/calculo-ram-incorrecto
-- test/pruebas-unitarias-cpu
-- chore/configurar-github-actions
-- security/analisis-dependencias
-
-### 6. Trabaja y haz commits pequeños
+## 6. Trabaja y crea commits pequeños
 
 ```bash
 git add .
-
 git commit -m "tipo: descripción corta en presente - Closes #N"
 ```
 
-> [!NOTE]
-> Siempre referencia el issue correspondiente en el commit: Closes #N
+Ejemplo:
 
-### 7. Sube tu rama a tu fork
+```bash
+git commit -m "fix: corregir conversion hexadecimal - Closes #52"
+```
+
+## 7. Sube tu rama a tu Fork
 
 ```bash
 git push origin tipo/descripcion-corta
 ```
 
-### 8. Abre un Pull Request
+Ejemplo:
 
-- Base: `sis-inf/PROYECTO` → rama `dev`
-- Compare: `TU-USUARIO/PROYECTO` → tu rama
+```bash
+git push origin fix/error-conversion-binaria
+```
 
-#### Recomendaciones para el PR
+## 8. Abre un Pull Request
 
-- Explica claramente los cambios realizados
-- Referencia el issue correspondiente (`Closes #N`)
-- Mantén el PR enfocado en un solo objetivo
-- Añade evidencia (logs, capturas, etc.) si aplica
+Desde GitHub, abre un Pull Request con esta configuración:
+
+| Campo | Valor |
+|---|---|
+| Base repository | `sis-inf/escuadra` |
+| Base branch | `dev` |
+| Head repository | `TU-USUARIO/escuadra` |
+| Compare branch | `tu-rama` |
+
+## Recomendaciones para el PR
+
+- Mantén el PR enfocado en un único objetivo
+- Describe claramente qué cambiaste y por qué
+- Referencia siempre el issue relacionado (`Closes #N`)
+- Evita incluir cambios no relacionados
+- Añade evidencia si aplica (logs, capturas, etc.)
+---
+
+# Convención de ramas
+
+Formato:
+
+```text
+tipo/descripcion-corta
+```
+
+| Tipo | Cuándo usarlo |
+|---|---|
+| `feat/` | Nueva funcionalidad |
+| `fix/` | Corrección de errores |
+| `docs/` | Documentación |
+| `test/` | Pruebas |
+| `chore/` | Configuración o tareas generales |
+| `refactor/` | Mejoras internas sin cambiar comportamiento |
+| `security/` | Mejoras de seguridad |
+| `data/` | Análisis de datos |
+
+Ejemplos:
+
+```text
+feat/calculadora-matrices
+fix/error-conversion-binaria
+docs/guia-instalacion
+test/pruebas-modulo-viga
+chore/configurar-github-actions
+```
 
 ---
 
-## Convención de commits
+# Convención de commits
+
+Formato:
+
+```text
+tipo: descripción corta en presente - Closes #N
+```
 
 | Tipo | Cuándo usarlo |
 |---|---|
@@ -106,33 +230,36 @@ git push origin tipo/descripcion-corta
 | `security:` | Mejora de seguridad |
 | `data:` | Análisis de datos |
 
-### Ejemplos
+Ejemplos:
 
-feat: agregar endpoint /metrics para CPU
-fix: corregir cálculo de porcentaje de RAM
-docs: agregar guía de instalación en Windows
-test: agregar pruebas unitarias para módulo de disco
-chore: configurar GitHub Actions para CI
+```text
+feat: agregar calculadora de matrices - Closes #10
+fix: corregir conversion hexadecimal - Closes #52
+docs: agregar guia de instalacion en Windows - Closes #31
+test: agregar pruebas unitarias para modulo viga - Closes #44
+```
 
----
-
-## Reglas importantes
-
-- ❌ Nunca hagas push directo a `main` o `dev`
-- ❌ Nunca trabajes directamente en `main` o `dev`
-- ✅ Un issue = una rama = un PR
-- ✅ Todo PR debe referenciar su issue con `Closes #N`
-- ✅ El PR debe pasar el CI antes de ser mergeado
-- ✅ Todo PR necesita al menos una revisión
+> Siempre referencia el issue correspondiente usando `Closes #N`.
 
 ---
 
-## Ramas del proyecto
+# Reglas importantes
+
+ - ❌  Nunca hagas push directo a `main` o `dev` 
+ - ❌  Nunca trabajes directamente sobre `main` o `dev` 
+ - ✅  Un issue = una rama = un PR 
+ - ✅  Todo PR debe referenciar su issue con `Closes #N` 
+ - ✅  Todo PR debe pasar CI antes del merge 
+ - ✅  Todo PR requiere al menos una revisión aprobada
+
+---
+
+# Estructura de ramas
 
 | Rama | Propósito |
 |---|---|
 | `main` | Versión estable — solo recibe merges desde `dev` |
-| `dev` | Rama de desarrollo principal |
+| `dev` | Rama principal de desarrollo |
 | `feat/*` | Nuevas funcionalidades |
 | `fix/*` | Correcciones |
 | `docs/*` | Documentación |
@@ -141,13 +268,18 @@ chore: configurar GitHub Actions para CI
 
 ---
 
-## ¿No sabes por dónde empezar?
+# ¿Por dónde empezar?
 
-1. Revisa los issues abiertos con la etiqueta `good first issue`
-2. Comenta en el issue que quieres trabajar
+Si es tu primera vez contribuyendo:
+
+1. Busca issues abiertos etiquetados como `good first issue`
+2. Comenta en el issue que deseas trabajar
 3. Espera confirmación antes de empezar
-4. Sigue los pasos de este documento
+4. Crea tu rama desde `dev`
+5. Sigue los pasos de este documento
 
 ---
 
-**¡Gracias por contribuir al proyecto!**
+# ¡Gracias por contribuir al proyecto!
+
+Toda contribución grande o pequeña ayuda a mejorar Escuadra.
