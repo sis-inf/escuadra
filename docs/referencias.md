@@ -77,6 +77,6 @@ Este documento centraliza los recursos tecnicos, normas de ingenieria y bibliogr
 - **Fuente:** Editorial Universidad Francisco de Paula Santander (UFPS), Colombia
 - **Año:** 2022
 - **Idioma:** Español
-- **URL:** https://libros.ufps.edu.co/index.php/editorial-ufps/catalog/book/25
+- **URL:** https://web.archive.org/web/20230000000000/https://libros.ufps.edu.co/index.php/editorial-ufps/catalog/book/25
 
 ---
