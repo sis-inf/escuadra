@@ -57,10 +57,24 @@ source .venv/bin/activate
 ### Windows / Linux / macOS:
 
 ```bash
-pip install -e ".[dev]"
+pip install -e '.[dev]'
 ```
 
 Esto instalará el proyecto en modo editable junto con las dependencias necesarias para desarrollo, testing y herramientas de calidad de código.
+
+## 4. Instalar hooks de pre-commit
+
+Ejecuta el siguiente comando para instalar los hooks de pre-commit en tu entorno local. Esto es **obligatorio** para asegurar que todos los commits cumplan con los estándares de calidad del proyecto antes de ser enviados.
+
+```bash
+pre-commit install
+```
+
+Si no tienes `pre-commit` instalado, puedes hacerlo con:
+
+```bash
+pip install pre-commit
+```
 
 ---
 
