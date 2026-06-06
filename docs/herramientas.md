@@ -1,48 +1,46 @@
-# Catálogo de herramientas de la suite Escuadra
+  # Herramientas
 
-Este documento describe las herramientas que componen la suite Escuadra, diseñada para resolver problemas de ingeniería y análisis numérico.
+  ## calculo_area
+  Descripción: Calcula el área de distintas figuras geométricas.
 
-## Herramientas disponibles
+  ### Fórmulas
+  - **Cuadrado**: $A = l^2$ (unidad: m²)
+  - **Rectángulo**: $A = l \times w$ (unidad: m²)
+  - **Triángulo**: $A = \frac{b \times h}{2}$ (unidad: m²)
+  - **Círculo**: $A = \pi r^2$ (unidad: m²)
 
-| Herramienta | Descripción | Propósito | Estado |
-|-------------|-------------|-----------|--------|
-| **Solucionador de ecuaciones lineales 2x2** | Resuelve sistemas de dos ecuaciones lineales con dos incógnitas | Encontrar valores de x e y que satisfagan ambas ecuaciones | Listo |
-| **Método de bisección** | Encuentra raíces de funciones continuas mediante intervalos | Resolver ecuaciones no lineales | Listo |
-| **Método de Newton-Raphson** | Aproxima raíces usando derivadas | Resolver ecuaciones no lineales con convergencia rápida | En progreso |
-| **Derivación numérica** | Calcula derivadas aproximadas usando diferencias finitas | Análisis de tasas de cambio sin función analítica | Listo |
-| **Integración numérica** | Aproxima integrales definidas mediante métodos como Simpson o trapecio | Calcular áreas bajo curvas | Pendiente |
-| **Interpolación polinomial** | Encuentra polinomios que pasan por puntos dados | Estimar valores entre datos conocidos | Pendiente |
-| **Regresión lineal** | Ajusta una recta a un conjunto de datos | Modelar relaciones lineales entre variables | En progreso |
+  ### Ejemplo de invocación
+  ```bash
+  python -m escuadra.tools.calculo_area --figura cuadrado --lado 5
+  # Salida: Área = 25.00 m²
+  ```
 
-## Problemas de ingeniería que resuelve cada herramienta
+  ## volumen
+  Descripción: Calcula el volumen de distintos sólidos.
 
-### Solucionador de ecuaciones lineales 2x2
-Resuelve problemas de equilibrio en sistemas físicos, circuitos eléctricos (leyes de Kirchhoff) y análisis estructural.
+  ### Fórmulas
+  - **Cubo**: $V = l^3$ (unidad: m³)
+  - **Cilindro**: $V = \pi r^2 h$ (unidad: m³)
+  - **Esfera**: $V = \frac{4}{3}\pi r^3$ (unidad: m³)
+  - **Prisma rectangular**: $V = l \times w \times h$ (unidad: m³)
 
-### Método de bisección
-Útil para encontrar raíces en problemas de ingeniería civil (análisis de vigas), mecánica (puntos de equilibrio) y termodinámica.
+  ### Ejemplo de invocación
+  ```bash
+  python -m escuadra.tools.volumen --solido cilindro --radio 2 --altura 5
+  # Salida: Volumen = 62.83 m³
+  ```
 
-### Método de Newton-Raphson
-Aplicable en problemas de flujo de carga en sistemas eléctricos, análisis de redes y optimización de procesos.
+  ## perimetro
+  Descripción: Calcula el perímetro de distintas figuras.
 
-### Derivación numérica
-Permite calcular velocidades y aceleraciones en sistemas mecánicos a partir de datos de posición.
+  ### Fórmulas
+  - **Cuadrado**: $P = 4l$ (unidad: m)
+  - **Rectángulo**: $P = 2(l + w)$ (unidad: m)
+  - **Triángulo**: $P = a + b + c$ (unidad: m)
+  - **Círculo** (circunferencia): $P = 2\pi r$ (unidad: m)
 
-### Integración numérica
-Útil para calcular momentos de inercia, trabajo mecánico, flujo de calor y áreas en diseños de ingeniería.
-
-### Interpolación polinomial
-Ayuda a estimar valores intermedios en experimentos, como resistencia de materiales a temperaturas no medidas.
-
-### Regresión lineal
-Permite predecir comportamientos y tendencias en datos experimentales, como correlación entre esfuerzo y deformación.
-
-## Leyenda de estados
-
-- **Listo** - Herramienta implementada y probada
-- **En progreso** - En desarrollo activo
-- **Pendiente** - Planificada para futuras versiones
-
-## Contribuciones
-
-Si deseas contribuir con nuevas herramientas o mejorar las existentes, consulta la guía de contribución en `docs/flujo-git.md`.
+  ### Ejemplo de invocación
+  ```bash
+  python -m escuadra.tools.perimetro --figura triangulo --lado1 3 --lado2 4 --lado3 5
+  # Salida: Perímetro = 12.00 m
+  ```
