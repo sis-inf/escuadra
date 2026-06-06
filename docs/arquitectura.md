@@ -69,3 +69,30 @@ Cada módulo contiene herramientas específicas de su rama de ingeniería, permi
 3. La solicitud se envía al módulo correspondiente en el Core.
 4. El Core procesa la información y genera un resultado.
 5. La API devuelve la respuesta al cliente en formato estructurado (JSON).
+
+## 7. Diagrama del Core
+```mermaid
+classDiagram
+
+class Dispatcher {
+    +run_convert()
+    +run_matrix()
+    +dispatch(subcommand)
+}
+
+class Registry {
+    +register_tool(name)
+    +get_tools()
+}
+
+
+Dispatcher ..> Registry : utiliza herramientas registradas
+```
+### Descripción
+
+
+El módulo "dispatcher.py" se encarga de despachar los subcomandos disponibles hacia las funciones correspondientes mediante la función "dispatch()".
+
+El módulo "registry.py" proporciona mecanismos para registrar herramientas mediante "register_tool()" y consultar las herramientas registradas mediante "get_tools()".
+
+La relación entre ambos módulos permite que el despachador ejecute funcionalidades previamente registradas en el sistema.
