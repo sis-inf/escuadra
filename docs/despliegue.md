@@ -10,6 +10,61 @@ Antes de ejecutar el proyecto, asegúrese de tener instalado:
 
 ---
 
+## Instalación con pip y Entorno Virtual
+
+Siga estos pasos para instalar el proyecto utilizando `pip` y configurar un entorno virtual.
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/sis-inf/escuadra.git
+cd escuadra
+```
+
+### 2. Crear y activar el entorno virtual
+
+**En Linux/macOS:**
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+**En Windows:**
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### 3. Instalar el proyecto
+
+Ejecute el siguiente comando desde el directorio del fork clonado para instalar el paquete en modo editable:
+
+```bash
+pip install -e .
+```
+
+### 4. Verificar la instalación
+
+Compruebe que la instalación fue exitosa ejecutando:
+
+```bash
+escuadra --version
+# o
+escuadra --help
+```
+
+### 5. Desactivar el entorno virtual
+
+Cuando haya terminado de trabajar, desactive el entorno virtual con:
+
+```bash
+deactivate
+```
+
+---
+
 ## Entornos
 
 ### Local
