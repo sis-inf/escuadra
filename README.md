@@ -6,18 +6,23 @@
 
 Prueba Escuadra en menos de 5 minutos:
 
+```bash
 git clone https://github.com/sis-inf/escuadra.git
 cd escuadra
 pip install -e .
+```
 
 Ejemplo de cálculo:
 
+```bash
 python -m escuadra
+```
 
 Salida esperada:
 
+```text
 Resultado: 25
-
+```
 Para instrucciones completas de instalación consulta:
 
 [docs/instalacion.md](docs/instalacion.md)
