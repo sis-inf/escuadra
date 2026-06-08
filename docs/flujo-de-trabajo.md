@@ -172,7 +172,7 @@ Solicitar nuevamente
 
 Todos los flujos siguen una estructura común:
 
-```text
+
 Entrada del usuario
   -->
 Validación
@@ -180,7 +180,6 @@ Validación
 Cálculo o procesamiento
   -->
 Salida de resultados
-```
 
 Las validaciones son obligatorias para garantizar que los cálculos se realicen con datos consistentes. Ante cualquier error, el sistema informa claramente el problema y permite al usuario corregir la entrada sin reiniciar completamente el proceso.
 
