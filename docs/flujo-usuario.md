@@ -2,7 +2,7 @@
 
 ## 1. Perfil del usuario
 
-Escuadra está dirigido a estudiantes, docentes y usuarios que necesitan utilizar herramientas matemáticas para resolver problemas de forma rápida y visual.
+Escuadra está dirigido a los estudiantes, docentes y usuarios que necesitan utilizar herramientas matemáticas para resolver problemas de forma rápida y visual.
 
 El usuario busca:
 - Resolver operaciones matemáticas
