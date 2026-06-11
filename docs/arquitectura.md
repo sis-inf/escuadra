@@ -93,7 +93,6 @@ escuadra/
 ---
 
 ## 6. Flujo de Datos
- fix-docs/arquitectura-diagrama-clases-core
 1. El usuario o cliente realiza una solicitud a la API.
 2. La API (Flask) recibe los parámetros y los valida.
 3. La solicitud se envía al módulo correspondiente en el Core.
@@ -116,8 +115,14 @@ class Registry {
     +get_tools()
 }
 
+class Historial {
+    +add_entry()
+    +get_history()
+    +clear_history()
+}
 
 Dispatcher ..> Registry : utiliza herramientas registradas
+Dispatcher --> Historial : registra operaciones
 ```
 ### Descripción
 
@@ -134,4 +139,3 @@ La relación entre ambos módulos permite que el despachador ejecute funcionalid
 3. Se invoca la función del módulo correspondiente (ej. calcular_reacciones).
 4. El módulo procesa los datos usando matemática pura de Python.
 5. El resultado se devuelve a la interfaz y se muestra al usuario.
- dev
