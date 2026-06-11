@@ -53,3 +53,106 @@ Para mas detalles, consulta el archivo `CONTRIBUTING.md` del repositorio.
 ## Que areas de ingenieria cubre Escuadra?
 
 El proyecto contempla herramientas para distintas ramas de ingenieria: Sistemas, Informatica, Industrial, Civil, Electronica y Mecanica.
+
+## Como sincronizo mi fork con los ultimos cambios del upstream?
+
+Para actualizar tu fork con los cambios mas recientes del repositorio principal:
+
+```bash
+ git checkout dev
+ git pull upstream dev
+```
+
+Despues puedes subir los cambios actualizados a tu fork:
+
+```bash
+ git push origin dev
+```
+
+## Puedo trabajar en mas de una issue simultaneamente?
+
+Si. Se recomienda crear una rama independiente para cada issue.
+
+Ejemplo:
+
+```bash
+ git checkout -b fix/error-login
+ git checkout -b docs/actualizar-faq
+```
+
+Cada issue debe tener su propia rama y su propio Pull Request.
+
+## Que pasa si mi Pull Request tiene conflictos de merge?
+
+Debes actualizar tu rama con los cambios mas recientes de `dev` y resolver los conflictos manualmente.
+
+```bash
+ git checkout dev
+ git pull upstream dev
+ git checkout mi-rama
+ git merge dev
+```
+
+Luego corrige los conflictos y realiza un nuevo commit.
+
+## Por que fue cerrado mi Pull Request sin merge?
+
+Un Pull Request puede cerrarse sin merge por diferentes motivos:
+
+* No cumple los criterios del issue.
+* Tiene conflictos sin resolver.
+* Modifica archivos no relacionados.
+* Duplica trabajo ya realizado por otro contribuidor.
+
+Revisa los comentarios de los revisores para conocer el motivo exacto.
+
+## Como se si mi codigo pasa el CI antes de abrir el Pull Request?
+
+Puedes ejecutar las pruebas localmente antes de subir los cambios.
+
+```bash
+ pytest
+```
+
+Tambien puedes ejecutar las herramientas de calidad definidas por el proyecto.
+
+```bash
+ ruff check .
+```
+
+## Como verifico que estoy trabajando sobre mi fork?
+
+Puedes revisar los repositorios remotos configurados:
+
+```bash
+ git remote -v
+```
+
+Debes tener configurados `origin` para tu fork y `upstream` para el repositorio principal.
+
+## Como creo una nueva rama para trabajar en una issue?
+
+Primero sincroniza la rama `dev` y luego crea una rama nueva:
+
+```bash
+ git checkout dev
+ git pull upstream dev
+ git checkout -b tipo/descripcion-corta
+```
+
+Ejemplo:
+
+```bash
+ git checkout -b docs/faq-workflow-forks
+```
+
+## Que hago despues de terminar una contribucion?
+
+Debes agregar los cambios, crear un commit y subir la rama a tu fork.
+
+```bash
+ git add .
+ git commit -m "docs: actualizar preguntas frecuentes - Closes #362"
+ git push origin fix-docs/faq-workflow-forks
+```
+Luego abre un Pull Request hacia la rama `dev` del repositorio principal.

@@ -26,6 +26,12 @@ __pycache__/
 *.py,cover
 *.py,coverage
 
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+
 # Build / compilación
 dist/
 build/
@@ -34,31 +40,12 @@ target/
 *.egg-info/
 .eggs/
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Cobertura de tests
-coverage/
-.coverage
-htmlcov/
-
-# Datos sensibles
-*.pem
-*.key
-*.cert
-
-# Entornos virtuales
-venv/
-.venv/
-env/
-ENV/
-
 # Testing / coverage
+coverage/
 coverage.*
+.coverage
 .coverage.*
+htmlcov/
 .pytest_cache/
 
 # Type checkers / tooling
@@ -69,11 +56,11 @@ coverage.*
 # Jupyter Notebooks
 .ipynb_checkpoints/
 
-# Build general / binarios
-*.o
-*.exe
-*.dll
-*.so
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # Datos sensibles
 *.pem
@@ -86,5 +73,12 @@ id_rsa.pub
 *.tmp
 *.temp
 *.bak
+
 # PyInstaller
 *.spec
+
+# Build general / binarios
+*.o
+*.exe
+*.dll
+*.so

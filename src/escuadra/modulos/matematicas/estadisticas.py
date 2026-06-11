@@ -1,45 +1,67 @@
-def calcular(datos: list) -> dict:
-   
+def calcular_media(datos: list) -> float:
     if not datos:
-        raise ValueError("La lista de datos está vacía.")
-    
-    for x in datos:
-        if not isinstance(x, (int, float)):
-            raise ValueError("La lista contiene elementos no numéricos.")
+        raise ValueError("La lista no puede estar vacia")
+
+    return float(sum(datos) / len(datos))
+
+
+def calcular_mediana(datos: list) -> float:
+    if not datos:
+        raise ValueError("La lista no puede estar vacia")
+
+    datos_ordenados = sorted(datos)
+    n = len(datos_ordenados)
+    mitad = n // 2
+
+    if n % 2 == 0:
+        return float(
+            (datos_ordenados[mitad - 1] + datos_ordenados[mitad]) / 2
+        )
+
+    return float(datos_ordenados[mitad])
+
+
+def calcular_moda(datos: list) -> list:
+    if not datos:
+        raise ValueError("La lista no puede estar vacia")
+
+    frecuencias = {}
+
+    for valor in datos:
+        frecuencias[valor] = frecuencias.get(valor, 0) + 1
+
+    frecuencia_maxima = max(frecuencias.values())
+
+    return [
+        valor
+        for valor, frecuencia in frecuencias.items()
+        if frecuencia == frecuencia_maxima
+    ]
+
+
+def calcular_desviacion_estandar(
+    datos: list,
+    poblacional: bool = False
+) -> float:
+    if not datos:
+        raise ValueError("La lista no puede estar vacia")
 
     n = len(datos)
-    datos_ordenados = sorted(datos)
+
+    if not poblacional and n < 2:
+        raise ValueError(
+            "Se requieren al menos dos datos para la desviacion muestral"
+        )
 
     media = sum(datos) / n
 
+    suma_cuadrados = 0
 
-    mitad = n // 2
-    if n % 2 == 0:
-        mediana = (datos_ordenados[mitad - 1] + datos_ordenados[mitad]) / 2
-    else:
-        mediana = datos_ordenados[mitad]
+    for valor in datos:
+        suma_cuadrados += (valor - media) ** 2
 
-    frecuencias = {}
-    for x in datos:
-        frecuencias[x] = frecuencias.get(x, 0) + 1
-    max_frecuencia = max(frecuencias.values())
-    moda = [k for k, v in frecuencias.items() if v == max_frecuencia][0]
+    divisor = n if poblacional else n - 1
 
-    varianza = sum((x - media) ** 2 for x in datos) / n
+    varianza = suma_cuadrados / divisor
 
-    desv_std = varianza ** 0.5
-
-    valor_minimo = datos_ordenados[0]
-    valor_maximo = datos_ordenados[-1]
-    rango = valor_maximo - valor_minimo
-
-    return {
-        'media': float(media),
-        'mediana': float(mediana),
-        'moda': float(moda),
-        'varianza': float(varianza),
-        'desviacion_estandar': float(desv_std),
-        'minimo': float(valor_minimo),
-        'maximo': float(valor_maximo),
-        'rango': float(rango)
-    }
+    return float(varianza ** 0.5)
