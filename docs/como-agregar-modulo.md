@@ -15,11 +15,9 @@ Ejemplo de estructura:
 modulos/
 ├── civil/
 ├── electrica/
-├── electronica/
-├── industrial/
-├── mecanica/
+├── geometria/
+├── matematicas/
 ├── sistemas/
-└── informatica/
 ```
 
 Cada carpeta contiene herramientas relacionadas con su área.
@@ -29,7 +27,7 @@ Ejemplos:
 ```text
 modulos/civil/calculo_vigas.py
 modulos/electrica/ley_ohm.py
-modulos/mecanica/calculo_velocidad.py
+modulos/matematicas/regla_tres.py
 ```
 
 ---
@@ -50,26 +48,41 @@ modulos/civil/
 
 ## 2. Crear el archivo del módulo
 
-El archivo debe tener un nombre descriptivo y usar `snake_case`.
+El archivo debe tener un nombre descriptivo y usar "snake_case".
+
+La ubicación de un módulo debe seguir la estructura:
+
+src/escuadra/modulos/NOMBRE_DOMINIO/nombre_herramienta.py
+
+Ejemplo:
+
+src/escuadra/modulos/matematicas/regla_tres.py
 
 Ejemplos válidos:
 
-```text
 calculo_vigas.py
 analisis_circuito.py
 conversion_temperatura.py
-```
 
 Evitar nombres genéricos como:
 
-```text
 archivo1.py
 modulo.py
 prueba123.py
-```
 
----
+## Crear __init__.py si el dominio es nuevo
 
+Si se crea un nuevo dominio dentro de "modulos/", debe agregarse un archivo:
+
+src/escuadra/modulos/NOMBRE_DOMINIO/__init__.py
+
+Esto permite que Python reconozca el directorio como un paquete.
+
+## Registrar la herramienta
+
+Después de crear el módulo, registrar la nueva herramienta en el sistema de registro correspondiente utilizado por Escuadra.
+
+Sin este paso la herramienta no será detectada por la aplicación.
 ## 3. Definir funciones claras
 
 Las funciones deben:
@@ -146,7 +159,7 @@ Las pruebas deben validar:
 
 ```python
 # Archivo:
-# modulos/civil/calculo_triangulo.py
+# src/escuadra/modulos/civil/calculo_triangulo.py
 
 def calcular_area_triangulo(base, altura):
     """
