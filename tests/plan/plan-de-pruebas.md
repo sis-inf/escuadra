@@ -52,3 +52,75 @@ Garantizar la fiabilidad, precisión numérica y estabilidad de la suite de cál
 | Desbordamiento de memoria (grandes datos) | Media | Alto | Implementación de pruebas de estrés y límites de entrada. |
 | Inconsistencia en CI (Ubuntu) vs Local | Baja | Medio | Uso de contenedores o entornos estandarizados en GitHub Actions. |
 | Fórmulas matemáticas mal implementadas | Media | Crítico | Revisión por pares y contraste con software de ingeniería (Matlab/Excel). |
+
+## 8. Plan de pruebas por módulo
+
+### 8.1 Modulo `modulos/civil/`
+
+Funciones a probar:
+- `viga.calcular_momento_flector`
+- `viga.calcular_deflexion`
+- `viga.verificar_resistencia`
+- `viga.aplicar_carga_distribuida`
+
+Casos de prueba recomendados:
+- Normales:
+  - Cargas uniformes y puntuales sobre vigas sencillas.
+  - Secciones rectangulares y perfiles estándar con resultados esperados.
+- Borde:
+  - Carga cero y longitud mínima permitida.
+  - Resultados cerca de los límites de resistencia admitidos.
+- Error:
+  - Cargas negativas no válidas.
+  - División por cero al usar dimensiones nulas.
+  - Parámetros de material o sección fuera de rango.
+
+Cobertura objetivo:
+- 85% de las funciones críticas en `modulos/civil/`.
+- Al menos 100% de las validaciones de entrada y manejo de errores.
+
+### 8.2 Modulo `modulos/electrica/`
+
+Funciones a probar:
+- `caida_tension.calcular_caida_tension`
+- `caida_tension.calcular_resistencia_cable`
+- `caida_tension.validar_corriente_admisible`
+- `caida_tension.aplicar_correccion_temperatura`
+
+Casos de prueba recomendados:
+- Normales:
+  - Conductores con longitudes y corrientes dentro de rango.
+  - Cálculos de caída de tensión en circuitos monofásicos.
+- Borde:
+  - Corriente límite máxima nominal.
+  - Longitud máxima permitida de conductor.
+- Error:
+  - Valores nulos o negativos para corriente, tensión o longitud.
+  - Parámetros de sección del conductor no válidos.
+
+Cobertura objetivo:
+- 85% de las funciones críticas en `modulos/electrica/`.
+- Cobertura completa en casos de validación de parámetros.
+
+### 8.3 Modulo `modulos/geometria/`
+
+Funciones a probar:
+- `calcular_area_poligono`
+- `calcular_perimetro`
+- `calcular_coordenadas_centroide`
+- `calcular_angulo_entre_vectores`
+
+Casos de prueba recomendados:
+- Normales:
+  - Cálculo de áreas y perímetros para figuras comunes (triángulo, rectángulo, círculo).
+  - Centroide de figuras regulares y poligonales.
+- Borde:
+  - Polígonos degenerados con área cero.
+  - Vectores colineales o ángulos de 0° y 180°.
+- Error:
+  - Estructuras de datos incompletas o vértices repetidos.
+  - Valores negativos o nulos en dimensiones geométricas.
+
+Cobertura objetivo:
+- 80% de las funciones previstas en `modulos/geometria/`.
+- 100% de las validaciones de entradas geométricas.
