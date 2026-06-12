@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.fixture
 def mock_config():
     """Fixture que simula la carga de configuración YAML sin archivo real"""
