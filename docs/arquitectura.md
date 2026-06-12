@@ -69,3 +69,35 @@ Cada módulo contiene herramientas específicas de su rama de ingeniería, permi
 3. La solicitud se envía al módulo correspondiente en el Core.
 4. El Core procesa la información y genera un resultado.
 5. La API devuelve la respuesta al cliente en formato estructurado (JSON).
+
+## 7. Diagrama de clases del core
+
+classDiagram
+
+    class Registry {
+        +register_tool(name)
+        +get_tools()
+    }
+
+    class Dispatcher {
+        +run_convert()
+        +run_matrix()
+        +dispatch(subcommand)
+    }
+
+    class Historial {
+        +agregar()
+        +listar()
+        +limpiar()
+    }
+
+    Dispatcher --> Registry : utiliza
+    Dispatcher --> Historial : utiliza
+
+Descripción
+
+- Registry administra el registro de herramientas disponibles.
+- Dispatcher enruta y ejecuta los subcomandos solicitados por el usuario.
+- Historial almacena y consulta el historial de ejecuciones realizadas.
+
+El Dispatcher utiliza Registry para localizar herramientas disponibles y utiliza Historial para registrar las operaciones ejecutadas.
