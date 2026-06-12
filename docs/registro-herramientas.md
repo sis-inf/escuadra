@@ -39,3 +39,18 @@ def add_parser(subparsers):
     )
 
     parser.set_defaults(func=ejecutar)
+```
+
+##  Registro de herramientas
+
+| Nombre de herramienta              | Módulo      | Archivo                               | PR   | Estado       |
+| ---------------------------------- | ----------- | ------------------------------------- | ---- | ------------ |
+| herramienta_divisor_tension        | electrica   | herramienta_divisor_tension.py        | #269 | implementada |
+| herramienta_ley_ohm                | electrica   | herramienta_ley_ohm.py                | #423 | implementada |
+| herramienta_calculo_area           | geometria   | herramienta_calculo_area.py           | #205 | implementada |
+| herramienta_calculadora_cientifica | matematicas | herramienta_calculadora_cientifica.py | #390 | implementada |
+| herramienta_conversion_unidades    | matematicas | herramienta_conversion_unidades.py    | #151 | implementada |
+| herramienta_sistemas_lineales      | matematicas | herramienta_sistemas_lineales.py      | #375 | implementada |
+| herramienta_complemento_a_2        | sistemas    | herramienta_complemento_a_2.py        | #270 | implementada |
+| herramienta_conversion_bases       | sistemas    | herramienta_conversion_bases.py       | #372 | implementada |
+| herramienta_tablas_verdad          | sistemas    | herramienta_tablas_verdad.py          | #149 | implementada |
