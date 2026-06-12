@@ -12,7 +12,7 @@ Garantizar la fiabilidad, precisión numérica y estabilidad de la suite de cál
 
 ### Fuera de alcance
 - Seguridad de red o ataques externos (Pentesting).
-- Pruebas de interfaz gráfica de usuario (UI/UX) avanzadas (el foco es el motor de cálculo).
+- Pruebas de interfaz gráfica del usuario (UI/UX) avanzadas (el foco es el motor de cálculo).
 - Compatibilidad con sistemas operativos móviles.
 
 ## 3. Tipos de prueba
