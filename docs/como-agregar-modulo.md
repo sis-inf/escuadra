@@ -218,3 +218,63 @@ Verificar que:
 - La rama fue creada desde `dev`
 - El PR apunta hacia `dev`
 - No se modificaron archivos fuera del alcance del issue
+
+## Ruta del módulo
+
+Las herramientas deben crearse dentro de la estructura actual del proyecto:
+
+src/escuadra/modulos/NOMBRE_DOMINIO/nombre_herramienta.py
+
+Ejemplos:
+
+src/escuadra/modulos/civil/momento_flector.py
+src/escuadra/modulos/electrica/herramienta_divisor_tension.py
+src/escuadra/modulos/sistemas/complemento_dos.py
+
+## Crear un nuevo dominio
+
+Si el dominio no existe, debe crearse una carpeta nueva dentro de "src/escuadra/modulos/".
+
+Ejemplo:
+
+src/escuadra/modulos/geotecnica/
+
+Además, es obligatorio agregar el archivo:
+
+src/escuadra/modulos/geotecnica/__init__.py
+
+Esto permite que Python reconozca el directorio como un paquete del proyecto.
+
+## Template básico de una herramienta
+
+El siguiente ejemplo muestra una estructura válida para una herramienta de Escuadra:
+
+from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
+
+
+class HerramientaEjemplo(Herramienta):
+    nombre = "Herramienta de ejemplo"
+    carrera = Carrera.CIVIL
+    descripcion = "Descripción breve de la herramienta."
+
+    def crear_widget(self):
+        raise NotImplementedError
+
+El nombre de la clase debe ser descriptivo y heredar de "Herramienta".
+
+## Registro de herramientas
+
+Después de crear una nueva herramienta, debe registrarse en el sistema correspondiente para que pueda ser detectada y utilizada por la aplicación.
+
+Verificar que la herramienta quede incorporada al registro utilizado por el proyecto y que aparezca correctamente dentro de la categoría o dominio correspondiente.
+
+## Verificación final
+
+Antes de abrir el Pull Request verificar que:
+
+- La herramienta se encuentra en "src/escuadra/modulos/NOMBRE_DOMINIO/"
+- El código Python es válido
+- Existe un archivo "__init__.py" si se creó un dominio nuevo
+- La herramienta fue agregada al registro correspondiente
+- El PR apunta a la rama "dev"
