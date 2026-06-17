@@ -82,3 +82,5 @@ id_rsa.pub
 *.exe
 *.dll
 *.so
+# MkDocs
+site/

@@ -1,0 +1,13 @@
+site_name: Escuadra
+
+docs_dir: docs
+
+nav:
+  - Inicio: instalacion.md
+  - Arquitectura: arquitectura.md
+  - Configuración: configuracion.md
+  - Desarrollo Local: desarrollo-local.md
+  - Flujo de Trabajo: flujo-de-trabajo.md
+  - Testing: testing.md
+  - Seguridad: seguridad.md
+  - API: api.md
