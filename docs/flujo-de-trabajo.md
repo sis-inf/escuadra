@@ -9,6 +9,28 @@ Este flujo ayuda a mantener ordenado el trabajo del equipo y evita modificar dir
 
 ---
 
+## Diagrama del flujo de ramas
+
+```text
+Fork
+  ↓
+Rama feature/fix/docs
+  ↓
+Pull Request
+  ↓
+dev
+  ↓
+main
+```
+
+El flujo actual del proyecto sigue el recorrido:
+
+```text
+fork → rama-feature → PR → dev → main
+```
+
+---
+
 ## 1. Hacer fork del repositorio
 
 El primer paso es crear una copia del repositorio principal en nuestra cuenta de GitHub.
@@ -70,6 +92,13 @@ La rama se crea con el siguiente comando:
 ```bash
 git checkout -b docs/flujo-de-trabajo
 ```
+Ejemplos de ramas según el tipo de tarea:
+
+```bash
+git checkout -b feat/calculadora
+git checkout -b fix/error-conversion
+git checkout -b docs/flujo-de-trabajo
+```
 
 Para verificar que estamos en la rama correcta:
 
@@ -100,6 +129,17 @@ docs/flujo-de-trabajo.md
 ## 6. Hacer commit de los cambios
 
 Primero se agregan los archivos modificados:
+
+```bash
+git add docs/flujo-de-trabajo.md docs/img/
+```
+Antes de realizar el commit, ejecutar las verificaciones automáticas:
+
+```bash
+pre-commit run --all-files
+```
+
+Si pre-commit realiza correcciones automáticas, volver a agregar los archivos:
 
 ```bash
 git add docs/flujo-de-trabajo.md docs/img/
@@ -148,6 +188,9 @@ docs/flujo-de-trabajo
 
 5. Completar la descripción del Pull Request.
 6. Hacer clic en **Create pull request**.
+
+7. Verificar que las comprobaciones automáticas de CI se ejecuten correctamente.
+8. Corregir cualquier error reportado por CI antes de solicitar la revisión del Pull Request.
 
 ![Captura del Pull Request](img/04-pull-request.png)
 

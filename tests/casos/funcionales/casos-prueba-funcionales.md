@@ -59,4 +59,58 @@
 - **Descripción:** Potencia en circuito monofásico
 - **Entrada:** voltaje 220V, corriente 5A, factor de potencia 0.9
 - **Resultado esperado:** Potencia activa = 990W
+
+## Herramienta: Conversor de Temperatura
+
+### CP-011
+
+* **Descripción:** Conversión de Celsius a Fahrenheit
+* **Entrada:** 100°C
+* **Resultado esperado:** 212°F
+
+### CP-012
+
+* **Descripción:** Conversión de Fahrenheit a Celsius
+* **Entrada:** 32°F
+* **Resultado esperado:** 0°C
+
+### CP-013
+
+* **Descripción:** Validación de temperatura Kelvin negativa
+* **Entrada:** -5 K
+* **Resultado esperado:** Mensaje de error indicando que Kelvin no puede tener valores negativos
+
+## Herramienta: Cálculo de Reacciones en Vigas
+
+### CP-014
+
+* **Descripción:** Viga simplemente apoyada con carga puntual de 20 kN
+* **Entrada:** longitud 10m, carga puntual 20 kN en el centro
+* **Resultado esperado:** Reacción en A = 10 kN, Reacción en B = 10 kN
+
+### CP-015
+
+* **Descripción:** Viga simplemente apoyada con carga puntual de 16 kN
+* **Entrada:** longitud 8m, carga puntual 16 kN en el centro
+* **Resultado esperado:** Reacción en A = 8 kN, Reacción en B = 8 kN
+
+### CP-016
+
+* **Descripción:** Validación de longitud de viga inválida
+* **Entrada:** longitud 0m, carga puntual 20 kN
+* **Resultado esperado:** Mensaje de error indicando que la longitud debe ser mayor que cero
+
+## Herramienta: Cálculo de Potencia Eléctrica
+
+### CP-017
+
+* **Descripción:** Potencia eléctrica con voltaje de 220V y corriente de 5A
+* **Entrada:** voltaje 220V, corriente 5A
+* **Resultado esperado:** Potencia = 1100W
+
+### CP-018
+
+* **Descripción:** Potencia eléctrica con corriente nula
+* **Entrada:** voltaje 220V, corriente 0A
+* **Resultado esperado:** Potencia = 0W
 EOF

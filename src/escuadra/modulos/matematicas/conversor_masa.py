@@ -1,0 +1,29 @@
+def convertir_masa(valor, unidad_origen, unidad_destino):
+    if valor < 0:
+        raise ValueError("El valor debe ser mayor o igual a cero")
+
+    factores = {
+        "kg": 1.0,
+        "g": 0.001,
+        "mg": 0.000001,
+        "lb": 0.453592,
+        "oz": 0.0283495,
+        "t": 1000.0,
+        "slug": 14.5939,
+    }
+
+    if unidad_origen not in factores:
+        raise ValueError(
+            f"Unidad desconocida: {unidad_origen}. "
+            f"Unidades válidas: {list(factores.keys())}"
+        )
+
+    if unidad_destino not in factores:
+        raise ValueError(
+            f"Unidad desconocida: {unidad_destino}. "
+            f"Unidades válidas: {list(factores.keys())}"
+        )
+
+    valor_kg = valor * factores[unidad_origen]
+
+    return valor_kg / factores[unidad_destino]

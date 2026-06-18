@@ -1,113 +1,230 @@
 # Guía de Despliegue
 
-## Prerrequisitos
+Esta guía describe el proceso de instalación y ejecución de Escuadra en sistemas Windows, Linux y macOS. Incluye la configuración del entorno virtual, la instalación del proyecto mediante pip y la verificación del funcionamiento de la interfaz de línea de comandos (CLI).
 
-Antes de ejecutar el proyecto, asegúrese de tener instalado:
+---
+
+# Prerrequisitos
+
+Antes de instalar Escuadra, asegúrese de tener instalado:
 
 * Python 3.10 o superior
-* pip (gestor de paquetes de Python)
-* Git (opcional, para clonar el repositorio)
+* pip (incluido con Python)
+* Git
+
+> Escuadra requiere Python 3.10 o superior. Versiones anteriores no están soportadas.
+
+Verificar las versiones instaladas:
+
+```bash
+python --version
+pip --version
+git --version
+```
+
+> En algunos sistemas Linux o macOS puede ser necesario utilizar `python3` en lugar de `python`.
 
 ---
 
-## Entornos
+# Obtener el código fuente
 
-### Local
+## Clonar el repositorio
+
+Si desea utilizar Escuadra como usuario:
 
 ```bash
-# Clonar el repositorio
 git clone https://github.com/sis-inf/escuadra.git
 cd escuadra
-
-# (Opcional) Crear entorno virtual
-python -m venv venv
-
-# Activar entorno virtual
-# En Windows:
-venv\Scripts\activate
-# En Linux/Mac:
-source venv/bin/activate
-
-# Instalar dependencias
-pip install -r requirements.txt
-
-# Ejecutar la aplicación
-python app.py
-# o alternativamente:
-flask run
 ```
 
-La aplicación se ejecutará por defecto en:
-
-```
-http://localhost:5000
-```
-
----
-
-### Producción
+Si trabaja mediante el flujo de contribución del proyecto, clone primero su fork personal:
 
 ```bash
-# Clonar repositorio
-git clone https://github.com/sis-inf/escuadra.git
+git clone https://github.com/TU-USUARIO/escuadra.git
 cd escuadra
-
-# Crear entorno virtual
-python -m venv venv
-source venv/bin/activate
-
-# Instalar dependencias
-pip install -r requirements.txt
-
-# Configurar variables de entorno
-export FLASK_APP=app.py
-export FLASK_ENV=production
-
-# Ejecutar servidor
-flask run --host=0.0.0.0 --port=5000
 ```
 
-Nota: Para entornos productivos reales se recomienda usar servidores como gunicorn o uWSGI junto a un proxy como Nginx.
+Para más detalles sobre el flujo de contribución consulte:
+
+```text
+docs/guia-contribuidor-primeros-pasos.md
+```
 
 ---
 
-## Variables de entorno
+# Entorno virtual en Linux/macOS
 
-| Variable  | Descripción                                 | Ejemplo     |
-| --------- | ------------------------------------------- | ----------- |
-| FLASK_APP | Archivo principal de la aplicación Flask    | app.py      |
-| FLASK_ENV | Modo de ejecución (desarrollo o producción) | development |
-| PORT      | Puerto en el que se ejecuta la aplicación   | 5000        |
+Crear el entorno virtual:
+
+```bash
+python -m venv .venv
+```
+
+Activarlo:
+
+```bash
+source .venv/bin/activate
+```
+
+Cuando el entorno esté activo, la terminal mostrará un prefijo similar a:
+
+```text
+(.venv)
+```
 
 ---
 
-## Solución de problemas comunes
+# Entorno virtual en Windows
 
-**Error: comando `pip` no reconocido**
+Crear el entorno virtual:
 
-* Verificar que Python esté correctamente instalado y agregado al PATH.
-
-**Error: módulos no encontrados**
-
-* Ejecutar nuevamente:
-
-```bash
-pip install -r requirements.txt
+```powershell
+python -m venv .venv
 ```
 
-**El servidor no inicia**
+Activar en PowerShell:
 
-* Verificar que el archivo principal (`app.py`) exista.
-* Revisar errores en consola.
-
-**Puerto en uso**
-
-* Cambiar el puerto:
-
-```bash
-flask run --port=5001
+```powershell
+.venv\Scripts\Activate.ps1
 ```
 
-**Problemas con entorno virtual**
+Activar en CMD:
 
-* Asegurarse de que esté activado antes de instalar dependencias.
+```cmd
+.venv\Scripts\activate
+```
+
+Cuando el entorno esté activo, la terminal mostrará un prefijo similar a:
+
+```text
+(.venv)
+```
+
+---
+
+# Instalación con pip
+
+Desde el directorio raíz del proyecto ejecutar:
+
+```bash
+pip install -e .
+```
+
+La opción `-e` (*editable*) instala el proyecto enlazándolo al código fuente local. Esto permite que los cambios realizados en el código se reflejen inmediatamente sin necesidad de reinstalar el paquete.
+
+La instalación registra además el comando:
+
+```bash
+escuadra
+```
+
+definido en el archivo `pyproject.toml`.
+
+---
+
+# Dependencias de desarrollo (opcional)
+
+Si va a contribuir al proyecto o ejecutar pruebas, instale también las dependencias de desarrollo:
+
+```bash
+pip install -e ".[dev]"
+```
+
+Estas dependencias incluyen herramientas para pruebas, validación de código y empaquetado.
+
+---
+
+# Verificar la instalación
+
+Verificar que Escuadra esté disponible:
+
+```bash
+escuadra --help
+```
+
+Consultar la versión instalada:
+
+```bash
+escuadra --version
+```
+
+También es posible ejecutar la aplicación mediante:
+
+```bash
+python -m escuadra --help
+```
+
+Si la instalación fue exitosa, se mostrará la ayuda de la aplicación o la versión instalada.
+
+---
+
+# Ejecución
+
+Mostrar la ayuda general:
+
+```bash
+escuadra --help
+```
+
+Ejecutar el paquete directamente:
+
+```bash
+python -m escuadra
+```
+
+---
+
+# Desactivar el entorno virtual
+
+Cuando finalice su sesión de trabajo:
+
+```bash
+deactivate
+```
+
+---
+
+# Problemas comunes
+
+## El comando `python` no es reconocido
+
+Verifique que Python esté instalado correctamente y agregado al PATH del sistema.
+
+## El comando `pip` no es reconocido
+
+Reinstale Python asegurándose de habilitar la opción:
+
+```text
+Add Python to PATH
+```
+
+durante la instalación.
+
+## El comando `escuadra` no funciona
+
+Verifique que:
+
+1. El entorno virtual esté activo.
+2. La instalación se haya realizado correctamente.
+3. Se haya ejecutado:
+
+```bash
+pip install -e .
+```
+
+## Error por dependencias faltantes
+
+Reinstale las dependencias del proyecto:
+
+```bash
+pip install -e .
+```
+
+---
+
+# Documentación relacionada
+
+* README.md
+* docs/guia-contribuidor-primeros-pasos.md
+* docs/arquitectura.md
+* pyproject.toml

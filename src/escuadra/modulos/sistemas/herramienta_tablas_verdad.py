@@ -1,14 +1,21 @@
-import re
 import itertools
-from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton,
-    QTableWidget, QTableWidgetItem, QLabel, QMessageBox
-)
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QClipboard, QGuiApplication
+import re
 
-from escuadra.core.herramienta import Herramienta
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtWidgets import (
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+    QWidget,
+)
+
 from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 
 
 class HerramientaTablasVerdad(Herramienta):
@@ -22,7 +29,8 @@ class HerramientaTablasVerdad(Herramienta):
 
         help_text = QLabel(
             "Operadores soportados:\n"
-            "AND (también &, *, ∧) | OR (también |, +, ∨) | NOT (también !, ~, ¬) | XOR (también ^)\n"
+            "AND (también &, *, ∧) | OR (también |, +, ∨) |"
+            "NOT (también !, ~, ¬) | XOR (también ^)\n"
             "Ejemplo: A AND (B OR C)"
         )
         layout.addWidget(help_text)
@@ -100,10 +108,16 @@ class HerramientaTablasVerdad(Herramienta):
         variables = sorted(set(variables_encontradas))
 
         if len(variables) == 0:
-            raise ValueError("No se encontraron variables en la expresión (use letras mayúsculas A-Z).")
+            raise ValueError(
+                "No se encontraron variables en la expresión"
+                "(use letras mayúsculas A-Z)."
+            )
 
         if len(variables) > 4:
-            raise ValueError(f"Se encontraron {len(variables)} variables. Por favor, simplifique la expresión a 4 variables o menos.")
+            raise ValueError(
+                f"Se encontraron {len(variables)} variables."
+                "Por favor, simplifique la expresión a 4 variables o menos."
+            )
 
         expresion_python = self.convertir_expresion(expresion)
 

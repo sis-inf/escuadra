@@ -1,0 +1,62 @@
+[
+    {
+        "nombre": "Oruro",
+        "celsius": 5.0,
+        "fahrenheit": 41.0,
+        "kelvin": 278.15
+    },
+    {
+        "nombre": "La Paz",
+        "celsius": 8.5,
+        "fahrenheit": 47.3,
+        "kelvin": 281.65
+    },
+    {
+        "nombre": "Santa Cruz",
+        "celsius": 30.0,
+        "fahrenheit": 86.0,
+        "kelvin": 303.15
+    },
+    {
+        "nombre": "Cochabamba",
+        "celsius": 22.0,
+        "fahrenheit": 71.6,
+        "kelvin": 295.15
+    },
+    {
+        "nombre": "Sucre",
+        "celsius": 18.0,
+        "fahrenheit": 64.4,
+        "kelvin": 291.15
+    },
+    {
+        "nombre": "Tarija",
+        "celsius": 25.0,
+        "fahrenheit": 77.0,
+        "kelvin": 298.15
+    },
+    {
+        "nombre": "Potosi",
+        "celsius": 4.0,
+        "fahrenheit": 39.2,
+        "kelvin": 277.15
+    },
+    {
+        "nombre": "Beni",
+        "celsius": 32.0,
+        "fahrenheit": 89.6,
+        "kelvin": 305.15
+    },
+    {
+        "nombre": "Pando",
+        "celsius": 31.0,
+        "fahrenheit": 87.8,
+        "kelvin": 304.15
+    },
+    {
+        "nombre": "El Alto",
+        "celsius": 6.0,
+        "fahrenheit": 42.8,
+        "kelvin": 279.15
+    }
+]

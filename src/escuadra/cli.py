@@ -7,6 +7,38 @@ import argparse
 
 __version__ = "0.1.0"
 
+# Agregar aqui los modulos cuando esten implementados
+MODULOS_DISPONIBLES = set()
+
+def herramienta_no_disponible(nombre_herramienta):
+    """Muestra mensaje para herramientas no implementadas."""
+    print(f"La herramienta '{nombre_herramienta}' aún está en construcción y no está disponible.")
+
+def ejecutar_herramienta(args):
+    """
+    Ejecuta el subcomando correspondiente si el módulo existe. En caso contrario, muestra un mensaje
+    """
+    herramienta = args.herramienta
+
+    if herramienta not in MODULOS_DISPONIBLES:
+        herramienta_no_disponible(herramienta)
+        return
+
+    try:
+        modulo = __import__(
+            f"escuadra.modulos.{herramienta}",
+            fromlist=["ejecutar"]
+        )
+
+    except (ModuleNotFoundError, ImportError):
+        herramienta_no_disponible(herramienta)
+        return
+
+    kwargs = vars(args).copy()
+    kwargs.pop("herramienta")
+
+    modulo.ejecutar(**kwargs)
+
 
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
@@ -42,6 +74,9 @@ def main():
 
     if args.herramienta is None:
         parser.print_help()
+        return
+
+    ejecutar_herramienta(args)
 
 
 if __name__ == "__main__":

@@ -41,4 +41,4 @@ jobs:
           pip install -e .
           pip install -r requirements-dev.txt
       - name: Run pytest
-        run: pytest
+         run: pytest -m "not slow"

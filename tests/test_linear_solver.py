@@ -2,11 +2,13 @@
 Pruebas unitarias para el solucionador de ecuaciones lineales 2x2
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.escuadra.math.linear_solver import solve_linear_2x2
+
 
 def test_solve_linear_2x2_simple():
     """Caso simple: sistema con solución única"""

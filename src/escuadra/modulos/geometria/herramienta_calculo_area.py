@@ -1,18 +1,24 @@
-from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QFormLayout,
-    QComboBox, QLineEdit, QLabel, QPushButton, QMessageBox,
-)
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import (
+    QComboBox,
+    QFormLayout,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
-from escuadra.core.herramienta import Herramienta
 from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 from escuadra.modulos.geometria.calculo_area import (
-    area_triangulo,
     area_circulo,
     area_rectangulo,
     area_trapecio,
+    area_triangulo,
 )
-
 
 # Configuración de cada figura: nombre visible → (campos requeridos, función de cálculo)
 _FIGURAS = {

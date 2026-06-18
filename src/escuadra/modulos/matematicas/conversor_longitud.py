@@ -9,7 +9,7 @@ UNIDADES_A_METROS = {
 
 
 def convertir(valor: float, de_unidad: str, a_unidad: str) -> dict:
-    
+
     """
     Convierte unidades de longitud usando metros como base.
 
