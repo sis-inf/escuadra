@@ -7,15 +7,19 @@ y este proyecto sigue el versionado [SemVer](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
-### Agregado
-- Estructura inicial del proyecto
-- Organización de carpetas bajo la arquitectura definida
-- Documentación inicial del proyecto
-- Archivo README con descripción general del sistema
-- Guías de estilo para el desarrollo
-- Glosario de términos del proyecto
-- Configuración inicial del entorno de desarrollo
-- Definición inicial de convenciones de trabajo colaborativo
+### Added
+- feat(conversor_longitud): agregado módulo de conversión de longitud
+- feat(herramienta_calculo_area): agregada herramienta de cálculo de áreas
+- feat(caida_tension): agregado cálculo de caída de tensión
+- feat(tablas_verdad): agregada generación de tablas de verdad
+- feat(conversor_bases): agregado conversor entre sistemas numéricos
+- feat(viga): agregado módulo de cálculo para vigas
+
+### Changed
+- chore(changelog): actualización de módulos documentados en desarrollo
+
+### Fixed
+- fix(changelog): corrección de entradas faltantes del sprint actual
 
 ## [0.1.0] - 2026-04-19
 

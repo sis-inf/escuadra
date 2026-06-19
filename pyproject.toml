@@ -46,3 +46,10 @@ markers = [
     "integration: tests que leen archivos del sistema",
     "unit: tests unitarios puros"
 ]
+
+[tool.coverage.run]
+source = ["src/escuadra"]
+omit = [
+    "*/main.py",
+    "*/ui/*"
+]
