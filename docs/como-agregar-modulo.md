@@ -1,25 +1,24 @@
 # Cómo agregar un nuevo módulo a Escuadra
 
-Esta guía explica cómo crear e integrar una nueva herramienta dentro del proyecto Escuadra.  
+Esta guía explica cómo crear e integrar una nueva herramienta dentro del proyecto Escuadra.
+
 El objetivo es mantener una estructura clara, consistente y fácil de mantener para todos los contribuidores.
 
 ---
 
 # Estructura de módulos
 
-Los módulos deben organizarse según la rama de ingeniería correspondiente.
+Los módulos deben organizarse según el dominio correspondiente dentro de `src/escuadra/modulos/`.
 
 Ejemplo de estructura:
 
 ```text
-modulos/
+src/escuadra/modulos/
 ├── civil/
 ├── electrica/
-├── electronica/
-├── industrial/
-├── mecanica/
-├── sistemas/
-└── informatica/
+├── geometria/
+├── matematicas/
+└── sistemas/
 ```
 
 Cada carpeta contiene herramientas relacionadas con su área.
@@ -27,37 +26,55 @@ Cada carpeta contiene herramientas relacionadas con su área.
 Ejemplos:
 
 ```text
-modulos/civil/calculo_vigas.py
-modulos/electrica/ley_ohm.py
-modulos/mecanica/calculo_velocidad.py
+src/escuadra/modulos/civil/herramienta_calculo_vigas.py
+src/escuadra/modulos/electrica/herramienta_ley_ohm.py
+src/escuadra/modulos/geometria/herramienta_calculo_area.py
 ```
 
 ---
 
 # Pasos para crear un nuevo módulo
 
-## 1. Elegir la rama de ingeniería
+## 1. Elegir el dominio adecuado
 
-Seleccionar la carpeta adecuada dentro de `modulos/`.
+Seleccionar la carpeta correspondiente dentro de:
+
+```text
+src/escuadra/modulos/
+```
 
 Ejemplo:
 
 ```text
-modulos/civil/
+src/escuadra/modulos/civil/
 ```
 
 ---
 
-## 2. Crear el archivo del módulo
+## 2. Crear `__init__.py` si el dominio es nuevo
 
-El archivo debe tener un nombre descriptivo y usar `snake_case`.
+Si se crea un dominio que todavía no existe, se debe agregar un archivo:
+
+```text
+src/escuadra/modulos/nuevo_dominio/__init__.py
+```
+
+Esto permite que Python reconozca el directorio como un paquete.
+
+---
+
+## 3. Crear el archivo del módulo
+
+El archivo debe crearse dentro del dominio correspondiente y tener un nombre descriptivo usando `snake_case`.
+
+Las herramientas descubiertas automáticamente por Escuadra deben utilizar el prefijo `herramienta_`.
 
 Ejemplos válidos:
 
 ```text
-calculo_vigas.py
-analisis_circuito.py
-conversion_temperatura.py
+herramienta_calculo_vigas.py
+herramienta_analisis_circuito.py
+herramienta_conversion_temperatura.py
 ```
 
 Evitar nombres genéricos como:
@@ -70,56 +87,43 @@ prueba123.py
 
 ---
 
-## 3. Definir funciones claras
+## 4. Implementar la herramienta
 
-Las funciones deben:
+Las herramientas deben heredar de `Herramienta`, definir sus metadatos e implementar el método `crear_widget()`.
 
-- Usar `snake_case`
-- Seguir la estructura verbo + sustantivo
-- Tener una única responsabilidad
-
-Ejemplos correctos:
+Template básico:
 
 ```python
-calcular_area()
-obtener_voltaje()
-analizar_carga()
-```
+from PySide6.QtWidgets import QLabel
 
-Ejemplos incorrectos:
+from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 
-```python
-calc()
-funcion1()
-datos()
+
+class HerramientaEjemplo(Herramienta):
+    nombre = "Ejemplo"
+    carrera = Carrera.SISTEMAS
+    descripcion = "Descripción de la herramienta."
+
+    def crear_widget(self):
+        return QLabel("Herramienta de ejemplo")
 ```
 
 ---
 
-# Convención de retorno
+## 5. Registro de herramientas
 
-Todas las funciones deben devolver un `dict` con claves descriptivas.
+Las herramientas son descubiertas automáticamente por el registro definido en:
 
-Esto permite:
-
-- Mantener consistencia entre módulos
-- Facilitar integraciones futuras
-- Hacer más legible la salida
-
-Ejemplo:
-
-```python
-return {
-    "resultado": area,
-    "unidad": "m2"
-}
+```text
+src/escuadra/core/registry.py
 ```
 
-Evitar retornos ambiguos como:
+Para que una herramienta sea detectada correctamente:
 
-```python
-return 25
-```
+* Debe estar ubicada dentro de `src/escuadra/modulos/`
+* El archivo debe comenzar con el prefijo `herramienta_`
+* Debe contener una clase que herede de `Herramienta`
 
 ---
 
@@ -131,14 +135,14 @@ Ejemplo de estructura:
 
 ```text
 tests/
-├── test_calculo_vigas.py
+├── test_herramienta_calculo_vigas.py
 ```
 
 Las pruebas deben validar:
 
-- Casos correctos
-- Valores límite
-- Manejo de errores simples
+* Casos correctos
+* Valores límite
+* Manejo de errores simples
 
 ---
 
@@ -146,65 +150,33 @@ Las pruebas deben validar:
 
 ```python
 # Archivo:
-# modulos/civil/calculo_triangulo.py
+# src/escuadra/modulos/geometria/herramienta_calculo_area.py
 
-def calcular_area_triangulo(base, altura):
-    """
-    Calcula el área de un triángulo.
-    """
+from PySide6.QtWidgets import QLabel
 
-    if base <= 0 or altura <= 0:
-        return {
-            "error": "La base y la altura deben ser mayores a cero"
-        }
-
-    area = (base * altura) / 2
-
-    return {
-        "base": base,
-        "altura": altura,
-        "area": area,
-        "unidad": "m2"
-    }
+from escuadra.core.carrera import Carrera
+from escuadra.core.herramienta import Herramienta
 
 
-def mostrar_resultado(resultado):
-    """
-    Muestra el resultado en pantalla.
-    """
+class HerramientaCalculoArea(Herramienta):
+    nombre = "Cálculo de Área"
+    carrera = Carrera.GEOMETRIA
+    descripcion = "Calcula áreas geométricas."
 
-    if "error" in resultado:
-        print("Error:", resultado["error"])
-        return
-
-    print("Base:", resultado["base"])
-    print("Altura:", resultado["altura"])
-    print("Área:", resultado["area"], resultado["unidad"])
-
-
-resultado = calcular_area_triangulo(10, 5)
-
-mostrar_resultado(resultado)
-```
-
-Salida esperada:
-
-```python
-Base: 10
-Altura: 5
-Área: 25.0 m2
+    def crear_widget(self):
+        return QLabel("Herramienta de cálculo de área")
 ```
 
 ---
 
 # Buenas prácticas
 
-- Mantener funciones pequeñas y reutilizables
-- Documentar funciones con docstrings
-- Evitar duplicar lógica
-- Usar nombres descriptivos
-- Mantener consistencia en el formato de retorno
-- Agregar pruebas antes de abrir un Pull Request
+* Mantener las herramientas pequeñas y reutilizables
+* Documentar el código mediante docstrings cuando corresponda
+* Evitar duplicar lógica existente
+* Utilizar nombres descriptivos para archivos, clases y funciones
+* Mantener consistencia con la estructura y convenciones del proyecto
+* Agregar pruebas antes de abrir un Pull Request
 
 ---
 
@@ -212,9 +184,11 @@ Altura: 5
 
 Verificar que:
 
-- El módulo funciona correctamente
-- El archivo sigue las convenciones del proyecto
-- Existen pruebas básicas
-- La rama fue creada desde `dev`
-- El PR apunta hacia `dev`
-- No se modificaron archivos fuera del alcance del issue
+* La herramienta funciona correctamente
+* El archivo sigue las convenciones del proyecto
+* Existen pruebas básicas
+* Se agregó `__init__.py` si fue necesario
+* La herramienta puede ser descubierta por el registro
+* La rama fue creada desde `dev`
+* El PR apunta hacia `dev`
+* No se modificaron archivos fuera del alcance del issue
