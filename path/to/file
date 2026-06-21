@@ -1,0 +1,29 @@
+- name: isort
+      repo: https://github.com/PyCQA/isort
+      rev: 2.x.x
+      type: diff
+      args:
+        - --multi-line=3
+        - --sort-by=import-order
+        - --profile=black
+        - --offset=80
+      files:
+        - '**/*.py'
+        - '**/*.pyi'
+        - '**/*.pyj'
+        - '**/*.pym'
+        - '**/*.pyx'
+    - name: black
+      repo: https://github.com/black-diffuse/black
+      rev: 23.5b1
+      type: diff
+      args:
+        - --mode=python
+        - --target-version=py310
+        - --skip-flake8
+      files:
+        - '**/*.py'
+        - '**/*.pyi'
+        - '**/*.pyj'
+        - '**/*.pym'
+        - '**/*.pyx'
