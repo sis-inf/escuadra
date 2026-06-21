@@ -1,0 +1,16 @@
+- repo: https://github.com/PyCQA/isort
+      rev: 0.8.1
+      hooks:
+        - id: isort
+          name: Isort
+          description: Sort Python imports
+          types: diff
+          language: python
+          actions:
+            - type: parse
+              annotate: true
+          extra_args:
+            - --sort-by=import-order
+            - --profile=black
+            - --skip=third-party
+            - --telemetry=false
