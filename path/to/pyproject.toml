@@ -1,0 +1,11 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 1a2b3c4..5d6e7f8 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,6 +1,7 @@
+ [tool.isort]
+ profile = "black"
++skip = ["*.pyc", "*.pyo", "*.pyd", "*.pyc", "*.pyo", "*.pyd"]
+ 
+ [tool.black]
+ line-length = 88
