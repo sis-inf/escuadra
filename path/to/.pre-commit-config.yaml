@@ -1,0 +1,20 @@
+diff --git a/.pre-commit-config.yaml b/.pre-commit-config.yaml
+index 6533333..8006877 100644
+--- a/.pre-commit-config.yaml
++++ b/.pre-commit-config.yaml
+@@ -1,6 +1,7 @@
+ repos:
+   - repo: https://github.com/psf/black
+     rev: 24.10.0
++  - repo: https://github.com/PyCQA/isort
++    rev: 5.13.2
+     hooks:
+       - id: black
+   - repo: https://github.com/PyCQA/flake8
+     rev: 6.0.0
+     hooks:
+       - id: flake8
+   - repo: https://github.com/PyCQA/pylint
+     rev: 3.0.0
+     hooks:
+       - id: pylint
