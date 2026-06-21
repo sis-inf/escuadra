@@ -1,0 +1,36 @@
+- repo: https://github.com/PyCQA/isort
+      rev: 0.8.1
+      hooks:
+        - id: isort
+          name: Isort
+          description: Sort Python imports
+          types: diff
+          language: python
+          actions:
+            - type: parse
+              annotate: true
+              filename: ^.*\.py$
+          args:
+            - --profile black
+            - --sorted
+            - --multi-line 3
+            - --save
+            - --telemetry false
+    - repo: https://github.com/aspindler/black
+      rev: 23.10b0
+      hooks:
+        - id: black
+          name: Black
+          description: Auto-formatter for Python code
+          types: diff
+          language: python
+          actions:
+            - type: parse
+              annotate: true
+              filename: ^.*\.py$
+          args:
+            - --mode parse
+            - --skip-changes-in-imports
+            - --target-version py310
+            - --fast
+            - --log-level error
