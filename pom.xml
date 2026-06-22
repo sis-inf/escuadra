@@ -1,0 +1,10 @@
+<!-- SpotBugs plugin -->
+<plugin>
+    <groupId>com.github.spotbugs</groupId>
+    <artifactId>spotbugs-maven-plugin</artifactId>
+    <version>4.8.6.2</version>
+    <configuration>
+        <threshold>High</threshold>
+        <effort>Max</effort>
+    </configuration>
+</plugin>

@@ -35,6 +35,7 @@ jobs:
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
     steps:
+
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -43,6 +44,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -e .
+
           pip install -r requirements-dev.txt
       - name: Run pytest
         run: pytest -m "not slow" --cov=src/escuadra --cov-report=term-missing
+      - name: Run SpotBugs
+        run: mvn spotbugs:check
+        continue-on-error: true
