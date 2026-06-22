@@ -31,7 +31,7 @@ escuadra = "escuadra.cli:main"
 where = ["src"]
 
 [tool.ruff]
-line-length = 100
+line-length = 88
 target-version = "py310"
 
 [tool.ruff.lint]
@@ -52,4 +52,22 @@ source = ["src/escuadra"]
 omit = [
     "*/main.py",
     "*/ui/*"
+]
+
+[tool.flake8]
+# Sincroniza la longitud máxima de línea permitida por Flake8 con el estándar de 88 caracteres de Black
+max-line-length = 88
+
+# Códigos omitidos para asegurar la interoperabilidad con el formateador Black:
+# E203: Ignora falsos positivos en espacios antes de ':' dentro de expresiones de slicing
+# W503: Desactiva la advertencia sobre rupturas de línea ocurridas antes de un operador binario
+extend-ignore = ["E203", "W503"]
+
+# Directorios excluidos del análisis estático para omitir dependencias externas y entornos locales
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "build",
+    "dist"
 ]
