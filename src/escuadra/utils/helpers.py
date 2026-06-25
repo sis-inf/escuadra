@@ -46,11 +46,7 @@ def leer_archivo(ruta):
         return archivo.read()
 
 
-def validar_numero(
-    texto,
-    permitir_negativo=True,
-    permitir_decimal=True
-):
+def validar_numero(texto, permitir_negativo=True, permitir_decimal=True):
     """
     Valida si un texto puede convertirse a número.
     """
