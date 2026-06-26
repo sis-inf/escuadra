@@ -1,4 +1,4 @@
-# 📄 Exportación a Reportes PDF
+s# 📄 Exportación a Reportes PDF
 
 Esta guía explica cómo exportar los resultados de los cálculos de Escuadra a un **reporte en formato PDF**.
 
