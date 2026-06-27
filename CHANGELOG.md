@@ -20,6 +20,7 @@ y este proyecto sigue el versionado [SemVer](https://semver.org/lang/es/).
 
 ### Fixed
 - fix(changelog): corrección de entradas faltantes del sprint actual
+- fix(matematicas): unificado el patrón de imports del paquete escuadra
 
 ## [0.1.0] - 2026-04-19
 
