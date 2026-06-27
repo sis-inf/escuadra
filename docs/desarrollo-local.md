@@ -64,6 +64,26 @@ pip install -r requirements-dev.txt
 
 Este archivo contiene herramientas necesarias para el desarrollo y pruebas del proyecto.
 
+## Usar el Makefile
+
+El repositorio incluye un `Makefile` con accesos directos para los comandos más comunes
+de desarrollo. Desde la raíz del proyecto puedes ejecutar:
+
+| Target | Comando equivalente | Uso |
+|--------|---------------------|-----|
+| `make install` | `pip3 install -e ".[dev]"` | Instala Escuadra en modo editable con dependencias de desarrollo. |
+| `make test` | `python3 -m pytest` | Ejecuta la suite de pruebas configurada para el proyecto. |
+| `make lint` | `ruff check .` | Revisa estilo y errores estáticos con Ruff. |
+| `make format` | `ruff format .` | Aplica el formato automático de Ruff. |
+| `make build` | `python3 -m build` | Genera los artefactos de distribución del paquete. |
+| `make run` | `python3 -m escuadra.app` | Ejecuta la interfaz gráfica localmente. |
+
+Puedes consultar la lista completa con:
+
+```bash
+make help
+```
+
 ## Configurar pre-commit
 
 Después de instalar las dependencias de desarrollo, es obligatorio configurar los hooks de **pre-commit**.

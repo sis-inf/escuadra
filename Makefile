@@ -1,37 +1,40 @@
 .DEFAULT_GOAL := help
 
+PYTHON ?= python3
+PIP ?= pip3
+
+.PHONY: help install test lint format build run clean
+
 help:
 	@echo "Targets disponibles:"
-	@echo "  install       Instalar dependencias"
-	@echo "  test          Ejecutar pruebas"
-	@echo "  test-cov      Ejecutar pruebas con cobertura"
-	@echo "  lint          Ejecutar flake8"
-	@echo "  format        Aplicar black e isort"
-	@echo "  format-check  Verificar formato con black"
+	@echo "  install       Instalar el proyecto con dependencias de desarrollo"
+	@echo "  test          Ejecutar la suite de pruebas"
+	@echo "  lint          Ejecutar Ruff"
+	@echo "  format        Formatear con Ruff"
+	@echo "  build         Generar distribuciones del paquete"
+	@echo "  run           Ejecutar la GUI localmente"
 	@echo "  clean         Limpiar archivos temporales"
 
 install:
-	pip install -e ".[dev]"
+	$(PIP) install -e ".[dev]"
 
 test:
-	pytest tests/ -v
-
-test-cov:
-	pytest --cov=src/escuadra tests/
+	$(PYTHON) -m pytest
 
 lint:
-	flake8 src/ tests/
+	ruff check .
 
 format:
-	black src/ tests/
-	isort src/ tests/
+	ruff format .
 
-format-check:
-	black --check src/ tests/
+build:
+	$(PYTHON) -m build
+
+run:
+	$(PYTHON) -m escuadra.app
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
 	rm -rf htmlcov
-	
