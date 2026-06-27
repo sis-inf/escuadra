@@ -20,6 +20,7 @@ y este proyecto sigue el versionado [SemVer](https://semver.org/lang/es/).
 
 ### Fixed
 - fix(changelog): corrección de entradas faltantes del sprint actual
+- fix(ui): reemplazados imports restantes de PyQt6 por PySide6 y agregado control de lint
 
 ## [0.1.0] - 2026-04-19
 

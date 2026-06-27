@@ -35,7 +35,10 @@ line-length = 100
 target-version = "py310"
 
 [tool.ruff.lint]
-select = ["E", "F", "W", "I"]
+select = ["E", "F", "W", "I", "TID"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"PyQt6".msg = "Escuadra usa PySide6 como binding de Qt; importa desde PySide6 en lugar de PyQt6."
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
