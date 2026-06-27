@@ -55,6 +55,58 @@ Si el paquete está disponible como comando ejecutable:
 escuadra
 ```
 
+## Instalación recomendada del CLI con pipx
+
+Cuando Escuadra esté publicado en PyPI, la forma recomendada de instalar el comando
+`escuadra` para uso diario será `pipx`. Esta herramienta crea un entorno aislado para la
+aplicación y expone el ejecutable en el `PATH`, evitando mezclar dependencias con otros
+proyectos de Python.
+
+Instala `pipx` según tu sistema operativo:
+
+```bash
+python -m pip install --user pipx
+python -m pipx ensurepath
+```
+
+Cierra y vuelve a abrir la terminal si `pipx` no queda disponible inmediatamente.
+En Debian/Ubuntu puede ser necesario instalar antes el paquete `python3-venv`, porque
+`pipx` necesita crear entornos virtuales.
+
+Luego instala Escuadra:
+
+```bash
+pipx install escuadra
+```
+
+Verifica que el comando responde:
+
+```bash
+escuadra --help
+```
+
+Para actualizar una instalación hecha con `pipx`:
+
+```bash
+pipx upgrade escuadra
+```
+
+Para desinstalarla:
+
+```bash
+pipx uninstall escuadra
+```
+
+Durante el desarrollo, antes de la publicación en PyPI, se puede validar el empaquetado
+local con:
+
+```bash
+pipx install .
+```
+
+Este comando debe ejecutarse desde la raíz del repositorio y utiliza el entry point
+definido en `pyproject.toml`: `escuadra = "escuadra.cli:main"`.
+
 ---
 
 # Instalación para desarrollo
