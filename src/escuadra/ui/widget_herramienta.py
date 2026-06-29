@@ -57,6 +57,26 @@ class WidgetHerramienta(QWidget):
         Devuelve el área de contenido.
         """
         return self._contenido
+    
+    def validar_campo(self, campo: QLineEdit, tipo: str):
+        texto = campo.text()
+
+        if tipo == "int":
+            if texto.isdigit() or texto == "":
+                campo.setStyleSheet("")
+            else:
+                campo.setStyleSheet("border: 2px solid red;")
+
+        elif tipo == "float":
+            try:
+                float(texto)
+                campo.setStyleSheet("")
+            except ValueError:
+                campo.setStyleSheet("border: 2px solid red;")
+
+        else:
+            campo.setStyleSheet("")
+
     def habilitar_validacion_realtime(self, campo: QLineEdit, tipo: str):
         """
         Activa validación en tiempo real opcional por campo.
