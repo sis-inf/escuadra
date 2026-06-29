@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget, QLineEdit
 
 
 class WidgetHerramienta(QWidget):
@@ -57,3 +57,11 @@ class WidgetHerramienta(QWidget):
         Devuelve el área de contenido.
         """
         return self._contenido
+    def habilitar_validacion_realtime(self, campo: QLineEdit, tipo: str):
+        """
+        Activa validación en tiempo real opcional por campo.
+        """
+
+        campo.textChanged.connect(
+            lambda: self.validar_campo(campo, tipo)
+    )
