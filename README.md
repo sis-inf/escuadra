@@ -1,24 +1,13 @@
 # Escuadra - Calculadora Técnica para Ingeniería
 
-<!-- Badges de Estado -->
-<p align="center">
-  <img src="https://github.com/sis-inf/escuadra/actions/workflows/ci.yml/badge.svg" alt="CI">
-  <img src="https://img.shields.io/badge/licencia-MIT-blue.svg" alt="Licencia">
-  <img src="https://img.shields.io/badge/estado-activo-brightgreen" alt="Estado">
-  <img src="https://img.shields.io/github/issues/sis-inf/escuadra" alt="Issues">
-  <img src="https://img.shields.io/github/repo-size/sis-inf/escuadra" alt="Tamaño">
-  <img src="https://img.shields.io/github/last-commit/sis-inf/escuadra" alt="Última actualización">
-  <img src="https://img.shields.io/badge/PRs-bienvenidos-brightgreen" alt="PRs">
-</p>
+[![Python CI](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml/badge.svg)](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml)
+[![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue.svg)](LICENSE)
+[![Estado](https://img.shields.io/badge/estado-activo-brightgreen)](#)
+[![PRs bienvenidos](https://img.shields.io/badge/PRs-bienvenidos-brightgreen)](CONTRIBUTING.md)
+[![Issues](https://img.shields.io/github/issues/sis-inf/escuadra)](https://github.com/sis-inf/escuadra/issues)
 
-<!-- Badges de PyPI (opcional, cuando esté publicado) -->
-<!--
-<p align="center">
-  <img src="https://img.shields.io/pypi/v/escuadra" alt="PyPI Versión">
-  <img src="https://img.shields.io/pypi/pyversions/escuadra" alt="Python Versiones">
-  <img src="https://img.shields.io/pypi/dm/escuadra" alt="Descargas">
-</p>
--->
+<!-- Agregar cuando el paquete esté publicado -->
+<!-- [![PyPI](https://img.shields.io/pypi/v/escuadra)](https://pypi.org/project/escuadra/) -->
 
 Una aplicación de escritorio que centraliza herramientas de cálculo especializadas para estudiantes y docentes de ingeniería.
 

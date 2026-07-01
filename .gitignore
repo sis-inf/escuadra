@@ -81,4 +81,4 @@ id_rsa.pub
 *.o
 *.exe
 *.dll
-*.so
+*.so.offline-markdown-preview/
