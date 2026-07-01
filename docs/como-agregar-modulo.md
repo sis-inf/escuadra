@@ -109,6 +109,35 @@ class HerramientaEjemplo(Herramienta):
         return QLabel("Herramienta de ejemplo")
 ```
 
+# Separación entre lógica pura y wrappers
+
+Los módulos del sistema se dividen en dos capas:
+
+## Módulo de lógica pura
+- Contiene únicamente lógica de cálculo o negocio
+- No depende de PySide6 ni UI
+- Es completamente testeable
+- No debe contener clases de herramienta
+
+## Wrapper herramienta_
+- Debe comenzar con el prefijo `herramienta_`
+- Es detectado automáticamente por el registry
+- Solo conecta la UI con la lógica
+- Debe importar funciones del módulo puro
+- NO debe reimplementar lógica
+
+---
+
+## Anti-patrón
+
+Antes algunos wrappers reimplementaban lógica en lugar de usar el módulo puro.
+
+Ejemplo incorrecto:
+```python
+def calcular_area(base, altura):
+    return (base * altura) / 2
+```
+
 ---
 
 ## 5. Registro de herramientas

@@ -1,182 +1,234 @@
-# Guía de Estilo para Mensajes de Commit
+# Estilo de Commits
 
 ## Introducción
 
-Este proyecto utiliza la convención Conventional Commits para mantener un historial de cambios claro, consistente y fácil de entender. El objetivo es que cualquier colaborador pueda identificar rápidamente el propósito de un cambio únicamente leyendo el mensaje de commit.
+El proyecto **Escuadra** utiliza la especificación **Conventional Commits** para mantener un historial de cambios claro, consistente y fácil de entender.
 
-La estructura recomendada es:
+Seguir una convención para los mensajes de commit facilita la revisión de cambios, mejora la trazabilidad del proyecto y permite identificar rápidamente el propósito de cada modificación.
 
-(tipo(ámbito): descripción)
+Para garantizar que todos los commits cumplan este estándar, el proyecto utiliza un **hook de pre-commit** que valida automáticamente el formato del mensaje antes de aceptar el commit.
+
+---
+
+# Formato del mensaje
+
+Todos los commits deben seguir el siguiente formato:
+
+```text
+tipo(ámbito): descripción
+```
+
+El **ámbito** es opcional. Si el cambio no pertenece a un componente específico del proyecto, puede omitirse.
+
+Por ejemplo:
+
+```text
+tipo: descripción
+```
+
+La descripción debe ser breve, clara y estar escrita en presente.
+
+---
+
+# Tipos permitidos
+
+El hook acepta únicamente los siguientes tipos de commit:
+
+| Tipo     | Descripción                                                |
+| -------- | ---------------------------------------------------------- |
+| feat     | Nueva funcionalidad.                                       |
+| fix      | Corrección de errores.                                     |
+| docs     | Cambios en la documentación.                               |
+| chore    | Tareas de mantenimiento, configuración o dependencias.     |
+| test     | Agregar o modificar pruebas.                               |
+| refactor | Reestructuración del código sin cambiar su comportamiento. |
+| style    | Cambios de formato o estilo sin modificar la lógica.       |
+| ci       | Cambios relacionados con integración continua (CI/CD).     |
+
+---
+
+# Uso del ámbito
+
+El ámbito indica qué parte del proyecto fue modificada. Aunque es opcional, se recomienda utilizarlo cuando ayude a identificar el componente afectado.
+
+Algunos ámbitos comunes son:
+
+* cli
+* docs
+* core
+* config
+* io
+* ui
+* civil
+* electrica
+* geometria
+* matematicas
+* sistemas
+
+---
+
+# Ejemplos de commits válidos
+
+```text
+feat: agregar calculadora de matrices
+```
+
+```text
+fix(cli): manejar error de módulo no encontrado
+```
+
+```text
+docs: actualizar guía de instalación
+```
+
+```text
+fix(docs): actualizar instrucciones de desarrollo local
+```
+
+```text
+test(math): agregar pruebas para el solucionador lineal
+```
+
+```text
+refactor(core): simplificar inicialización del proyecto
+```
+
+```text
+style(ui): aplicar formato al código
+```
+
+```text
+ci: actualizar flujo de GitHub Actions
+```
+
+---
+
+# Ejemplos de commits inválidos
+
+Los siguientes mensajes no cumplen con la convención y serán rechazados por el hook:
+
+```text
+arreglo bug
+```
+
+```text
+Cambios varios
+```
+
+```text
+nuevo commit
+```
+
+```text
+bug corregido
+```
+
+```text
+fix
+```
+
+```text
+docs
+```
+
+```text
+actualización
+```
+
+---
+
+# Referencias a issues
+
+Si tu commit cierra un issue, sigue incluyendo **`Closes #N`**, tal como se indica en **CONTRIBUTING.md**.
 
 Ejemplo:
 
-feat(civil): agregar cálculo de carga distribuida
+```text
+fix(cli): manejar error de módulo no encontrado - Closes #52
+```
 
-El tipo indica la naturaleza del cambio, el ámbito señala el módulo afectado y la descripción resume brevemente la modificación realizada.
+El hook valida únicamente que el mensaje comience con el formato:
+
+```text
+tipo(ámbito): descripción
+```
+
+Todo el contenido que aparezca después (como `Closes #52`) no afecta la validación del mensaje.
 
 ---
 
-## Tipos de commit permitidos
+# Validación automática
 
-| Tipo | Descripción |
-|--------|-------------|
-| feat | Nueva funcionalidad |
-| fix | Corrección de errores |
-| docs | Cambios en documentación |
-| test | Agregar o modificar pruebas |
-| chore | Tareas de mantenimiento |
-| refactor | Reestructuración sin cambiar funcionalidad |
-| style | Cambios de formato o estilo |
-| ci | Configuración de integración continua |
+El proyecto utiliza el hook **conventional-pre-commit** para verificar automáticamente el formato del mensaje de commit.
+
+La configuración del hook se encuentra en:
+
+```text
+.pre-commit-config.yaml
+```
+
+Una vez instalado, Git ejecutará esta validación antes de crear cada commit.
+
+Si el mensaje no cumple con la convención definida, el commit será rechazado.
 
 ---
 
-## Ámbitos recomendados
+# Instalación del hook
 
-Los ámbitos ayudan a identificar la parte del proyecto afectada.
+Después de clonar el repositorio e instalar las dependencias de desarrollo, instala los hooks con:
 
-- civil
-- electrica
-- matematicas
-- sistemas
-- geometria
-- core
-- io
-- cli
-- config
+```bash
+pre-commit install
+pre-commit install --hook-type commit-msg
+```
 
-Ejemplos:
-
-- feat(civil): agregar cálculo de vigas
-- fix(matematicas): corregir error de redondeo
-- docs(core): actualizar documentación principal
+El segundo comando instala el hook encargado de validar los mensajes de commit.
 
 ---
 
-## Ejemplos correctos
+# Comprobación del funcionamiento
 
-### 1
+### Ejemplo de mensaje rechazado
 
-```text
-feat(civil): agregar cálculo de cargas
+```bash
+git commit --allow-empty -m "arreglo bug"
 ```
 
-### 2
+Resultado esperado:
 
 ```text
-fix(matematicas): corregir error en interpolación
+Commit message validation failed.
 ```
 
-### 3
+### Ejemplo de mensaje aceptado
 
-```text
-docs(core): actualizar guía de instalación
+```bash
+git commit --allow-empty -m "fix(cli): manejar error de módulo no encontrado"
 ```
 
-### 4
-
-```text
-test(geometria): agregar pruebas para triangulación
-```
-
-### 5
-
-```text
-chore(config): actualizar dependencias
-```
-
-### 6
-
-```text
-refactor(io): simplificar lectura de archivos
-```
-
-### 7
-
-```text
-style(cli): mejorar formato del código
-```
-
-### 8
-
-```text
-ci(config): configurar GitHub Actions
-```
+El commit será aceptado porque cumple con el formato definido por Conventional Commits.
 
 ---
 
-## Ejemplos incorrectos y corrección
+# ¿Qué hago si mi commit es rechazado?
 
-### Incorrecto 1
+Si el hook rechaza el mensaje del commit, simplemente corrige el mensaje y vuelve a intentarlo.
 
-```text
-arreglos varios
+Puedes editar el mensaje con:
+
+```bash
+git commit --edit --file=.git/COMMIT_EDITMSG
 ```
 
-Correcto:
-
-```text
-fix(core): corregir errores menores
-```
-
-### Incorrecto 2
-
-```text
-nuevo metodo
-```
-
-Correcto:
-
-```text
-feat(matematicas): agregar nuevo método numérico
-```
-
-### Incorrecto 3
-
-```text
-actualizacion
-```
-
-Correcto:
-
-```text
-docs(core): actualizar documentación principal
-```
-
-### Incorrecto 4
-
-```text
-test
-```
-
-Correcto:
-
-```text
-test(civil): agregar pruebas para estructuras
-```
-
-### Incorrecto 5
-
-```text
-correcciones
-```
-
-Correcto:
-
-```text
-fix(geometria): corregir validación de polígonos
-```
+O volver a ejecutar el comando `git commit` utilizando un mensaje que siga la convención establecida.
 
 ---
 
-## Buenas prácticas
+# Recomendaciones
 
-- Utilizar verbos en infinitivo.
-- Mantener descripciones cortas y claras.
-- Especificar el ámbito cuando sea posible.
-- Evitar mensajes genéricos.
-- Mantener consistencia entre todos los colaboradores.
-
-## Conclusión
-
-Seguir estas convenciones mejora la trazabilidad del proyecto, facilita las revisiones de código y permite comprender rápidamente el historial de cambios. Un mensaje de commit bien escrito contribuye a una colaboración más eficiente y profesional.
+* Utiliza descripciones breves y claras.
+* Escribe la descripción en presente.
+* Mantén un único propósito por commit.
+* Usa el tipo de commit que mejor describa el cambio realizado.
+* Utiliza un ámbito cuando facilite identificar el componente afectado.
+* Incluye `Closes #N` cuando el commit resuelva un issue.
