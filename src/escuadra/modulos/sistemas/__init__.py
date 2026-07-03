@@ -1,1 +1,1 @@
-ÿþ
+"""MÃ³dulo de sistemas."""
