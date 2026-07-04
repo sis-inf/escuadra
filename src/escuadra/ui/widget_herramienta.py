@@ -1,6 +1,9 @@
+import time
+import threading
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
 
+from escuadra.ui.progress import ProgressIndicator
 
 class WidgetHerramienta(QWidget):
     """
@@ -57,3 +60,29 @@ class WidgetHerramienta(QWidget):
         Devuelve el área de contenido.
         """
         return self._contenido
+
+def ejecutar_con_progreso_ui(funcion, *args, umbral=0.5, **kwargs):
+
+    resultado = [None]
+    terminado = threading.Event()
+
+    def tarea():
+        resultado[0] = funcion(*args, **kwargs)
+        terminado.set()
+
+    hilo = threading.Thread(target=tarea)
+    hilo.start()
+
+    hilo.join(timeout=umbral)
+
+    if not terminado.is_set():
+        progress = ProgressIndicator()
+        progress.start()
+
+        hilo.join()
+
+        progress.stop()
+    else:
+        hilo.join()
+
+    return resultado[0]

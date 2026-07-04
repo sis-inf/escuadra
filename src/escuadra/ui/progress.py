@@ -2,6 +2,8 @@
 Módulo de indicador de progreso para el CLI de Escuadra.
 """
 
+import time
+import threading
 
 def mostrar_progreso(current: int, total: int, width: int = 30) -> None:
     """
@@ -22,3 +24,29 @@ def mostrar_progreso(current: int, total: int, width: int = 30) -> None:
 
     if current == total:
         print()
+
+class ProgressIndicator:
+    def __init__(self, mensaje="Procesando..."):
+        self.mensaje = mensaje
+        self._activo = False
+        self.thread = None
+
+    def start(self):
+        self._activo = True
+        print(f"\n{self.mensaje}")
+
+        def run():
+            while self._activo:
+                print(".", end="", flush=True)
+                time.sleep(0.5)
+
+        self.thread = threading.Thread(target=run)
+        self.thread.start()
+
+    def stop(self):
+        self._activo = False
+
+        if self.thread:
+            self.thread.join()
+
+        print("\n✔ terminado")
