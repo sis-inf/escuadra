@@ -4,8 +4,9 @@ Punto de entrada principal con subcomandos para las herramientas.
 """
 
 import argparse
+import platform
 import sys
-import platform  
+
 
 def verificar_entorno():
     """Verifica la versión de Python y la disponibilidad de PySide6."""
@@ -19,6 +20,7 @@ def verificar_entorno():
         sys.exit(1)
 
     try:
+        # noqa: F401
         import PySide6
     except ImportError:
         print(
@@ -34,14 +36,14 @@ __version__ = "0.1.0"
 
 MODULOS_DISPONIBLES = set()
 
+
 def herramienta_no_disponible(nombre_herramienta):
     """Muestra mensaje para herramientas no implementadas."""
-    print(f"La herramienta '{nombre_herramienta}' aún está en construcción y no está disponible.")
+    print(f"La herramienta '{nombre_herramienta}' aún está en construcción.")
+
 
 def ejecutar_herramienta(args):
-    """
-    Ejecuta el subcomando correspondiente si el módulo existe. En caso contrario, muestra un mensaje
-    """
+    """Ejecuta el subcomando correspondiente si el módulo existe."""
     herramienta = args.herramienta
 
     if herramienta not in MODULOS_DISPONIBLES:
@@ -50,78 +52,85 @@ def ejecutar_herramienta(args):
 
     try:
         modulo = __import__(
-            f"escuadra.modulos.{herramienta}",
-            fromlist=["ejecutar"]
+            f"escuadra.modulos.{herramienta}", fromlist=["ejecutar"]
         )
-
     except (ModuleNotFoundError, ImportError):
         herramienta_no_disponible(herramienta)
         return
 
     kwargs = vars(args).copy()
     kwargs.pop("herramienta")
-
     modulo.ejecutar(**kwargs)
 
 
 def mostrar_version_detallada():
-    """Imprime la versión del proyecto junto con datos de diagnóstico del entorno."""
+    """Imprime la versión del proyecto junto con datos de diagnóstico."""
     print(f"Escuadra versión: {__version__}")
     print(f"Python versión: {platform.python_version()}")
-    
+
     try:
         import PySide6
+
         pyside_version = PySide6.__version__
     except ImportError:
         pyside_version = "No instalado / No detectado"
-        
+
     print(f"PySide6 versión: {pyside_version}")
-    print(f"Sistema Operativo: {platform.system()} {platform.release()} ({platform.machine()})")
+    print(
+        f"Sistema Operativo: {platform.system()} "
+        f"{platform.release()} ({platform.machine()})"
+    )
 
 
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
-    
     try:
         parser = argparse.ArgumentParser(
             prog="escuadra",
-            description="Herramientas de cálculo de ingeniería civil y eléctrica."
+            description="Herramientas de cálculo de ingeniería."
         )
 
         parser.add_argument(
-            "--version", "-v",
-            action="version",
+            "--version", "-v", action="version",
             version=f"%(prog)s {__version__}"
         )
 
         subparsers = parser.add_subparsers(
-            title="herramientas",
-            dest="herramienta",
-            help="Herramienta a ejecutar"
+            title="herramientas", dest="herramienta", help="Herramienta"
         )
 
-        # Subcomando: version (Requerido por el issue actual)
         subparsers.add_parser(
-            "version", 
-            help="Muestra la versión del proyecto e información detallada de diagnóstico"
+            "version",
+            help="Muestra la versión e información de diagnóstico"
         )
 
-        # Subcomando: interactivo (Proveniente de dev)
-        interactivo_parser = subparsers.add_parser(
+        subparsers.add_parser(
             "interactivo",
             help="Modo interactivo paso a paso (REPL)"
         )
 
-        # Subcomando: viga
-        viga_parser = subparsers.add_parser("viga", help="Cálculo de reacciones en vigas")
-        viga_parser.add_argument("--longitud", type=float, required=True, help="Longitud de la viga en metros")
-        viga_parser.add_argument("--carga", type=float, required=True, help="Carga puntual en kN")
+        viga_parser = subparsers.add_parser(
+            "viga", help="Cálculo de reacciones en vigas"
+        )
+        viga_parser.add_argument(
+            "--longitud", type=float, required=True, help="Longitud (m)"
+        )
+        viga_parser.add_argument(
+            "--carga", type=float, required=True, help="Carga (kN)"
+        )
 
-        # Subcomando: tension
-        tension_parser = subparsers.add_parser("tension", help="Cálculo de caída de tensión")
-        tension_parser.add_argument("--longitud", type=float, required=True, help="Longitud del conductor en metros")
-        tension_parser.add_argument("--corriente", type=float, required=True, help="Corriente en amperios")
-        tension_parser.add_argument("--seccion", type=float, required=True, help="Sección del conductor en mm²")
+        tension_parser = subparsers.add_parser(
+            "tension", help="Cálculo de caída de tensión"
+        )
+        tension_parser.add_argument(
+            "--longitud", type=float, required=True, help="Longitud (m)"
+        )
+        tension_parser.add_argument(
+            "--corriente", type=float, required=True, help="Corriente (A)"
+        )
+        tension_parser.add_argument(
+            "--seccion", type=float, required=True, help="Sección (mm²)"
+        )
 
         args = parser.parse_args()
 
@@ -129,17 +138,15 @@ def main():
             parser.print_help()
             sys.exit(0)
 
-        # Si el subcomando es 'version', mostramos el diagnóstico y salimos limpiamente
         if args.herramienta == "version":
             mostrar_version_detallada()
             sys.exit(0)
 
-        # Para cualquier otra herramienta funcional, validamos rigurosamente el entorno primero
         verificar_entorno()
         ejecutar_herramienta(args)
 
     except KeyboardInterrupt:
-        print("\nOperación cancelada por el usuario.")
+        print("\nOperación cancelada.")
         sys.exit(130)
 
 
