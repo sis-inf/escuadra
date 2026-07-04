@@ -5,7 +5,7 @@ Punto de entrada principal con subcomandos para las herramientas.
 
 import argparse
 import sys
-import platform  # Agregado para obtener información del sistema operativo
+import platform  
 
 def verificar_entorno():
     """Verifica la versión de Python y la disponibilidad de PySide6."""
@@ -100,10 +100,16 @@ def main():
             help="Herramienta a ejecutar"
         )
 
-        # Subcomando: version (Requerido por el issue)
+        # Subcomando: version (Requerido por el issue actual)
         subparsers.add_parser(
             "version", 
             help="Muestra la versión del proyecto e información detallada de diagnóstico"
+        )
+
+        # Subcomando: interactivo (Proveniente de dev)
+        interactivo_parser = subparsers.add_parser(
+            "interactivo",
+            help="Modo interactivo paso a paso (REPL)"
         )
 
         # Subcomando: viga
