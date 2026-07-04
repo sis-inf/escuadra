@@ -25,7 +25,10 @@ def confirmar(parent, titulo, mensaje):
 
     # Agregar botones personalizados en español
     boton_si = caja.addButton("Sí", QMessageBox.ButtonRole.YesRole)
-    boton_no = caja.addButton("No", QMessageBox.ButtonRole.NoRole)
+
+    # FIX: Se quita la asignación a 'boton_no' porque no se utiliza,
+    # evitando el error F841 de ruff. El botón se sigue agregando al diálogo.
+    caja.addButton("No", QMessageBox.ButtonRole.NoRole)
 
     caja.exec()
 

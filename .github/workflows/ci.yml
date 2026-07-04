@@ -30,10 +30,19 @@ jobs:
 
   test:
     name: Test (pytest)
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    env:
+      QT_QPA_PLATFORM: offscreen
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        python-version:
+          - "3.10"
+          - "3.11"
+          - "3.12"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -44,6 +53,8 @@ jobs:
         run: |
           pip install -e .
           pip install -r requirements-dev.txt
+      - name: Verificar ubicación de tests
+        run: bash scripts/verificar-tests-ubicacion.sh
       - name: Run pytest
         run: pytest -m "not slow" --cov=src/escuadra --cov-report=term-missing
   mypy:

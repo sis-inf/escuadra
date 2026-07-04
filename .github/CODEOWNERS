@@ -1,7 +1,6 @@
 # Regla fallback global: Asignación por defecto si ninguna ruta específica coincide
 * @erwinsaul
 
-# Mapeo de módulos específicos del sistema y documentación a sus respectivos revisores
 /src/escuadra/modulos/civil/* @Alex-Calle-P @Vizalla @YORDY-SG @LinoSimon20
 /src/escuadra/modulos/electrica/* @Alex-Calle-P @Vizalla @YORDY-SG @LinoSimon20
 /src/escuadra/core/* @Alex-Calle-P @Vizalla @YORDY-SG @LinoSimon20

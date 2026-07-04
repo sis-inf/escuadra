@@ -15,7 +15,26 @@ authors = [{name = "SIS-INF"}]
 dependencies = [
     "PySide6>=6.6,<7.0",
 ]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Education",
+]
 
+[project.urls]
+Repository = "https://github.com/sis-inf/escuadra"
+Documentation = "https://github.com/sis-inf/escuadra/blob/main/README.md"
+Issues = "https://github.com/sis-inf/escuadra/issues"
 [project.optional-dependencies]
 dev = [
     "pytest>=8,<10",

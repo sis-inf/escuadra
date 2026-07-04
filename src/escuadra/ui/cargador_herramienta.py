@@ -2,7 +2,7 @@
 Carga dinámica de herramientas en la ventana principal.
 """
 
-from ui.mensajes import mostrar_error
+from escuadra.ui.mensajes import mostrar_error
 from escuadra.utils.logging_config import obtener_logger
 
 logger = obtener_logger("cargador_herramienta")
@@ -42,19 +42,13 @@ class CargadorHerramienta:
 
             nombre = clase_herramienta.__name__
 
-            self._ventana.mostrar_mensaje_estado(
-                f"Herramienta activa: {nombre}"
-            )
+            self._ventana.mostrar_mensaje_estado(f"Herramienta activa: {nombre}")
 
             self._herramienta_actual = herramienta
             self._widget_actual = widget
 
         except Exception as error:
-
-            logger.error(
-                f"Error al cargar herramienta: {error}",
-                exc_info=True
-            )
+            logger.error(f"Error al cargar herramienta: {error}", exc_info=True)
 
             mostrar_error(
                 self._ventana,
