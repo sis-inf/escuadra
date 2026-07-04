@@ -5,6 +5,7 @@ Punto de entrada principal con subcomandos para las herramientas.
 
 import argparse
 import sys
+import platform  # Agregado para obtener información del sistema operativo
 
 def verificar_entorno():
     """Verifica la versión de Python y la disponibilidad de PySide6."""
@@ -63,12 +64,25 @@ def ejecutar_herramienta(args):
     modulo.ejecutar(**kwargs)
 
 
+def mostrar_version_detallada():
+    """Imprime la versión del proyecto junto con datos de diagnóstico del entorno."""
+    print(f"Escuadra versión: {__version__}")
+    print(f"Python versión: {platform.python_version()}")
+    
+    try:
+        import PySide6
+        pyside_version = PySide6.__version__
+    except ImportError:
+        pyside_version = "No instalado / No detectado"
+        
+    print(f"PySide6 versión: {pyside_version}")
+    print(f"Sistema Operativo: {platform.system()} {platform.release()} ({platform.machine()})")
+
+
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
     
     try:
-        verificar_entorno()
-
         parser = argparse.ArgumentParser(
             prog="escuadra",
             description="Herramientas de cálculo de ingeniería civil y eléctrica."
@@ -84,6 +98,12 @@ def main():
             title="herramientas",
             dest="herramienta",
             help="Herramienta a ejecutar"
+        )
+
+        # Subcomando: version (Requerido por el issue)
+        subparsers.add_parser(
+            "version", 
+            help="Muestra la versión del proyecto e información detallada de diagnóstico"
         )
 
         # Subcomando: viga
@@ -103,6 +123,13 @@ def main():
             parser.print_help()
             sys.exit(0)
 
+        # Si el subcomando es 'version', mostramos el diagnóstico y salimos limpiamente
+        if args.herramienta == "version":
+            mostrar_version_detallada()
+            sys.exit(0)
+
+        # Para cualquier otra herramienta funcional, validamos rigurosamente el entorno primero
+        verificar_entorno()
         ejecutar_herramienta(args)
 
     except KeyboardInterrupt:
@@ -112,4 +139,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
