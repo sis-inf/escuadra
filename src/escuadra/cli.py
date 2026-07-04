@@ -31,7 +31,7 @@ def verificar_entorno():
 
 __version__ = "0.1.0"
 
-# Agregar aqui los modulos cuando esten implementados
+
 MODULOS_DISPONIBLES = set()
 
 def herramienta_no_disponible(nombre_herramienta):
