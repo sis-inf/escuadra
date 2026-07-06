@@ -31,6 +31,35 @@ def verificar_entorno():
 __version__ = "0.1.0"
 
 
+MODULOS_DISPONIBLES = set()
+
+
+def herramienta_no_disponible(nombre_herramienta):
+    """Muestra mensaje para herramientas no implementadas."""
+    print(f"La herramienta '{nombre_herramienta}' aún está en construcción.")
+
+
+def ejecutar_herramienta(args):
+    """Ejecuta el subcomando correspondiente si el módulo existe."""
+    herramienta = args.herramienta
+
+    if herramienta not in MODULOS_DISPONIBLES:
+        herramienta_no_disponible(herramienta)
+        return
+
+    try:
+        modulo = __import__(
+            f"escuadra.modulos.{herramienta}", fromlist=["ejecutar"]
+        )
+    except (ModuleNotFoundError, ImportError):
+        herramienta_no_disponible(herramienta)
+        return
+
+    kwargs = vars(args).copy()
+    kwargs.pop("herramienta")
+    modulo.ejecutar(**kwargs)
+
+
 def mostrar_version_detallada():
     """Imprime la versión del proyecto junto con datos de diagnóstico."""
     print(f"Escuadra versión: {__version__}")
@@ -38,6 +67,7 @@ def mostrar_version_detallada():
 
     try:
         import PySide6
+
         pyside_version = PySide6.__version__
     except ImportError:
         pyside_version = "No instalado / No detectado"
@@ -71,17 +101,51 @@ def main():
             help="Muestra la versión e información de diagnóstico"
         )
 
+        subparsers.add_parser(
+            "interactivo",
+            help="Modo interactivo paso a paso (REPL)"
+        )
+
+        viga_parser = subparsers.add_parser(
+            "viga", help="Cálculo de reacciones en vigas"
+        )
+        viga_parser.add_argument(
+            "--longitud", type=float, required=True, help="Longitud (m)"
+        )
+        viga_parser.add_argument(
+            "--carga", type=float, required=True, help="Carga (kN)"
+        )
+
+        tension_parser = subparsers.add_parser(
+            "tension", help="Cálculo de caída de tensión"
+        )
+        tension_parser.add_argument(
+            "--longitud", type=float, required=True, help="Longitud (m)"
+        )
+        tension_parser.add_argument(
+            "--corriente", type=float, required=True, help="Corriente (A)"
+        )
+        tension_parser.add_argument(
+            "--seccion", type=float, required=True, help="Sección (mm²)"
+        )
+
         args = parser.parse_args()
 
         if args.herramienta is None:
             parser.print_help()
             sys.exit(0)
 
+        # Modo interactivo
+        if args.herramienta == "interactivo":
+            ejecutar_interactivo()
+            return
+
         if args.herramienta == "version":
             mostrar_version_detallada()
             sys.exit(0)
 
         verificar_entorno()
+        ejecutar_herramienta(args)
 
     except KeyboardInterrupt:
         print("\nOperación cancelada.")
