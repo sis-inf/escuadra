@@ -4,23 +4,22 @@ Punto de entrada principal con subcomandos para las herramientas.
 """
 
 import argparse
+import platform
 import sys
-import json
-import csv
-
-from escuadra.cli_interactivo import ejecutar_interactivo
 
 
 def verificar_entorno():
+    """Verifica la versión de Python y la disponibilidad de PySide6."""
     if sys.version_info < (3, 10):
-        print("Error: Escuadra requiere Python 3.10 o superior.")
+        print(
+            f"Error: Escuadra requiere Python 3.10 o superior.\n"
+            f"Versión detectada: {sys.version.split()[0]}\n"
+            "Actualice Python e inténtelo nuevamente."
+        )
         sys.exit(1)
 
-    try:
-        import importlib.util
-        if importlib.util.find_spec("PySide6") is None:
-            raise ImportError
-    except ImportError:
+    import importlib.util
+    if importlib.util.find_spec("PySide6") is None:
         print(
             "Error: PySide6 no está instalado.\n"
             "Instálelo ejecutando:\n"
@@ -32,165 +31,44 @@ def verificar_entorno():
 __version__ = "0.1.0"
 
 
-# Agregar aqui los modulos cuando esten implementados
-MODULOS_DISPONIBLES = set()
-
-
-def herramienta_no_disponible(nombre_herramienta):
-    """Muestra mensaje para herramientas no implementadas."""
-    print(
-        f"La herramienta '{nombre_herramienta}' aún está en construcción "
-        "y no está disponible."
-    )
-
-
-def exportar_resultado(ruta, resultado):
-    """Exporta resultados del CLI en formato JSON o CSV."""
-
-    if ruta.endswith(".json"):
-        with open(ruta, "w", encoding="utf-8") as archivo:
-            json.dump(
-                resultado,
-                archivo,
-                indent=4,
-                ensure_ascii=False
-            )
-
-    elif ruta.endswith(".csv"):
-        with open(
-            ruta,
-            "w",
-            encoding="utf-8",
-            newline=""
-        ) as archivo:
-            writer = csv.writer(archivo)
-
-            if isinstance(resultado, dict):
-                writer.writerow(resultado.keys())
-                writer.writerow(resultado.values())
-            else:
-                writer.writerow(["resultado"])
-                writer.writerow([resultado])
-
-    else:
-        print("Formato no soportado. Use archivos .json o .csv")
-
-
-def ejecutar_herramienta(args):
-    """
-    Ejecuta el subcomando correspondiente si el módulo existe.
-    En caso contrario, muestra un mensaje.
-    """
-
-    herramienta = args.herramienta
-
-    if herramienta not in MODULOS_DISPONIBLES:
-        herramienta_no_disponible(herramienta)
-        return
+def mostrar_version_detallada():
+    """Imprime la versión del proyecto junto con datos de diagnóstico."""
+    print(f"Escuadra versión: {__version__}")
+    print(f"Python versión: {platform.python_version()}")
 
     try:
-        modulo = __import__(
-            f"escuadra.modulos.{herramienta}",
-            fromlist=["ejecutar"]
-        )
+        import PySide6
+        pyside_version = PySide6.__version__
+    except ImportError:
+        pyside_version = "No instalado / No detectado"
 
-    except (ModuleNotFoundError, ImportError):
-        herramienta_no_disponible(herramienta)
-        return
-
-    kwargs = vars(args).copy()
-    kwargs.pop("herramienta")
-
-    salida = kwargs.pop("salida", None)
-
-    resultado = modulo.ejecutar(**kwargs)
-
-    if salida:
-        exportar_resultado(salida, resultado)
-    else:
-        print(resultado)
+    print(f"PySide6 versión: {pyside_version}")
+    print(
+        f"Sistema Operativo: {platform.system()} "
+        f"{platform.release()} ({platform.machine()})"
+    )
 
 
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
-
     try:
-        verificar_entorno()
-
         parser = argparse.ArgumentParser(
             prog="escuadra",
-            description="Herramientas de cálculo de ingeniería civil y eléctrica."
+            description="Herramientas de cálculo de ingeniería."
         )
 
         parser.add_argument(
-            "--version",
-            "-v",
-            action="version",
+            "--version", "-v", action="version",
             version=f"%(prog)s {__version__}"
         )
 
-        parser.add_argument(
-            "--salida",
-            help="Archivo donde exportar resultado (.json o .csv)"
-        )
-
         subparsers = parser.add_subparsers(
-            title="herramientas",
-            dest="herramienta",
-            help="Herramienta a ejecutar"
+            title="herramientas", dest="herramienta", help="Herramienta"
         )
 
-        # Subcomando: interactivo
         subparsers.add_parser(
-            "interactivo",
-            help="Modo interactivo paso a paso (REPL)"
-        )
-
-        # Subcomando: viga
-        viga_parser = subparsers.add_parser(
-            "viga",
-            help="Cálculo de reacciones en vigas"
-        )
-
-        viga_parser.add_argument(
-            "--longitud",
-            type=float,
-            required=True,
-            help="Longitud de la viga en metros"
-        )
-
-        viga_parser.add_argument(
-            "--carga",
-            type=float,
-            required=True,
-            help="Carga puntual en kN"
-        )
-
-        # Subcomando: tension
-        tension_parser = subparsers.add_parser(
-            "tension",
-            help="Cálculo de caída de tensión"
-        )
-
-        tension_parser.add_argument(
-            "--longitud",
-            type=float,
-            required=True,
-            help="Longitud del conductor en metros"
-        )
-
-        tension_parser.add_argument(
-            "--corriente",
-            type=float,
-            required=True,
-            help="Corriente en amperios"
-        )
-
-        tension_parser.add_argument(
-            "--seccion",
-            type=float,
-            required=True,
-            help="Sección del conductor en mm²"
+            "version",
+            help="Muestra la versión e información de diagnóstico"
         )
 
         args = parser.parse_args()
@@ -199,15 +77,14 @@ def main():
             parser.print_help()
             sys.exit(0)
 
-        # Modo interactivo
-        if args.herramienta == "interactivo":
-            ejecutar_interactivo()
-            return
+        if args.herramienta == "version":
+            mostrar_version_detallada()
+            sys.exit(0)
 
-        ejecutar_herramienta(args)
+        verificar_entorno()
 
     except KeyboardInterrupt:
-        print("\nOperación cancelada por el usuario.")
+        print("\nOperación cancelada.")
         sys.exit(130)
 
 
