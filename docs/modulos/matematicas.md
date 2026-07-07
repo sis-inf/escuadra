@@ -11,15 +11,13 @@ El alcance del módulo incluye:
 - Operaciones con números complejos
 - Cálculos de álgebra lineal básica
 
-## Herramientas disponibles
-
-| Nombre | Descripción | Funciones principales |
-|--------|-------------|----------------------|
-| conversor_longitud | Convierte valores entre diferentes unidades de longitud (metros, kilómetros, millas, pies, pulgadas) | `metros_a_kilometros()`, `kilometros_a_millas()`, `pies_a_metros()`, `pulgadas_a_centimetros()` |
-| conversor_temperatura | Realiza conversiones entre escalas de temperatura (Celsius, Fahrenheit, Kelvin) | `celsius_a_fahrenheit()`, `fahrenheit_a_celsius()`, `celsius_a_kelvin()`, `kelvin_a_celsius()` |
-| estadísticas | Calcula medidas estadísticas descriptivas de un conjunto de datos | `media()`, `mediana()`, `moda()`, `desviacion_estandar()`, `varianza()` |
-| trigonometría | Proporciona funciones trigonométricas básicas y conversiones de ángulos | `seno()`, `coseno()`, `tangente()`, `grados_a_radianes()`, `radianes_a_grados()` |
-| numeros_complejos | Realiza operaciones aritméticas con números complejos | `suma()`, `resta()`, `multiplicacion()`, `division()`, `modulo()`, `conjugado()` |
+| `calculadora_cientifica` | Operaciones matemáticas avanzadas | Expresión matemática |
+| `conversor_presion` | Conversión entre Pa, bar, psi, atm | Valor, unidad origen, unidad destino |
+| `conversor_energia` | Conversión entre J, cal, kWh, BTU | Valor, unidad origen, unidad destino |
+| `conversor_velocidad` | Conversión entre m/s, km/h, mph, nudos | Valor, unidad origen, unidad destino |
+| `conversor_masa` | Conversión entre kg, g, lb, oz | Valor, unidad origen, unidad destino |
+| `conversor_angulo` | Conversión entre grados, radianes, gradianes | Valor, unidad origen, unidad destino |
+| `sistemas_lineales_nxn` | Eliminación gaussiana para sistemas NxN | Matriz de coeficientes, vector de términos independientes |
 
 ## Ejemplos de uso
 

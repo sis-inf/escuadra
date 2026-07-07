@@ -110,10 +110,13 @@ Las tres ecuaciones son equivalentes y se pueden derivar unas de otras usando la
 |-------------|----------------|----------------------|
 | `ley_ohm` | V = I · R, I = V / R, R = V / I | Dos de: voltaje, corriente, resistencia |
 | `potencia` | P = V · I, P = I² · R, P = V² / R | Dos de: voltaje, corriente, resistencia |
-| `circuito_serie` | R_total = R₁ + R₂ + ..., V_total = V₁ + V₂ + ..., I_total = I₁ = I₂ = ... | Lista de resistencias, voltaje de fuente |
-| `circuito_paralelo` | 1/R_total = 1/R₁ + 1/R₂ + ..., V_total = V₁ = V₂ = ..., I_total = I₁ + I₂ + ... | Lista de resistencias, voltaje de fuente |
+| `circuito_serie` | R_total = R₁ + R₂ + ... | Lista de resistencias, voltaje de fuente |
+| `circuito_paralelo` | 1/R_total = 1/R₁ + 1/R₂ + ... | Lista de resistencias, voltaje de fuente |
 | `caida_tension` | V_caida = I · R_conductor | Corriente, resistencia del conductor |
 | `divisor_tension` | V_salida = V_entrada · (R₂ / (R₁ + R₂)) | Voltaje de entrada, resistencias R₁ y R₂ |
+| `conversion_unidades` | Conversión entre V, A, Ω, W y sus múltiplos | Valor, unidad origen, unidad destino |
+| `circuito_rc` | V(t) = V₀·(1 - e^(-t/RC)), τ = R·C | Resistencia, capacitancia, voltaje inicial, tiempo |
+| `circuito_rl` | I(t) = I₀·(1 - e^(-t·R/L)), τ = L/R | Resistencia, inductancia, corriente inicial, tiempo |
 
 ## Unidades y conversiones
 

@@ -26,6 +26,13 @@ El módulo de geometría proporciona funciones para calcular áreas, perímetros
 | Triángulo        | `perimetro_triangulo(a, b, c)`       | P = a + b + c           |
 | Hexágono regular | `perimetro_hexagono_regular(lado)`   | P = 6 × lado            |
 
+### Conversión de coordenadas
+
+| Función | Descripción | Fórmula |
+|---------|-------------|---------|
+| `cartesiana_a_polar(x, y)` | Convierte coordenadas cartesianas a polares | r = √(x²+y²), θ = arctan(y/x) |
+| `polar_a_cartesiana(r, θ)` | Convierte coordenadas polares a cartesianas | x = r·cos(θ), y = r·sin(θ) |
+
 ---
 
 ## Sólidos geométricos soportados
