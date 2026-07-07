@@ -196,3 +196,22 @@
 
 ##### \- El procesamiento avanzado de texto no está implementado.
 
+
+
+
+
+## Advertencias de Alcance Educativo y Simplificaciones
+
+Este proyecto incluye herramientas diseñadas exclusivamente con fines pedagógicos y didácticos. A continuación, se detallan las limitaciones y simplificaciones críticas aplicadas a los módulos nuevos que todo usuario debe conocer:
+
+### 1. Simplificación de Mapas de Karnaugh
+* **Limitación:** El algoritmo implementado resuelve simplificaciones básicas de mapas de Karnaugh, pero **no** equivale al método completo de *Quine-McCluskey*. 
+* **Impacto:** No está diseñado para procesar de forma óptima un número elevado de variables ni para garantizar la resolución de funciones lógicas con múltiples condiciones "no importa" (*don't care*) complejas bajo estándares industriales.
+
+### 2. Combinación de Cargas LRFD Simplificada
+* **Limitación:** Las combinaciones de carga implementadas corresponden a una versión simplificada del método LRFD (Diseño por Factores de Carga y Resistencia).
+* **Impacto:** Bajo ninguna circunstancia este módulo reemplaza la normativa o códigos de diseño estructural vigentes (como las especificaciones de la AISC o reglamentos locales). No se debe emplear para el cálculo ni verificación de proyectos de ingeniería reales.
+
+### 3. Cálculo de Pandeo de Euler
+* **Limitación:** La fórmula de Euler para la carga crítica de pandeo es teórica y asume una columna ideal (perfectamente recta, material homogéneo y carga perfectamente concéntrica).
+* **Impacto:** El cálculo posee un rango de validez física acotado. No contempla los efectos de imperfecciones geométricas reales, esfuerzos residuales, ni el comportamiento inelástico del material (pandeo inelástico), los cuales reducen drásticamente la capacidad de carga real en estructuras físicas.
