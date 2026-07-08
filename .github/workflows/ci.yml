@@ -27,6 +27,8 @@ jobs:
         run: pip install ruff>=0.4
       - name: Run ruff
         run: ruff check .
+      - name: Verificar uso de PySide6
+        run: bash scripts/verificar-pyside6.sh
 
   test:
     name: Test (pytest)

@@ -1,9 +1,12 @@
 import time
 import threading
+
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
 
 from escuadra.ui.progress import ProgressIndicator
+from escuadra.ui.mensajes import mostrar_error_contextualizado
+
 
 class WidgetHerramienta(QWidget):
     """
@@ -14,6 +17,7 @@ class WidgetHerramienta(QWidget):
         """
         Inicializa el widget base.
         """
+
         super().__init__(parent)
 
         layout_principal = QVBoxLayout(self)
@@ -55,34 +59,61 @@ class WidgetHerramienta(QWidget):
         layout_principal.addWidget(separador)
         layout_principal.addWidget(self._contenido)
 
+
     def area_contenido(self):
         """
         Devuelve el área de contenido.
         """
+
         return self._contenido
 
+
 def ejecutar_con_progreso_ui(funcion, *args, umbral=0.5, **kwargs):
+    """
+    Ejecuta una función mostrando indicador de progreso si tarda demasiado.
+    """
 
     resultado = [None]
     terminado = threading.Event()
 
+
     def tarea():
-        resultado[0] = funcion(*args, **kwargs)
-        terminado.set()
+        try:
+            resultado[0] = funcion(*args, **kwargs)
+
+        except Exception as error:
+            resultado[0] = error
+
+        finally:
+            terminado.set()
+
 
     hilo = threading.Thread(target=tarea)
     hilo.start()
 
+
     hilo.join(timeout=umbral)
 
+
     if not terminado.is_set():
+
         progress = ProgressIndicator()
         progress.start()
 
+
         hilo.join()
 
+
         progress.stop()
+
     else:
+
         hilo.join()
+
+
+    if isinstance(resultado[0], Exception):
+        mostrar_error_contextualizado(None, resultado[0])
+        return None
+
 
     return resultado[0]

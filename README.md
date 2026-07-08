@@ -114,3 +114,6 @@ source .venv/bin/activate
 # Instalar en modo desarrollo
 pip install -e ".[dev]"
 ```
+## Documentación
+
+Ver el [índice general de documentación](docs/indice-general.md) para una lista completa organizada por categoría.
