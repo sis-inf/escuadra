@@ -1,6 +1,6 @@
 # Escuadra - Calculadora Técnica para Ingeniería
 
-[![Python CI](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml/badge.svg)](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml)
+[![CI](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml/badge.svg)](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml)
 [![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue.svg)](LICENSE)
 
 Una aplicación de escritorio que centraliza herramientas de cálculo especializadas para estudiantes y docentes de ingeniería.
@@ -114,3 +114,6 @@ source .venv/bin/activate
 # Instalar en modo desarrollo
 pip install -e ".[dev]"
 ```
+## Documentación
+
+Ver el [índice general de documentación](docs/indice-general.md) para una lista completa organizada por categoría.

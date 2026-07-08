@@ -30,6 +30,28 @@ escuadra --version
 escuadra -v
 ```
 
+## Autocompletado de shell
+
+Escuadra soporta autocompletado de subcomandos mediante `argcomplete`.
+
+Instala las dependencias del proyecto y activa el autocompletado:
+
+### Bash
+
+```bash
+eval "$(register-python-argcomplete escuadra)"
+```
+
+### Zsh
+
+```bash
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete escuadra)"
+```
+
+Después podrás presionar `Tab` para completar automáticamente los subcomandos disponibles.
+
 ## Flags globales
 
 Los siguientes flags están disponibles en todos los subcomandos:

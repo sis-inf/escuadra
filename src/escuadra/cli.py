@@ -79,6 +79,24 @@ def mostrar_version_detallada():
     )
 
 
+def ejecutar_interactivo():
+    """Ejecuta un modo interactivo básico para Escuadra."""
+    print("Modo interactivo. Escriba 'salir' para finalizar.")
+    while True:
+        try:
+            entrada = input("> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            break
+
+        if entrada.lower() in ("salir", "exit", "quit"):
+            break
+        if not entrada:
+            continue
+
+        print(f"Comando no reconocido en modo interactivo: {entrada}")
+
+
 def main():
     """Punto de entrada principal del CLI de Escuadra."""
     try:
