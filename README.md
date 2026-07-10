@@ -2,6 +2,12 @@
 
 [![CI](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml/badge.svg)](https://github.com/sis-inf/escuadra/actions/workflows/ci.yml)
 [![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue.svg)](LICENSE)
+[![Estado](https://img.shields.io/badge/estado-activo-brightgreen)](#)
+[![PRs bienvenidos](https://img.shields.io/badge/PRs-bienvenidos-brightgreen)](CONTRIBUTING.md)
+[![Issues](https://img.shields.io/github/issues/sis-inf/escuadra)](https://github.com/sis-inf/escuadra/issues)
+
+<!-- Agregar cuando el paquete esté publicado -->
+<!-- [![PyPI](https://img.shields.io/pypi/v/escuadra)](https://pypi.org/project/escuadra/) -->
 
 Una aplicación de escritorio que centraliza herramientas de cálculo especializadas para estudiantes y docentes de ingeniería.
 
