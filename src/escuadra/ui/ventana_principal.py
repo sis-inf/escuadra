@@ -4,7 +4,18 @@ Contiene la clase VentanaPrincipal que hereda de QMainWindow.
 """
 
 from PySide6.QtGui import QAction
-from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QStackedWidget, QStatusBar, QWidget
+from PySide6.QtWidgets import (
+    QApplication,
+    QFileDialog,
+    QMainWindow,
+    QMenu,
+    QMessageBox,
+    QStackedWidget,
+    QStatusBar,
+    QWidget,
+)
+
+from escuadra.config.loader import export_user_data, import_user_data
 
 
 class VentanaPrincipal(QMainWindow):
@@ -31,6 +42,17 @@ class VentanaPrincipal(QMainWindow):
 
         # Menu Archivo
         menu_archivo = barra.addMenu("Archivo")
+
+        accion_exportar = QAction("Exportar todos mis datos...", self)
+        accion_exportar.triggered.connect(self._exportar_datos)
+        menu_archivo.addAction(accion_exportar)
+
+        accion_importar = QAction("Importar datos...", self)
+        accion_importar.triggered.connect(self._importar_datos)
+        menu_archivo.addAction(accion_importar)
+
+        menu_archivo.addSeparator()
+
         accion_salir = QAction("Salir", self)
         accion_salir.triggered.connect(QApplication.quit)
         menu_archivo.addAction(accion_salir)
@@ -45,6 +67,65 @@ class VentanaPrincipal(QMainWindow):
         menu_ayuda = barra.addMenu("Ayuda")
         self._accion_acerca_de = QAction("Acerca de", self)
         menu_ayuda.addAction(self._accion_acerca_de)
+
+    def _exportar_datos(self) -> None:
+        ruta, _ = QFileDialog.getSaveFileName(
+            self,
+            "Exportar datos",
+            "escuadra_backup.zip",
+            "Archivos ZIP (*.zip)",
+        )
+        if not ruta:
+            return
+
+        try:
+            export_user_data(ruta)
+            QMessageBox.information(
+                self,
+                "Exportación exitosa",
+                f"Datos exportados correctamente a:\n{ruta}",
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error al exportar",
+                f"No se pudieron exportar los datos:\n{e}",
+            )
+
+    def _importar_datos(self) -> None:
+        ruta, _ = QFileDialog.getOpenFileName(
+            self,
+            "Importar datos",
+            "",
+            "Archivos ZIP (*.zip)",
+        )
+        if not ruta:
+            return
+
+        respuesta = QMessageBox.question(
+            self,
+            "Confirmar importación",
+            "¿Desea sobrescribir la configuración actual con los datos del respaldo?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+
+        if respuesta != QMessageBox.StandardButton.Yes:
+            return
+
+        try:
+            import_user_data(ruta)
+            QMessageBox.information(
+                self,
+                "Importación exitosa",
+                "Datos restaurados correctamente.\n"
+                "Reinicie la aplicación para aplicar los cambios.",
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error al importar",
+                f"No se pudieron importar los datos:\n{e}",
+            )
 
     def _configurar_area_central(self) -> None:
         self._area_central = QStackedWidget()

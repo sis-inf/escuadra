@@ -2,6 +2,7 @@
 Módulo para cargar configuración desde archivos YAML.
 """
 
+import zipfile
 from pathlib import Path
 
 import yaml
@@ -108,3 +109,57 @@ def save_font_scale(scale: float) -> None:
 
     with config_path.open("w", encoding="utf-8") as f:
         yaml.dump(config, f, default_flow_style=False, allow_unicode=True)
+
+
+def export_user_data(export_path: str) -> None:
+    """
+    Exporta toda la configuración y datos del usuario a un archivo ZIP.
+
+    Args:
+        export_path: Ruta donde guardar el archivo ZIP de respaldo.
+
+    Raises:
+        FileNotFoundError: Si no existe el directorio de configuración.
+        zipfile.BadZipFile: Si hay un error al crear el ZIP.
+    """
+    config_dir = _get_config_dir()
+
+    if not config_dir.exists():
+        raise FileNotFoundError(
+            f"Directorio de configuración no encontrado: {config_dir}"
+        )
+
+    with zipfile.ZipFile(export_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for archivo in config_dir.rglob("*"):
+            if archivo.is_file():
+                arcname = archivo.relative_to(config_dir)
+                zf.write(archivo, arcname)
+
+
+def import_user_data(import_path: str, overwrite: bool = True) -> None:
+    """
+    Restaura la configuración y datos del usuario desde un archivo ZIP.
+
+    Args:
+        import_path: Ruta al archivo ZIP de respaldo.
+        overwrite: Si True, sobrescribe archivos existentes. Default True.
+
+    Raises:
+        FileNotFoundError: Si el archivo ZIP no existe.
+        zipfile.BadZipFile: Si el archivo no es un ZIP válido.
+    """
+    if not Path(import_path).exists():
+        raise FileNotFoundError(f"Archivo de respaldo no encontrado: {import_path}")
+
+    config_dir = _get_config_dir()
+    config_dir.mkdir(parents=True, exist_ok=True)
+
+    with zipfile.ZipFile(import_path, "r") as zf:
+        for member in zf.namelist():
+            destino = config_dir / member
+
+            if destino.exists() and not overwrite:
+                continue
+
+            destino.parent.mkdir(parents=True, exist_ok=True)
+            zf.extract(member, config_dir)
