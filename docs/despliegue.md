@@ -221,45 +221,6 @@ pip install -e .
 ```
 
 ---
-# Verificación de integridad de los ejecutables
-
-Las versiones publicadas mediante GitHub Releases incluyen un archivo `SHA256SUMS.txt` junto al ejecutable. Este archivo contiene el checksum SHA256 del ejecutable distribuido y permite verificar que la descarga no haya sido modificada o corrompida.
-
-## Linux
-
-Ejecute el siguiente comando desde el directorio donde se encuentran el ejecutable y `SHA256SUMS.txt`:
-
-```bash
-sha256sum -c SHA256SUMS.txt
-```
-
-Si la verificación es correcta, se mostrará un resultado similar a:
-
-```text
-escuadra: OK
-```
-
-## macOS
-
-Calcule el checksum del ejecutable:
-
-```bash
-shasum -a 256 escuadra
-```
-
-Compare el valor obtenido con el correspondiente en `SHA256SUMS.txt`.
-
-## Windows (PowerShell)
-
-Calcule el checksum mediante:
-
-```powershell
-Get-FileHash .\escuadra -Algorithm SHA256
-```
-
-Compare el valor mostrado con el registrado en `SHA256SUMS.txt`.
-
----
 
 # Documentación relacionada
 
