@@ -79,3 +79,27 @@ from escuadra.modulos.geometria.volumen import (
 print(volumen_cubo(3))
 print(volumen_esfera(2))
 ```
+
+## Transformaciones geométricas
+
+### `transformaciones`
+
+Permite realizar transformaciones geométricas bidimensionales sobre puntos del plano.
+
+Funciones disponibles:
+
+- rotar_punto()
+- trasladar_punto()
+- escalar_punto()
+
+Ejemplos:
+
+```python
+rotar_punto((1,0),90)
+# (0,1)
+
+trasladar_punto((2,3),5,-1)
+# (7,2)
+
+escalar_punto((2,2),2)
+# (4,4)

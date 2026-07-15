@@ -114,6 +114,10 @@ Las tres ecuaciones son equivalentes y se pueden derivar unas de otras usando la
 | `circuito_paralelo` | 1/R_total = 1/R₁ + 1/R₂ + ..., V_total = V₁ = V₂ = ..., I_total = I₁ + I₂ + ... | Lista de resistencias, voltaje de fuente |
 | `caida_tension` | V_caida = I · R_conductor | Corriente, resistencia del conductor |
 | `divisor_tension` | V_salida = V_entrada · (R₂ / (R₁ + R₂)) | Voltaje de entrada, resistencias R₁ y R₂ |
+| `correccion_fp` | Qc = P·(tanφ₁ − tanφ₂) | Potencia activa, factor de potencia inicial y objetivo |
+| `potencia_trifasica` | P = √3·V·I·cosφ | Voltaje de línea, corriente, factor de potencia |
+| `circuitos_rc_rl` | τ = R·C, τ = L/R | Resistencia, capacitancia o inductancia |
+| `conversion_electrica` | Conversión de unidades eléctricas | Voltaje, corriente, potencia, resistencia |
 
 ## Unidades y conversiones
 
@@ -154,6 +158,56 @@ En el análisis de circuitos eléctricos es fundamental comprender las unidades 
   - 0.015 A = 0.015 / 0.001 = 15 mA
 
 **Importancia de las unidades:** Es crucial mantener la consistencia de unidades en todos los cálculos. Por ejemplo, al usar la Ley de Ohm, si la resistencia está en kilo-ohmios, el resultado de la corriente estará en miliamperios si el voltaje está en voltios. Siempre es recomendable convertir todas las cantidades a unidades base (V, A, Ω, W) antes de realizar cálculos complejos.
+
+## Potencia trifásica
+
+### `potencia_trifasica`
+
+Calcula la potencia activa, reactiva y aparente de sistemas trifásicos utilizando valores de línea.
+
+**Fórmulas:**
+
+- P = √3 · V · I · fp
+- Q = √3 · V · I · sin(φ)
+- S = √3 · V · I
+
+**Parámetros:**
+
+- voltaje_linea
+- corriente_linea
+- factor_potencia
+- conexion (estrella o triángulo)
+
+## Corrección del factor de potencia
+
+### `correccion_fp`
+
+Calcula la capacitancia necesaria para corregir el factor de potencia mediante bancos de capacitores.
+
+**Parámetros:**
+
+- potencia_activa
+- fp_actual
+- fp_deseado
+- voltaje
+- frecuencia
+
+## Circuitos RC y RL
+
+### `circuitos_rc_rl`
+
+Herramientas para análisis de constantes de tiempo en circuitos RC y RL.
+
+**Fórmulas:**
+
+- τRC = R · C
+- τRL = L / R
+
+Permite calcular:
+
+- Constante de tiempo RC
+- Constante de tiempo RL
+- Voltaje de carga de un capacitor
 
 ## Ejemplo práctico completo
 

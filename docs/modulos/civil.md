@@ -22,6 +22,9 @@ La deflexión en vigas es el desplazamiento vertical que experimenta una viga cu
 | `area_seccion` | A = b·h (rectangular), A = π·d²/4 (circular) | Base, altura, diámetro |
 | `carga_distribuida` | w = F/L, V(x) = R_A - w·x, M(x) = R_A·x - w·x²/2 | Fuerza total, longitud, tipo de distribución |
 | `momento_inercia` | I = (b·h³)/12 (rectangular), I = (π·d⁴)/64 (circular) | Base, altura, diámetro |
+| `columna_pandeo` | Pcr = π²·E·I / (K·L)² | Módulo de elasticidad, momento de inercia, longitud, condición de apoyo |
+| `combinacion_cargas` | U = 1.2·D + 1.6·L (LRFD) | Carga muerta, carga viva, factores de carga |
+| `diseno_vial` | Pendiente = ((Δelevación)/distancia)·100, e = (v²/(g·R)) - f | Elevaciones, distancia horizontal, velocidad de diseño, radio de curva, fricción lateral |
 
 ## Ejemplos completos
 

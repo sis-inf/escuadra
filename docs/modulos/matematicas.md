@@ -19,6 +19,7 @@ El alcance del módulo incluye:
 | conversor_temperatura | Realiza conversiones entre escalas de temperatura (Celsius, Fahrenheit, Kelvin) | `celsius_a_fahrenheit()`, `fahrenheit_a_celsius()`, `celsius_a_kelvin()`, `kelvin_a_celsius()` |
 | estadísticas | Calcula medidas estadísticas descriptivas de un conjunto de datos | `media()`, `mediana()`, `moda()`, `desviacion_estandar()`, `varianza()` |
 | trigonometría | Proporciona funciones trigonométricas básicas y conversiones de ángulos | `seno()`, `coseno()`, `tangente()`, `grados_a_radianes()`, `radianes_a_grados()` |
+| financiera | Realiza cálculos de matemática financiera utilizando interés compuesto | `calcular_valor_futuro()`, `calcular_valor_presente()`, `calcular_interes_compuesto()` |
 | numeros_complejos | Realiza operaciones aritméticas con números complejos | `suma()`, `resta()`, `multiplicacion()`, `division()`, `modulo()`, `conjugado()` |
 
 ## Ejemplos de uso
@@ -93,6 +94,105 @@ print(f"Desviación estándar: {desv_est:.2f}")
 var = varianza(datos)
 print(f"Varianza: {var:.2f}")
 ```
+
+### financiera
+
+La matemática financiera estudia el valor del dinero en el tiempo. Una misma cantidad de dinero tiene diferente valor según el momento en que se reciba o se invierta, debido a factores como el interés, la inflación y el riesgo.
+
+Las herramientas de este módulo permiten calcular:
+
+- Valor futuro de una inversión.
+- Valor presente de una cantidad futura.
+- Interés compuesto generado por una inversión.
+
+#### Fundamento teórico
+
+##### Valor futuro
+
+El valor futuro representa cuánto valdrá una inversión después de cierto número de períodos cuando los intereses se capitalizan.
+
+Fórmula:
+
+VF = VP × (1 + i)^n
+
+Donde:
+
+- VF = Valor futuro
+- VP = Valor presente o capital inicial
+- i = tasa de interés por período
+- n = número de períodos
+
+##### Valor presente
+
+Permite determinar cuánto vale hoy una cantidad de dinero que se recibirá en el futuro.
+
+Fórmula:
+
+VP = VF / (1 + i)^n
+
+Donde:
+
+- VP = Valor presente
+- VF = Valor futuro
+- i = tasa de interés por período
+- n = número de períodos
+
+##### Interés compuesto
+
+El interés compuesto corresponde a la ganancia obtenida después de aplicar intereses sobre el capital inicial y sobre los intereses acumulados.
+
+Fórmula:
+
+I = VF − Capital
+
+donde:
+
+VF = Capital × (1 + i)^n
+
+#### Ejemplo práctico
+
+```python
+from escuadra.modulos.matematicas.financiera import (
+    calcular_valor_futuro,
+    calcular_valor_presente,
+    calcular_interes_compuesto
+)
+
+capital = 1000
+tasa = 0.10
+periodos = 3
+
+valor_futuro = calcular_valor_futuro(capital, tasa, periodos)
+print(valor_futuro)
+
+valor_presente = calcular_valor_presente(valor_futuro, tasa, periodos)
+print(valor_presente)
+
+interes = calcular_interes_compuesto(capital, tasa, periodos)
+print(interes)
+```
+
+#### Resultado esperado
+
+Para un capital inicial de 1000 unidades monetarias, una tasa del 10% por período y 3 períodos:
+
+Valor futuro:
+
+VF = 1000 × (1 + 0.10)^3
+
+VF = 1331
+
+Interés generado:
+
+I = 1331 − 1000
+
+I = 331
+
+Por lo tanto:
+
+- Valor futuro = 1331
+- Valor presente = 1000
+- Interés compuesto = 331
 
 ### trigonometría
 

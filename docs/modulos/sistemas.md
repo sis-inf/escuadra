@@ -4,12 +4,15 @@
 
 El módulo `sistemas` agrupa las herramientas orientadas a informática y computación. Sus herramientas son especialmente útiles en cursos de **arquitectura de computadoras**, **lógica digital** y **programación de sistemas**, ya que cubren los fundamentos numéricos y lógicos sobre los que se construye el software y el hardware.
 
-El módulo contiene tres herramientas principales:
+El módulo contiene las siguientes herramientas:
 
 - `conversor_bases` — conversión entre sistemas de numeración (binario, octal, decimal, hexadecimal)
 - `herramienta_tablas_verdad` — generación de tablas de verdad para expresiones booleanas
 - `tabla_ascii` — consulta y conversión de caracteres y códigos ASCII
 - `conversor_color` — conversión de colores entre los modelos RGB, HEX y HSL
+- `calculadora_subred` — cálculo de redes IPv4 mediante prefijos CIDR
+- `codigo_paridad` — generación y verificación de bits de paridad
+- `karnaugh` — mapas de Karnaugh y simplificación básica de expresiones booleanas
 
 ---
 
@@ -221,6 +224,85 @@ rgb_a_hsl(128, 128, 128)  # (0, 0, 50)     — gris neutro
 
 ---
 
+## Calculadora de subredes
+
+### `calculadora_subred`
+
+Calcula información de direccionamiento IPv4 a partir de una dirección IP y un prefijo CIDR.
+
+Información obtenida:
+
+- Dirección de red
+- Dirección broadcast
+- Máscara de subred
+- Primer host disponible
+- Último host disponible
+- Total de hosts
+
+**Ejemplo:**
+
+```python
+calcular_subred("192.168.1.10", "24")
+```
+
+Resultado:
+
+```text
+{
+    "red": "192.168.1.0",
+    "broadcast": "192.168.1.255",
+    "mascara": "255.255.255.0",
+    "primer_host": "192.168.1.1",
+    "ultimo_host": "192.168.1.254",
+    "total_hosts": 254
+}
+```
+
+---
+
+## Verificación de paridad
+
+### `codigo_paridad`
+
+Permite generar y verificar bits de paridad para detección básica de errores en transmisión de datos.
+
+**Funciones disponibles:**
+
+- `calcular_bit_paridad()`
+- `verificar_paridad()`
+
+**Ejemplo:**
+
+```python
+calcular_bit_paridad("1011", "par")
+```
+
+Resultado:
+
+```text
+1
+```
+
+---
+
+## Mapas de Karnaugh
+
+### `karnaugh`
+
+Genera mapas de Karnaugh básicos para expresiones booleanas de entre 2 y 4 variables y permite realizar simplificaciones elementales.
+
+**Funciones disponibles:**
+
+- `generar_mapa_karnaugh()`
+- `simplificar_expresion()`
+
+**Limitaciones:**
+
+- Soporta entre 2 y 4 variables.
+- Implementa simplificaciones básicas.
+- No sustituye algoritmos completos de minimización como Quine-McCluskey.
+
+---
 ## Ejemplos de casos de uso en programación de sistemas
 
 ### Depuración a nivel de bits
@@ -282,3 +364,4 @@ Al diseñar interfaces de bajo nivel o para sistemas embebidos con pantallas de 
 hex_a_rgb("#1E90FF")   # (30, 144, 255) — dodger blue
 rgb_a_hsl(30, 144, 255)  # (210, 100, 56) — matiz azul, saturación plena
 ```
+
