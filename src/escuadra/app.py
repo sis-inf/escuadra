@@ -9,6 +9,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
+from escuadra.config.loader import load_font_scale
 from escuadra.core.registry import descubrir_herramientas, herramientas_por_carrera
 from escuadra.ui.cargador_herramienta import CargadorHerramienta
 from escuadra.ui.constructor_menu import construir_menu
@@ -37,6 +38,12 @@ def main() -> None:
 
     try:
         app = QApplication(sys.argv)
+
+        # Aplicar escala de fuente global
+        font_scale = load_font_scale()
+        base_font = app.font()
+        base_font.setPointSizeF(base_font.pointSizeF() * font_scale)
+        app.setFont(base_font)
 
         # Descubrir herramientas
         herramientas = descubrir_herramientas()

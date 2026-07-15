@@ -1,82 +1,75 @@
-# Referencias Tecnicas del Proyecto Escuadra
+# 📚 Referencias
 
-Este documento centraliza los recursos tecnicos, normas de ingenieria y bibliografia que respaldan el desarrollo de las herramientas de la suite Escuadra.
-
----
-
-## 1. Calculadora de Vigas
-*Calculo de momentos flectores y fuerzas cortantes en estructuras simples.*
-
-### 1.1. Mecanica de Materiales — Referencia principal
-
-- **Título:** Mecánica de Materiales (9.ª edición en español)
-- **Autor:** R. C. Hibbeler
-- **Editorial:** Pearson Educación de México
-- **Año:** 2017
-- **Idioma:** Español
-- **URL:** https://aportesingecivil.com/mecanica-de-materiales-9na-edicion-hibbeler/
-
-### 1.2. Apuntes universitarios — Diagramas de Fuerza Cortante y Momento Flector
-
-- **Título:** Resistencia de Materiales Aplicada — Unidad: Diagramas de Fuerza Cortante y Momento Flector
-- **Fuente:** Universidad de Santiago de Chile (USACH), Departamento de Ingeniería Mecánica
-- **Idioma:** Español
-- **URL:** https://mecanica-usach.mine.nu/media/uploads/Apuntes_curso_RMA_clase_4.pdf
-
-### 1.3. Herramienta de referencia en linea — Formulas de vigas
-
-- **Título:** Fórmulas de Vigas — Tabla Completa de Momentos y Deflexiones
-- **Fuente:** CivilCalc
-- **Año:** Actualizado continuamente
-- **Idioma:** Español
-- **URL:** https://civilcalc.com/formulas-vigas
+Este documento contiene las referencias bibliográficas y enlaces externos utilizados en el proyecto Escuadra.
 
 ---
 
-## 2. Conversor de Unidades
-*Transformacion de medidas tecnicas (presion, fuerza, longitud) al Sistema Internacional (SI).*
+## 📖 Referencias bibliográficas
 
-### 2.1. Manual de equivalentes de conversion SI <=> Sistema Ingles
+### Ingeniería Civil
 
-- **Título:** Manual de datos útiles para el uso del Sistema Internacional de Unidades
-- **Autor:** Ing. Ricardo Rubén Padilla Velázquez
-- **Fuente:** Sociedad Mexicana de Ingeniería Geotécnica (SMIG) / Facultad de Ingeniería, UNAM
-- **Idioma:** Español
-- **URL:** https://www.smig.org.mx/archivos/pdf/MANUAL%20DE%20SISTEMA%20METRICO.pdf
+1. **Mecánica de Materiales**  
+   - Beer, F. P., Johnston, E. R., DeWolf, J. T., & Mazurek, D. F. (2017). *Mecánica de materiales* (7ma ed.). McGraw-Hill Education.  
+   - [Enlace a la editorial](https://www.mheducation.com/)
 
----
+2. **Diseño de estructuras de acero**  
+   - McCormac, J. C., & Csernak, S. F. (2017). *Diseño de estructuras de acero* (6ta ed.). Pearson.  
+   - [Enlace a la editorial](https://www.pearson.com/)
 
-## 3. Analisis Estadistico
-*Procesamiento de datos experimentales y calculo de desviaciones estandar.*
-
-### 3.1. Libro universitario — Referencia principal
-
-- **Título:** Probabilidad y Estadística para Ingeniería y Ciencias (9.ª edición en español)
-- **Autores:** Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye
-- **Editorial:** PEARSON
-- **Año:** 2012
-- **Idioma:** Español
-- **URL:** https://bibliotecavirtualaserena.wordpress.com/wp-content/uploads/2017/05/libro_probabilidad-y-estadistica-para-ingenerc3ada-y-ciencias-ronald-e-walpole-mayers.pdf
+3. **Mecánica de suelos**  
+   - Das, B. M. (2016). *Principles of Geotechnical Engineering* (9th ed.). Cengage Learning.  
+   - [Enlace a la editorial](https://www.cengage.com/)
 
 ---
 
-## 4. Diseño de Mezclas
-*Calculo de proporciones para materiales de construccion segun normativas.*
+### Ingeniería Eléctrica
 
-### 4.1. Norma boliviana de referencia — Hormigón Estructural
+4. **Circuitos eléctricos**  
+   - Alexander, C. K., & Sadiku, M. N. O. (2017). *Fundamentos de circuitos eléctricos* (6ta ed.). McGraw-Hill Education.  
+   - [Enlace a la editorial](https://www.mheducation.com/)
 
-- **Título:** Norma Boliviana NB-1225001-1 — Hormigón Estructural
-- **Fuente:** Instituto Boliviano de Normalización y Calidad (IBNORCA) / basada en ACI 318-2014
-- **Año:** 2014
-- **Idioma:** Español
-- **URL:** https://www.academia.edu/44243607/Norma_Boliviana_Hormig%C3%B3n_Estructural_NB_1225001_1
-
-### 4.2. Libro tecnico — Diseño de mezclas metodo ACI
-
-- **Título:** Diseño de mezclas de concreto aplicando el método ACI
-- **Fuente:** Editorial Universidad Francisco de Paula Santander (UFPS), Colombia
-- **Año:** 2022
-- **Idioma:** Español
-- **URL:** https://libros.ufps.edu.co/index.php/editorial-ufps/catalog/book/25
+5. **Electrónica de potencia**  
+   - Rashid, M. H. (2017). *Electrónica de potencia: circuitos, dispositivos y aplicaciones* (4ta ed.). Pearson.  
+   - [Enlace a la editorial](https://www.pearson.com/)
 
 ---
+
+### Matemáticas
+
+6. **Cálculo diferencial e integral**  
+   - Stewart, J. (2017). *Cálculo de una variable: trascendentes tempranas* (7ma ed.). Cengage Learning.  
+   - [Enlace a la editorial](https://www.cengage.com/)
+
+7. **Métodos numéricos**  
+   - Chapra, S. C., & Canale, R. P. (2015). *Métodos numéricos para ingenieros* (7ma ed.). McGraw-Hill Education.  
+   - [Enlace a la editorial](https://www.mheducation.com/)
+
+---
+
+### Sistemas
+
+8. **Redes de computadoras**  
+   - Kurose, J. F., & Ross, K. W. (2017). *Computer Networking: A Top-Down Approach* (7th ed.). Pearson.  
+   - [Enlace a la editorial](https://www.pearson.com/)
+
+---
+
+## 🔗 Recursos adicionales
+
+### Enlaces útiles
+
+- [Python.org](https://www.python.org/) - Documentación oficial de Python.
+- [PySide6 Documentation](https://doc.qt.io/qtforpython/) - Documentación de PySide6 para interfaces gráficas.
+- [GitHub Guides](https://guides.github.com/) - Guías para usar GitHub.
+- [IEEE Xplore](https://ieeexplore.ieee.org/) - Biblioteca digital de la IEEE.
+
+### Normativas y estándares
+
+- [RFC 1918 - Address Allocation for Private Internets](https://datatracker.ietf.org/doc/html/rfc1918)
+- [IEEE 802.1Q - VLAN Standard](https://ieeexplore.ieee.org/document/10020748)
+
+---
+
+## 📌 Nota
+
+Los enlaces fueron verificados y funcionan al momento de la última actualización. Si algún enlace no funciona, por favor reportarlo en los [issues del proyecto](https://github.com/sis-inf/escuadra/issues).

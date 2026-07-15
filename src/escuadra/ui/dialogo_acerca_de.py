@@ -7,7 +7,7 @@ con informacion del proyecto: nombre, versión, licencia y créditos.
 
 from __future__ import annotations
 
-from PyQt6.QtWidgets import QMessageBox, QWidget
+from PySide6.QtWidgets import QMessageBox, QWidget
 
 
 def mostrar_acerca_de(parent: QWidget | None = None) -> None:

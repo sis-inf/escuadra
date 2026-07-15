@@ -1,0 +1,14 @@
+site_name: Escuadra
+
+nav:
+  - Instalación: instalacion.md
+  - Configuración: configuracion.md
+  - Arquitectura: arquitectura.md
+  - Desarrollo Local: desarrollo-local.md
+  - Flujo de Trabajo: flujo-de-trabajo.md
+  - Casos de Uso: casos-de-uso.md
+  - Testing: testing.md
+  - Seguridad: seguridad.md
+  - Preguntas Frecuentes: preguntas-frecuentes.md
+
+docs_dir: docs

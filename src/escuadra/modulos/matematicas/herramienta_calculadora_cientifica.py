@@ -9,7 +9,10 @@ from escuadra.core.herramienta import Herramienta
 class HerramientaCalculadoraCientifica(Herramienta):
     nombre = "Calculadora científica"
     carrera = Carrera.MATEMATICAS
-    descripcion = "Calculadora con operaciones aritméticas, trigonométricas, logarítmicas y constantes."
+    descripcion = (
+        "Calculadora con operaciones aritméticas, trigonométricas, "
+        "logarítmicas y constantes."
+    )
 
     def __init__(self):
         super().__init__()

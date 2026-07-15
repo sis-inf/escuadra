@@ -1,6 +1,11 @@
+from escuadra.modulos.matematicas.error_validacion import ErrorValidacion
+
+
 def convertir_masa(valor, unidad_origen, unidad_destino):
     if valor < 0:
-        raise ValueError("El valor debe ser mayor o igual a cero")
+        raise ErrorValidacion(
+            f"La masa no puede ser negativa (valor recibido: {valor})"
+        )
 
     factores = {
         "kg": 1.0,

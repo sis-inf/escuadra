@@ -6,14 +6,10 @@ def calcular_ohm(
     valores = [voltaje, corriente, resistencia]
 
     if valores.count(None) != 1:
-        raise ValueError(
-            "Debe proporcionar exactamente dos parámetros"
-        )
+        raise ValueError("Debe proporcionar exactamente dos parámetros")
 
     if resistencia == 0:
-        raise ValueError(
-            "La resistencia no puede ser cero"
-        )
+        raise ValueError("La resistencia no puede ser cero")
 
     if voltaje is None:
         voltaje = corriente * resistencia
@@ -22,6 +18,9 @@ def calcular_ohm(
         corriente = voltaje / resistencia
 
     else:
+        if corriente == 0:
+            raise ValueError("La corriente no puede ser cero")
+
         resistencia = voltaje / corriente
 
     return {

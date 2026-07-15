@@ -1,236 +1,178 @@
 # Catálogo de herramientas de la suite Escuadra
 
-Este documento describe las herramientas actualmente implementadas en la suite Escuadra. Todas las herramientas listadas corresponden a clases que implementan la interfaz base `Herramienta`.
+Este documento describe las herramientas actualmente disponibles en la suite Escuadra.
+
+Las herramientas listadas corresponden a clases que implementan la interfaz base
+`Herramienta` y que son descubiertas correctamente por el sistema de registro
+(`escuadra.core.registry`).
 
 ## Herramientas disponibles
 
-| Herramienta                       | Módulo      | Descripción                                                                                            | Comando CLI sugerido              |
-| --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------ | --------------------------------- |
-| Calculadora científica            | Matemáticas | Calculadora con operaciones aritméticas, trigonométricas, logarítmicas y constantes matemáticas.       | `escuadra calculadora-cientifica` |
-| Conversión de unidades            | Matemáticas | Convierte valores entre unidades de longitud, masa, tiempo y temperatura.                              | `escuadra conversion-unidades`    |
-| Sistemas de ecuaciones lineales   | Matemáticas | Resuelve sistemas lineales de tamaño 2×2 hasta 5×5 mediante eliminación gaussiana con pivoteo parcial. | `escuadra sistemas-lineales`      |
-| Ley de Ohm                        | Eléctrica   | Calcula voltaje, corriente o resistencia a partir de las otras dos magnitudes y obtiene la potencia.   | `escuadra ley-ohm`                |
-| Divisor de tensión                | Eléctrica   | Calcula voltaje de salida o resistencias necesarias en un divisor de tensión.                          | `escuadra divisor-tension`        |
-| Conversión de unidades eléctricas | Eléctrica   | Convierte entre unidades de potencia y energía.                                                        | `escuadra conversion-electrica`   |
-| Conversión de bases               | Sistemas    | Convierte números entre decimal, binario, octal y hexadecimal.                                         | `escuadra conversion-bases`       |
-| Complemento a 2                   | Sistemas    | Convierte entre enteros con signo y representación binaria en complemento a dos.                       | `escuadra complemento-a-2`        |
-| Tablas de verdad                  | Sistemas    | Genera tablas de verdad para expresiones booleanas de hasta cuatro variables.                          | `escuadra tablas-verdad`          |
-| Cálculo de áreas                  | Geometría   | Calcula el área de triángulos, círculos, rectángulos y trapecios.                                      | `escuadra calculo-area`           |
+| Herramienta                       | Módulo                               | Descripción                                                                           |
+| --------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------- |
+| Calculadora científica            | Matemáticas                          | Calculadora con operaciones aritméticas, trigonométricas, logarítmicas y constantes.  |
+| Conversión de unidades            | Matemáticas                          | Convierte valores entre unidades de longitud, masa, tiempo y temperatura.             |
+| Matemática financiera             | Matemáticas                          | Calcula valor futuro, valor presente e interés compuesto.                             |
+| Sistemas de ecuaciones lineales   | Matemáticas                          | Resuelve sistemas A·x = b para tamaños entre 2x2 y 5x5.                               |
+| Resolución de triángulos          | Matemáticas                          | Calcula triángulos usando ley de senos y cosenos.                                     |
+| Conversión de unidades eléctricas | Ingeniería Eléctrica                 | Convierte entre unidades de potencia (W, kW, HP) y unidades de energía (Wh, kWh, J).  |
+| Divisor de tensión                | Ingeniería Eléctrica                 | Calcula el voltaje de salida o las resistencias necesarias en un divisor de tensión.  |
+| Ley de Ohm                        | Ingeniería Eléctrica                 | Calcula voltaje, corriente o resistencia a partir de las otras dos magnitudes.        |
+| Potencia Trifásica                | Ingeniería Eléctrica                 | Calcula la potencia activa, reactiva y aparente en sistemas trifásicos.               |
+| Complemento a 2                   | Ingeniería de Sistemas e Informática | Convierte entre decimal con signo y representación en complemento a 2.                |
+| Conversión de bases               | Ingeniería de Sistemas e Informática | Convierte un número entre decimal, binario, octal y hexadecimal.                      |
+| Mapas de Karnaugh                 | Ingeniería de Sistemas e Informática | Genera mapas de Karnaugh y realiza simplificaciones básicas de expresiones booleanas. |
+| Tablas de verdad                  | Ingeniería de Sistemas e Informática | Genera la tabla de verdad de una expresión booleana con hasta 4 variables.            |
 
-## Organización por módulo
+---
+
+# Organización por módulo
 
 ## Matemáticas
 
-#### Calculadora científica
+### Calculadora científica
 
 Permite evaluar expresiones matemáticas utilizando:
 
-* Operaciones aritméticas básicas.
-* Potencias y raíces.
-* Funciones trigonométricas.
-* Logaritmos y logaritmos naturales.
-* Constantes π y e.
-* Modo angular en grados o radianes.
+- Operaciones aritméticas básicas.
+- Potencias y raíces.
+- Funciones trigonométricas.
+- Logaritmos y logaritmos naturales.
+- Constantes matemáticas.
 
-**Comando CLI sugerido:**
+---
 
-```bash
-escuadra calculadora-cientifica --expresion "sin(45)+sqrt(16)"
-```
+### Conversión de unidades
 
-#### Conversión de unidades
+Permite realizar conversiones entre diferentes categorías:
 
-Permite convertir entre diferentes categorías de unidades:
+- Longitud.
+- Masa.
+- Tiempo.
+- Temperatura.
 
-* Longitud.
-* Masa.
-* Tiempo.
-* Temperatura.
+---
 
-Incluye conversiones entre unidades métricas e imperiales.
+### Matemática financiera
 
-**Comando CLI sugerido:**
+Permite realizar cálculos financieros relacionados con:
 
-```bash
-escuadra conversion-unidades \
-  --categoria longitud \
-  --de km \
-  --a m \
-  --valor 3.5
-```
+- Valor futuro.
+- Valor presente.
+- Interés compuesto.
 
-#### Sistemas de ecuaciones lineales
+---
 
-Resuelve sistemas lineales cuadrados de tamaño entre 2×2 y 5×5 mediante eliminación gaussiana con pivoteo parcial.
+### Sistemas de ecuaciones lineales
 
-Muestra la solución para cada incógnita del sistema.
+Resuelve sistemas de ecuaciones lineales mediante métodos matriciales.
 
-**Comando CLI sugerido:**
+Características:
 
-```bash
-escuadra sistemas-lineales \
-  --matriz "2,1;5,7" \
-  --vector "11,13"
-```
+- Soporte para sistemas desde 2x2 hasta 5x5.
+- Resolución del sistema A·x = b.
+- Manejo de matrices numéricas.
 
-## Eléctrica
+---
 
-#### Ley de Ohm
+### Resolución de triángulos
 
-Calcula automáticamente:
+Permite calcular elementos desconocidos de un triángulo utilizando:
 
-* Voltaje (V).
-* Corriente (I).
-* Resistencia (R).
-* Potencia (P).
+- Ley de senos.
+- Ley de cosenos.
 
-A partir de dos magnitudes conocidas.
+---
 
-**Comando CLI sugerido:**
+# Ingeniería Eléctrica
 
-```bash
-escuadra ley-ohm --corriente 5 --resistencia 10
-```
+## Ley de Ohm
 
-#### Divisor de tensión
+Calcula magnitudes eléctricas a partir de valores conocidos:
 
-Permite:
+- Voltaje.
+- Corriente.
+- Resistencia.
 
-* Calcular Vout.
-* Calcular R1.
-* Calcular R2.
+---
 
-Utilizando las ecuaciones de un divisor resistivo.
+## Divisor de tensión
 
-**Comando CLI sugerido:**
+Permite calcular:
 
-```bash
-escuadra divisor-tension \
-  --vin 12 \
-  --r1 1000 \
-  --r2 2200
-```
+- Voltaje de salida.
+- Resistencias necesarias en un divisor resistivo.
 
-#### Conversión de unidades eléctricas
+Utiliza la relación entre resistencias y tensión de entrada.
 
-Realiza conversiones entre:
+---
 
-**Potencia**
+## Conversión de unidades eléctricas
 
-* W
-* kW
-* MW
-* HP
-* CV
+Realiza conversiones entre unidades de:
 
-**Energía**
+### Potencia
 
-* J
-* kJ
-* Wh
-* kWh
-* MJ
+- W.
+- kW.
+- HP.
 
-**Comando CLI sugerido:**
+### Energía
 
-```bash
-escuadra conversion-electrica \
-  --categoria potencia \
-  --de kW \
-  --a HP \
-  --valor 5
-```
+- J.
+- Wh.
+- kWh.
 
-## Sistemas
+---
 
-#### Conversión de bases
+## Potencia Trifásica
 
-Convierte números entre:
+Permite calcular parámetros de sistemas trifásicos:
 
-* Decimal.
-* Binario.
-* Octal.
-* Hexadecimal.
+- Potencia activa.
+- Potencia reactiva.
+- Potencia aparente.
 
-Soporta números negativos.
+---
 
-**Comando CLI sugerido:**
+# Ingeniería de Sistemas e Informática
 
-```bash
-escuadra conversion-bases \
-  --base 10 \
-  --valor 255
-```
+## Complemento a 2
 
-#### Complemento a 2
+Permite realizar conversiones entre:
 
-Permite convertir:
+- Decimal con signo.
+- Representación binaria en complemento a 2.
 
-* Decimal → Complemento a 2.
-* Complemento a 2 → Decimal.
+Soporta diferentes tamaños de palabra.
 
-Con tamaños de palabra de:
+---
 
-* 4 bits.
-* 8 bits.
-* 16 bits.
-* 32 bits.
+## Conversión de bases
 
-**Comando CLI sugerido:**
+Permite convertir números entre diferentes sistemas:
 
-```bash
-escuadra complemento-a-2 \
-  --decimal -5 \
-  --bits 8
-```
+- Decimal.
+- Binario.
+- Octal.
+- Hexadecimal.
 
-#### Tablas de verdad
+---
 
-Genera tablas de verdad para expresiones booleanas utilizando operadores:
+## Mapas de Karnaugh
 
-* AND
-* OR
-* NOT
-* XOR
+Permite generar y simplificar expresiones booleanas mediante mapas de Karnaugh.
 
-Admite hasta cuatro variables lógicas y permite copiar el resultado al portapapeles.
+Incluye soporte para simplificación de expresiones lógicas.
 
-**Comando CLI sugerido:**
+---
 
-```bash
-escuadra tablas-verdad \
-  --expresion "A AND (B OR C)"
-```
+## Tablas de verdad
 
-## Geometría
+Genera tablas de verdad para expresiones booleanas.
 
-#### Cálculo de áreas
+Características:
 
-Calcula áreas de las siguientes figuras geométricas:
-
-* Triángulo.
-* Círculo.
-* Rectángulo.
-* Trapecio.
-
-Los resultados se expresan en unidades cuadradas.
-
-**Comando CLI sugerido:**
-
-```bash
-escuadra calculo-area \
-  --figura circulo \
-  --radio 5
-```
-
-## Leyenda de disponibilidad
-
-Actualmente las herramientas documentadas se encuentran implementadas como componentes de la interfaz gráfica de Escuadra.
-
-## Nota
-
-Los comandos CLI mostrados corresponden a la convención de nomenclatura prevista para las herramientas de Escuadra. La disponibilidad real de cada comando depende de su integración en la interfaz de línea de comandos (CLI), la cual puede encontrarse en desarrollo.
-
-## Contribuciones
-
-Si deseas contribuir con nuevas herramientas o mejorar las existentes, consulta la documentación para contribuidores disponible en el directorio `CONTRIBUTING.md`.
+- Soporte de hasta cuatro variables.
+- Operadores lógicos básicos.
+- Generación de resultados tabulados.

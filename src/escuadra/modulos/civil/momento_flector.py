@@ -1,7 +1,11 @@
 from typing import Any, Dict
 
 
-def calcular_momento_max(longitud: float, carga: float, tipo_carga: str = 'puntual_central') -> Dict[str, Any]:
+def calcular_momento_max(
+    longitud: float,
+    carga: float,
+    tipo_carga: str = 'puntual_central'
+) -> Dict[str, Any]:
     """
     Calcula el momento flector máximo en un elemento civil.
 

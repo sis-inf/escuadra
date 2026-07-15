@@ -147,6 +147,21 @@ pre-commit run --all-files
 
 para verificar que todos los hooks funcionan correctamente.
 
+## Uso del Makefile
+
+El proyecto incluye un `Makefile` que reúne los comandos más comunes utilizados durante el desarrollo.
+
+| Comando | Descripción |
+|----------|-------------|
+| `make install` | Instala el proyecto en modo editable con las dependencias de desarrollo. |
+| `make test` | Ejecuta la suite de pruebas mediante `pytest`. |
+| `make lint` | Ejecuta `ruff check .` para verificar la calidad del código. |
+| `make format` | Ejecuta `ruff format .` para aplicar el formato del proyecto. |
+| `make build` | Genera los paquetes de distribución mediante `python -m build`. |
+| `make run` | Ejecuta la aplicación localmente. |
+
+Estos comandos funcionan como atajos para las tareas de desarrollo más frecuentes y permiten mantener un flujo de trabajo consistente.
+
 ## Resultado esperado
 
 Al finalizar todos los pasos:

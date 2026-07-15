@@ -1,5 +1,23 @@
-import pytest
+import os
 
+import pytest
+from PySide6.QtWidgets import QApplication
+
+os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+
+
+@pytest.fixture(scope="session")
+def app_qt():
+    """
+    QApplication reutilizable para tests de componentes Qt
+    en modo headless/offscreen.
+    """
+    app = QApplication.instance()
+
+    if app is None:
+        app = QApplication([])
+
+    return app
 
 @pytest.fixture
 def mock_config():

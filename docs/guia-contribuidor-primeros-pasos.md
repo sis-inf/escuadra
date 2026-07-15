@@ -35,7 +35,7 @@ Un fork crea una copia del repositorio bajo tu cuenta de GitHub. Es necesario po
 
 **Cómo hacerlo:**
 1. Ingresa a la página del repositorio de Escuadra en GitHub.
-2. Haz clic en el botón **Fork** (esquina superior derecha).
+2. Haz clic en el botón **Fork** (esquina superior derecha).    
 3. Selecciona tu cuenta personal como destino y confirma.
 
 Al terminar, tendrás el repositorio disponible en `https://github.com/TU_USUARIO/escuadra`.
@@ -147,10 +147,7 @@ source .venv/bin/activate
 ```
 
 Sabrás que está activo porque verás el prefijo `(.venv)` en tu terminal:
-
-```
 (.venv) usuario@equipo:~/escuadra$
-```
 
 Instala las dependencias:
 
@@ -160,8 +157,25 @@ pip install -e ".[dev]"
 
 La opción `-e` instala el proyecto en modo editable, lo que significa que los cambios que hagas en el código se reflejan inmediatamente sin necesidad de reinstalar.
 
----
+### ⚠️ Paso obligatorio: instalar los hooks de pre-commit
 
+**Este paso es obligatorio y debe hacerse inmediatamente después de instalar las dependencias, antes de hacer cualquier commit.**
+
+```bash
+pre-commit install
+```
+
+Este comando instala los hooks de Git que verifican automáticamente el código antes de cada commit (formato con `ruff`, `ruff-format` y validación de YAML). Sin este paso, tus commits podrían fallar en el CI aunque funcionen localmente.
+
+Verifica que los hooks están instalados:
+
+```bash
+pre-commit run --all-files
+```
+
+> Si ves errores en este paso, corrígelos antes de continuar. Los mismos checks correrán en el CI.
+
+> Si olvidaste ejecutar `pre-commit install` y ya hiciste commits, instálalo ahora y ejecuta `pre-commit run --all-files` para verificar que todo está en orden.
 ## Paso 6 — Hacer los cambios
 
 Edita únicamente los archivos listados en el issue que estás resolviendo. El issue siempre indica en la sección **"Archivos a tocar"** qué se debe modificar y qué no.

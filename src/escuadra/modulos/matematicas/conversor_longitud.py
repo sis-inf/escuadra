@@ -1,3 +1,5 @@
+from escuadra.modulos.matematicas.error_validacion import ErrorValidacion
+
 UNIDADES_A_METROS = {
     "m": 1,
     "cm": 0.01,
@@ -22,11 +24,14 @@ def convertir(valor: float, de_unidad: str, a_unidad: str) -> dict:
         dict: Resultado de la conversión.
 
     Raises:
-        ValueError: Si el valor es negativo o la unidad no existe.
+        ErrorValidacion: Si el valor es negativo.
+        ValueError: Si la unidad no existe.
     """
 
     if valor < 0:
-        raise ValueError("El valor no puede ser negativo")
+        raise ErrorValidacion(
+            f"La longitud no puede ser negativa (valor recibido: {valor})"
+        )
 
     de_unidad = de_unidad.strip().lower()
     a_unidad = a_unidad.strip().lower()

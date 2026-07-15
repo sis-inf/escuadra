@@ -71,8 +71,7 @@ def calcular_caida(
     for nombre, valor in parametros.items():
         if valor <= 0:
             raise ValueError(
-                f"El parametro '{nombre}' debe ser positivo. "
-                f"Se recibio: {valor}."
+                f"El parametro '{nombre}' debe ser positivo. " f"Se recibio: {valor}."
             )
 
     resistividad = RESISTIVIDADES[material_lower]
