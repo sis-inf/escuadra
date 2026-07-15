@@ -5,6 +5,7 @@ Punto de entrada principal con subcomandos para las herramientas.
 
 import argparse
 import json
+import platform
 import sys
 
 import argcomplete
@@ -95,6 +96,16 @@ def ejecutar_herramienta(args):
         print(resultado)
 
 
+def cmd_version(args):
+    """Muestra la versión del proyecto y datos de diagnóstico del entorno."""
+    from PySide6 import __version__ as pyside6_version
+
+    print(f"Escuadra:      {__version__}")
+    print(f"Python:        {platform.python_version()}")
+    print(f"PySide6:       {pyside6_version}")
+    print(f"Plataforma:    {platform.platform()}")
+
+
 def cmd_listar(args):
     """Muestra las herramientas disponibles agrupadas por carrera."""
     agrupadas = herramientas_por_carrera()
@@ -154,6 +165,13 @@ def main():
             "interactivo",
             help="Modo interactivo paso a paso (REPL)"
         )
+
+        # Subcomando: version
+        version_parser = subparsers.add_parser(
+            "version",
+            help="Muestra la versión del proyecto y datos de diagnóstico del entorno"
+        )
+        version_parser.set_defaults(func=cmd_version)
 
         # Subcomando: listar
         agrupadas = herramientas_por_carrera()

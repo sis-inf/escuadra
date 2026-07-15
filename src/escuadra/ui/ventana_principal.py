@@ -3,7 +3,8 @@ Módulo de la ventana principal de Escuadra.
 Contiene la clase VentanaPrincipal que hereda de QMainWindow.
 """
 
-from PySide6.QtGui import QAction
+from typing import Callable
+from PySide6.QtGui import QAction, QKeySequence, QShortcut
 from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QStackedWidget, QStatusBar, QWidget
 
 
@@ -11,9 +12,9 @@ class VentanaPrincipal(QMainWindow):
     """
     Ventana principal de la aplicación Escuadra.
 
-    Configura el título, tamaño, menú superior, área central
-    y barra de estado. Expone puntos de extensión para que
-    otros componentes monten contenido en los menús.
+    Configura el título, tamaño, menú superior, área central,
+    barra de estado y atajos de teclado. Expone puntos de extensión para que
+    otros componentes monten contenido en los menús y acciones.
     """
 
     def __init__(self, parent: QWidget | None = None) -> None:
@@ -25,6 +26,7 @@ class VentanaPrincipal(QMainWindow):
         self._configurar_menus()
         self._configurar_area_central()
         self._configurar_barra_estado()
+        self._configurar_atajos_teclado()
 
     def _configurar_menus(self) -> None:
         barra = self.menuBar()
@@ -55,6 +57,13 @@ class VentanaPrincipal(QMainWindow):
         self.setStatusBar(barra_estado)
         barra_estado.showMessage("Lista para usar")
 
+    def _configurar_atajos_teclado(self) -> None:
+        """Configura los atajos de teclado Ctrl+1 a Ctrl+9 para herramientas recientes."""
+        self._atajos_herramientas_recientes: list[QShortcut] = []
+        for i in range(1, 10):
+            atajo = QShortcut(QKeySequence(f"Ctrl+{i}"), self)
+            self._atajos_herramientas_recientes.append(atajo)
+
     # API publica
 
     def menu_carrera(self) -> QMenu:
@@ -68,6 +77,20 @@ class VentanaPrincipal(QMainWindow):
     def accion_acerca_de(self) -> QAction:
         """Devuelve la acción Acerca de para conectarla desde la integración."""
         return self._accion_acerca_de
+
+    def atajos_herramientas_recientes(self) -> list[QShortcut]:
+        """Devuelve la lista de atajos Ctrl+1 a Ctrl+9 para conectarlos desde la integración."""
+        return self._atajos_herramientas_recientes
+
+    def conectar_atajos_recientes(self, callback: Callable[[int], None]) -> None:
+        """
+        Conecta los atajos de teclado (Ctrl+1 a Ctrl+9) a una función callback externa.
+
+        Args:
+            callback: Función que recibe el índice (0 a 8) de la herramienta reciente a abrir.
+        """
+        for idx, atajo in enumerate(self._atajos_herramientas_recientes):
+            atajo.activated.connect(lambda i=idx: callback(i))
 
     def mostrar_herramienta(self, widget: QWidget) -> None:
         """
