@@ -2,7 +2,14 @@ import time
 import threading
 
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget, QPushButton, QApplication
+from PySide6.QtWidgets import (
+    QFrame,
+    QLabel,
+    QVBoxLayout,
+    QWidget,
+    QPushButton,
+    QApplication,
+)
 
 from escuadra.ui.progress import ProgressIndicator
 from escuadra.ui.mensajes import mostrar_error_contextualizado
@@ -17,17 +24,19 @@ class WidgetHerramienta(QWidget):
 
     def __init__(self, nombre, descripcion, parent=None):
         super().__init__(parent)
-        
+
         # Layout principal de la herramienta
         self.layout_principal = QVBoxLayout(self)
 
         # Encabezado visual (Aporte de tu compañero)
         encabezado = QFrame()
-        encabezado.setStyleSheet("""
+        encabezado.setStyleSheet(
+            """
             background-color: #EAEAEA;
             padding: 10px;
             border-radius: 5px;
-        """)
+        """
+        )
 
         layout_encabezado = QVBoxLayout(encabezado)
 
@@ -60,7 +69,9 @@ class WidgetHerramienta(QWidget):
         self.layout_principal.addWidget(encabezado)
         self.layout_principal.addWidget(separador)
         self.layout_principal.addWidget(self._contenido)
-        self.layout_principal.addWidget(self.btn_copiar)  # Tu botón se posiciona al final de manera fija
+        self.layout_principal.addWidget(
+            self.btn_copiar
+        )  # Tu botón se posiciona al final de manera fija
 
     def area_contenido(self):
         """

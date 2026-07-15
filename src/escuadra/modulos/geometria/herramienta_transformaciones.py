@@ -15,10 +15,7 @@ class HerramientaTransformaciones(Herramienta):
 
     carrera = Carrera.GEOMETRIA
 
-    descripcion = (
-        "Permite rotar, trasladar y escalar puntos "
-        "en el plano cartesiano."
-    )
+    descripcion = "Permite rotar, trasladar y escalar puntos " "en el plano cartesiano."
 
     def crear_widget(self) -> QWidget:
         return QWidget()

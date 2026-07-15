@@ -15,10 +15,7 @@ class HerramientaFinanciera(Herramienta):
 
     carrera = Carrera.MATEMATICAS
 
-    descripcion = (
-        "Calcula valor futuro, valor presente "
-        "e interés compuesto."
-    )
+    descripcion = "Calcula valor futuro, valor presente " "e interés compuesto."
 
     def crear_widget(self) -> QWidget:
         return QWidget()

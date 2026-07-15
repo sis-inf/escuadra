@@ -2,7 +2,6 @@
 Tests unitarios para el registry de herramientas.
 """
 
-
 from PySide6.QtWidgets import QLabel, QWidget
 
 from escuadra.core.carrera import Carrera
