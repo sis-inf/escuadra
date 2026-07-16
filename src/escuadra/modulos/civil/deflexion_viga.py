@@ -1,3 +1,6 @@
+import warnings
+
+
 def calcular_deflexion_max(
     longitud,
     carga,
@@ -17,6 +20,10 @@ def calcular_deflexion_max(
     Retorna un diccionario con:
     - deflexion_max (mm)
     - posicion (m)
+
+    Warnings:
+        Si la deflexión excede L/250, se genera una advertencia indicando
+        que la teoría lineal podría no ser válida para grandes deflexiones.
     """
 
     parametros = [
@@ -45,6 +52,20 @@ def calcular_deflexion_max(
 
     else:
         raise ValueError("Tipo de carga inválido")
+
+    # Verificar límite de validez de teoría lineal (L/250)
+    limite_deflexion = longitud / 250  # en metros
+    delta_metros = delta
+
+    if delta_metros > limite_deflexion:
+        warnings.warn(
+            f"La deflexión calculada ({delta * 1000:.2f} mm) excede L/250 "
+            f"({limite_deflexion * 1000:.2f} mm). La teoría lineal podría "
+            f"no ser válida para grandes deflexiones. Considere usar un "
+            f"análisis de segundo orden.",
+            UserWarning,
+            stacklevel=2,
+        )
 
     return {
         "deflexion_max": delta * 1000,

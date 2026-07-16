@@ -1,11 +1,18 @@
-import time
 import threading
 
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget, QPushButton, QApplication
+from PySide6.QtWidgets import (
+    QApplication,
+    QFrame,
+    QLabel,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
-from escuadra.ui.progress import ProgressIndicator
+from escuadra.modulos.advertencias import capturar_advertencias
 from escuadra.ui.mensajes import mostrar_error_contextualizado
+from escuadra.ui.progress import ProgressIndicator
 
 
 class WidgetHerramienta(QWidget):
@@ -17,7 +24,7 @@ class WidgetHerramienta(QWidget):
 
     def __init__(self, nombre, descripcion, parent=None):
         super().__init__(parent)
-        
+
         # Layout principal de la herramienta
         self.layout_principal = QVBoxLayout(self)
 
@@ -52,6 +59,20 @@ class WidgetHerramienta(QWidget):
         # Área donde las subclases renderizan sus componentes internos
         self._contenido = QWidget()
 
+        # Label para advertencias (no bloqueantes)
+        self._label_advertencias = QLabel("")
+        self._label_advertencias.setWordWrap(True)
+        self._label_advertencias.setStyleSheet("""
+            QLabel {
+                background-color: #FFF3CD;
+                border: 1px solid #FFEEBA;
+                border-radius: 5px;
+                padding: 8px;
+                color: #856404;
+            }
+        """)
+        self._label_advertencias.hide()
+
         # Botón dedicado para copiar resultados (Tu funcionalidad del Issue #704)
         self.btn_copiar = QPushButton("Copiar resultado")
         self.btn_copiar.clicked.connect(self.copiar_al_portapapeles)
@@ -60,13 +81,41 @@ class WidgetHerramienta(QWidget):
         self.layout_principal.addWidget(encabezado)
         self.layout_principal.addWidget(separador)
         self.layout_principal.addWidget(self._contenido)
-        self.layout_principal.addWidget(self.btn_copiar)  # Tu botón se posiciona al final de manera fija
+        self.layout_principal.addWidget(self._label_advertencias)
+        self.layout_principal.addWidget(self.btn_copiar)
 
     def area_contenido(self):
         """
         Devuelve el área de contenido para que las subclases añadan sus componentes.
         """
         return self._contenido
+
+    def mostrar_advertencias(self, advertencias: list[str]):
+        """
+        Muestra advertencias en el label dedicado.
+        Las advertencias son informativas y no bloqueantes.
+        """
+        if advertencias:
+            texto = "\n".join(f"⚠ {a}" for a in advertencias)
+            self._label_advertencias.setText(texto)
+            self._label_advertencias.show()
+        else:
+            self._label_advertencias.hide()
+
+    def limpiar_advertencias(self):
+        """Limpia las advertencias mostradas."""
+        self._label_advertencias.hide()
+        self._label_advertencias.setText("")
+
+    def ejecutar_con_advertencias(self, funcion, *args, **kwargs):
+        """
+        Ejecuta una función capturando warnings y mostrándolos en la UI.
+        Retorna el resultado de la función.
+        """
+        with capturar_advertencias() as advertencias:
+            resultado = funcion(*args, **kwargs)
+        self.mostrar_advertencias(advertencias)
+        return resultado
 
     def obtener_resultado_formateado(self) -> str:
         """
